@@ -70,7 +70,7 @@ const pushTransformedOrder = async (order) => {
 
     console.log("✅ Successfully pushed transformed order:", response.data);
   } catch (error) {
-    console.error("❌ Error pushing transformed order:", error.response?.data || error.message);
+    console.log("❌ Error pushing transformed order:", error.response?.data || error.message);
   }
 };
 
@@ -146,7 +146,7 @@ const fetchSpringFestivalOrders = async () => {
     // console.log("✅ Data saved to spring_festival_grouped_orders.json");
     return groupedOrders;
   } catch (error) {
-    console.error("❌ Error fetching orders:", error.response?.data || error.message);
+    console.log("❌ Error fetching orders:", error.response?.data || error.message);
     return {};
   }
 };
@@ -320,7 +320,6 @@ export const fetchRetailXOrders = async (req, res) => {
     });
 
   } catch (error) {
-    console.error("❌ Error fetching RetailX orders:", error.stack || error);
     return res.status(500).json({
       success: false,
       message: "Error fetching RetailX orders",
