@@ -5,6 +5,9 @@ import { fetchAmazonSellerSummitOrders } from "./AmazonSellerSummit.js";
 import { fetchSubscriptionXOrders } from "./SubscriptionX.js";
 import { fetchSocialMediaMastersOrders } from "./SocialMediaMasters.js";
 import { fetchAndGroupSponsors } from "./SubscriptionJSON.js";
+import { fetchCustomerXOrders } from "./CustomerX.js";
+import { fetchDigitalMarketingEvolutionXOrders } from "./DigitalMarketingEvolution.js";
+import { fetchSustainabilityXOrders } from "./SustainabilityX.js";
 dotenv.config();
 const app = express();
 const PORT = 8080;
@@ -20,10 +23,10 @@ app.get("/", (req, res) => {
 app.get("/push-retailx-data", fetchRetailXOrders);
 app.get("/push-subscription-data", fetchSubscriptionXOrders);
 app.get("/push-amazon-data", fetchAmazonSellerSummitOrders);
+app.get("/push-customerx-data",fetchCustomerXOrders);
+app.get("/push-digital-marketting-data",fetchDigitalMarketingEvolutionXOrders);
 app.get("/push-social-media-data", fetchSocialMediaMastersOrders);
-
-
-app.get("/subscription-json",fetchAndGroupSponsors)
+app.get("/push-sustainability-data",fetchSustainabilityXOrders)
 
 
 
