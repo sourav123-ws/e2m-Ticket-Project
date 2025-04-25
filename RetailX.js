@@ -521,13 +521,13 @@ export const fetchRetailXOrders = async (req, res) => {
       await new Promise(resolve => setTimeout(resolve, 300)); // slight delay
     }
 
-    fs.writeFileSync(
-          "RETAIL_X.json",
-          JSON.stringify({
-            total: transformedOrders.length,
-            orders: transformedOrders
-          }, null, 2)
-        );
+    // fs.writeFileSync(
+    //       "RETAIL_X.json",
+    //       JSON.stringify({
+    //         total: transformedOrders.length,
+    //         orders: transformedOrders
+    //       }, null, 2)
+    //     );
 
     return res.status(200).json({
       success: true,
@@ -544,6 +544,3 @@ export const fetchRetailXOrders = async (req, res) => {
     });
   }
 };
-
-
-fetchRetailXOrders();
