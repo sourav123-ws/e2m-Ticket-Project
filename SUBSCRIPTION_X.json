@@ -1,0 +1,3822 @@
+{
+  "event": "SustainabilityX",
+  "total": 33,
+  "orders": [
+    {
+      "sendMail": 0,
+      "ShowInCMSAttendeeList": 1,
+      "FormType": "FREE",
+      "RegistrationType": {
+        "ColorCode": "#000",
+        "RegistrationType": "Attendee",
+        "RegistrationTypeId": "IDcDKMY6E6l9z2Ad394v"
+      },
+      "DynamicFields": [
+        {
+          "Name": "JobTitle",
+          "Value": "Sustainability Lead",
+          "Label": "Job Title",
+          "Type": "text"
+        },
+        {
+          "Name": "Company/Organisation",
+          "Value": "John Lewis (ex)",
+          "Label": "Company/Organisation",
+          "Type": "text"
+        },
+        {
+          "Name": "LinkedinProfile",
+          "Value": "Rachel Callan",
+          "Label": "Linkedin Profile",
+          "Type": "text"
+        },
+        {
+          "Name": "Country/Region",
+          "Value": "United Kingdom",
+          "Label": "Country / Region",
+          "Type": "text"
+        },
+        {
+          "Name": "WhicheventattheSpringRetailFestivalareyouattending?(yourattendanceincludesafreecopyoftherelevantresearchreport)",
+          "Value": "SustainabilityX [retailers & brands only, all registrations are subject to approval]",
+          "Label": "Which event at the Spring Retail Festival are you attending? (your attendance includes a free copy of the relevant research report)",
+          "Type": "text"
+        },
+        {
+          "Name": "Iwouldliketobeconsideredtoattendthepre-eventdinner",
+          "Value": "No",
+          "Label": "I would like to be considered to attend the pre-event dinner",
+          "Type": "text"
+        },
+        {
+          "Name": "IwouldliketoattendtheSpringRetailFestivalAwards",
+          "Value": "No",
+          "Label": "I would like to attend the Spring Retail Festival Awards",
+          "Type": "text"
+        },
+        {
+          "Name": "Iagreetoparticipationintheintroductorymeetingprogramme\"Connect\"inanetworkingbreak",
+          "Value": "Yes",
+          "Label": "I agree to participation in the introductory meeting programme \"Connect\" in a networking break",
+          "Type": "text"
+        },
+        {
+          "Name": "Iagreetothetermsandconditionsofregistrationincludingreceivingafreecopyoftherelevanteventresearchreport",
+          "Value": "Yes",
+          "Label": "I agree to the terms and conditions of registration including receiving a free copy of the relevant event research report",
+          "Type": "text"
+        },
+        {
+          "Name": "AddressLine1",
+          "Value": "",
+          "Label": "Address Line 1",
+          "Type": "text"
+        },
+        {
+          "Name": "AddressLine2",
+          "Value": "",
+          "Label": "Address Line 2",
+          "Type": "text"
+        },
+        {
+          "Name": "AddressLine3",
+          "Value": "",
+          "Label": "Address Line 3",
+          "Type": "text"
+        },
+        {
+          "Name": "WhichtracksatRMXareyoumostinterestedtoattend",
+          "Value": [],
+          "Label": "Which tracks at RMX are you most interested to attend",
+          "Type": "multiselect"
+        },
+        {
+          "Name": "IwouldliketoattendtheRMXAwards",
+          "Value": "",
+          "Label": "I would like to attend the RMX Awards",
+          "Type": "select"
+        },
+        {
+          "Name": "IwouldlikeaccesstotheRetailXIntelligencedataplatform(freetrial)",
+          "Value": "",
+          "Label": "I would like access to the RetailX Intelligence data platform (free trial)",
+          "Type": "select"
+        }
+      ],
+      "DefaultFields": [],
+      "PreSignupFields": [],
+      "FirstName": "Rachel",
+      "LastName": "Callan",
+      "Email": "rachel_henry1@hotmail.com",
+      "PhoneCountryCode": "",
+      "Phone": "+447956333717",
+      "Address": "",
+      "Zip": "",
+      "qr_code": "Xp3EPCK",
+      "qr": "https://cdn.tickettailor.com/userfiles/cache/barcode/qr/attendee/82508198/477e1b3ec86e705f686f.png",
+      "Company": "John Lewis (ex)",
+      "Designation": "Sustainability Lead",
+      "isComplete": true
+    },
+    {
+      "sendMail": 0,
+      "ShowInCMSAttendeeList": 1,
+      "FormType": "FREE",
+      "RegistrationType": {
+        "ColorCode": "#000",
+        "RegistrationType": "Attendee",
+        "RegistrationTypeId": "IDcDKMY6E6l9z2Ad394v"
+      },
+      "DynamicFields": [
+        {
+          "Name": "JobTitle",
+          "Value": "Global Operations Manager",
+          "Label": "Job Title",
+          "Type": "text"
+        },
+        {
+          "Name": "Company/Organisation",
+          "Value": "The LEGO Group",
+          "Label": "Company/Organisation",
+          "Type": "text"
+        },
+        {
+          "Name": "LinkedinProfile",
+          "Value": "https://www.linkedin.com/in/ellen-noreen-harkin/",
+          "Label": "Linkedin Profile",
+          "Type": "text"
+        },
+        {
+          "Name": "Country/Region",
+          "Value": "United Kingdom",
+          "Label": "Country / Region",
+          "Type": "text"
+        },
+        {
+          "Name": "WhicheventattheSpringRetailFestivalareyouattending?(yourattendanceincludesafreecopyoftherelevantresearchreport)",
+          "Value": "SustainabilityX [retailers & brands only, all registrations are subject to approval]",
+          "Label": "Which event at the Spring Retail Festival are you attending? (your attendance includes a free copy of the relevant research report)",
+          "Type": "text"
+        },
+        {
+          "Name": "Iwouldliketobeconsideredtoattendthepre-eventdinner",
+          "Value": "Yes",
+          "Label": "I would like to be considered to attend the pre-event dinner",
+          "Type": "text"
+        },
+        {
+          "Name": "IwouldliketoattendtheSpringRetailFestivalAwards",
+          "Value": "No",
+          "Label": "I would like to attend the Spring Retail Festival Awards",
+          "Type": "text"
+        },
+        {
+          "Name": "Iagreetoparticipationintheintroductorymeetingprogramme\"Connect\"inanetworkingbreak",
+          "Value": "Yes",
+          "Label": "I agree to participation in the introductory meeting programme \"Connect\" in a networking break",
+          "Type": "text"
+        },
+        {
+          "Name": "Iagreetothetermsandconditionsofregistrationincludingreceivingafreecopyoftherelevanteventresearchreport",
+          "Value": "Yes",
+          "Label": "I agree to the terms and conditions of registration including receiving a free copy of the relevant event research report",
+          "Type": "text"
+        },
+        {
+          "Name": "AddressLine1",
+          "Value": "",
+          "Label": "Address Line 1",
+          "Type": "text"
+        },
+        {
+          "Name": "AddressLine2",
+          "Value": "",
+          "Label": "Address Line 2",
+          "Type": "text"
+        },
+        {
+          "Name": "AddressLine3",
+          "Value": "",
+          "Label": "Address Line 3",
+          "Type": "text"
+        },
+        {
+          "Name": "WhichtracksatRMXareyoumostinterestedtoattend",
+          "Value": [],
+          "Label": "Which tracks at RMX are you most interested to attend",
+          "Type": "multiselect"
+        },
+        {
+          "Name": "IwouldliketoattendtheRMXAwards",
+          "Value": "",
+          "Label": "I would like to attend the RMX Awards",
+          "Type": "select"
+        },
+        {
+          "Name": "IwouldlikeaccesstotheRetailXIntelligencedataplatform(freetrial)",
+          "Value": "",
+          "Label": "I would like access to the RetailX Intelligence data platform (free trial)",
+          "Type": "select"
+        }
+      ],
+      "DefaultFields": [],
+      "PreSignupFields": [],
+      "FirstName": "Ellen",
+      "LastName": "Harkin",
+      "Email": "ellen.harkin@lego.com",
+      "PhoneCountryCode": "",
+      "Phone": "+447913707078",
+      "Address": "",
+      "Zip": "",
+      "qr_code": "PZ7gtEh",
+      "qr": "https://cdn.tickettailor.com/userfiles/cache/barcode/qr/attendee/83551262/36907130e209b23312d9.png",
+      "Company": "The LEGO Group",
+      "Designation": "Global Operations Manager",
+      "isComplete": true
+    },
+    {
+      "sendMail": 0,
+      "ShowInCMSAttendeeList": 1,
+      "FormType": "FREE",
+      "RegistrationType": {
+        "ColorCode": "#000",
+        "RegistrationType": "Attendee",
+        "RegistrationTypeId": "IDcDKMY6E6l9z2Ad394v"
+      },
+      "DynamicFields": [
+        {
+          "Name": "JobTitle",
+          "Value": "Senior Analyst ",
+          "Label": "Job Title",
+          "Type": "text"
+        },
+        {
+          "Name": "Company/Organisation",
+          "Value": "Carbon Trust",
+          "Label": "Company/Organisation",
+          "Type": "text"
+        },
+        {
+          "Name": "LinkedinProfile",
+          "Value": "https://www.linkedin.com/in/benedict-gee-706a23181/",
+          "Label": "Linkedin Profile",
+          "Type": "text"
+        },
+        {
+          "Name": "Country/Region",
+          "Value": "United Kingdom",
+          "Label": "Country / Region",
+          "Type": "text"
+        },
+        {
+          "Name": "WhicheventattheSpringRetailFestivalareyouattending?(yourattendanceincludesafreecopyoftherelevantresearchreport)",
+          "Value": "SustainabilityX [retailers & brands only, all registrations are subject to approval]",
+          "Label": "Which event at the Spring Retail Festival are you attending? (your attendance includes a free copy of the relevant research report)",
+          "Type": "text"
+        },
+        {
+          "Name": "Iwouldliketobeconsideredtoattendthepre-eventdinner",
+          "Value": "Yes",
+          "Label": "I would like to be considered to attend the pre-event dinner",
+          "Type": "text"
+        },
+        {
+          "Name": "IwouldliketoattendtheSpringRetailFestivalAwards",
+          "Value": "No",
+          "Label": "I would like to attend the Spring Retail Festival Awards",
+          "Type": "text"
+        },
+        {
+          "Name": "IwouldlikeaccesstotheRetailXIntelligencedataplatform(freetrial)",
+          "Value": "No",
+          "Label": "I would like access to the RetailX Intelligence data platform (free trial)",
+          "Type": "text"
+        },
+        {
+          "Name": "Iagreetoparticipationintheintroductorymeetingprogramme\"Connect\"inanetworkingbreak",
+          "Value": "Yes",
+          "Label": "I agree to participation in the introductory meeting programme \"Connect\" in a networking break",
+          "Type": "text"
+        },
+        {
+          "Name": "IagreetotheT&C'sofregistrationincludingreceivingafreecopyoftherelevanteventresearchreport",
+          "Value": "Yes",
+          "Label": "I agree to the T&C's of registration including receiving a free copy of the relevant event research report",
+          "Type": "text"
+        },
+        {
+          "Name": "AddressLine1",
+          "Value": "",
+          "Label": "Address Line 1",
+          "Type": "text"
+        },
+        {
+          "Name": "AddressLine2",
+          "Value": "",
+          "Label": "Address Line 2",
+          "Type": "text"
+        },
+        {
+          "Name": "AddressLine3",
+          "Value": "",
+          "Label": "Address Line 3",
+          "Type": "text"
+        },
+        {
+          "Name": "WhichtracksatRMXareyoumostinterestedtoattend",
+          "Value": [],
+          "Label": "Which tracks at RMX are you most interested to attend",
+          "Type": "multiselect"
+        },
+        {
+          "Name": "IwouldliketoattendtheRMXAwards",
+          "Value": "",
+          "Label": "I would like to attend the RMX Awards",
+          "Type": "select"
+        }
+      ],
+      "DefaultFields": [],
+      "PreSignupFields": [],
+      "FirstName": "Ben",
+      "LastName": "Gee",
+      "Email": "benedict.gee@carbontrust.com",
+      "PhoneCountryCode": "",
+      "Phone": "+447494316126",
+      "Address": "",
+      "Zip": "",
+      "qr_code": "vk7bphB",
+      "qr": "https://cdn.tickettailor.com/userfiles/cache/barcode/qr/attendee/85217109/2eea62230f210847ca19.png",
+      "Company": "Carbon Trust",
+      "Designation": "Senior Analyst ",
+      "isComplete": true
+    },
+    {
+      "sendMail": 0,
+      "ShowInCMSAttendeeList": 1,
+      "FormType": "FREE",
+      "RegistrationType": {
+        "ColorCode": "#000",
+        "RegistrationType": "Attendee",
+        "RegistrationTypeId": "IDcDKMY6E6l9z2Ad394v"
+      },
+      "DynamicFields": [
+        {
+          "Name": "JobTitle",
+          "Value": "Senior Marketing & PR Manager",
+          "Label": "Job Title",
+          "Type": "text"
+        },
+        {
+          "Name": "Company/Organisation",
+          "Value": "RE&UP",
+          "Label": "Company/Organisation",
+          "Type": "text"
+        },
+        {
+          "Name": "LinkedinProfile",
+          "Value": "https://www.linkedin.com/in/keith-o-brien/",
+          "Label": "Linkedin Profile",
+          "Type": "text"
+        },
+        {
+          "Name": "Country/Region",
+          "Value": "United Kingdom",
+          "Label": "Country / Region",
+          "Type": "text"
+        },
+        {
+          "Name": "WhicheventattheSpringRetailFestivalareyouattending?(yourattendanceincludesafreecopyoftherelevantresearchreport)",
+          "Value": "SustainabilityX [retailers & brands only, all registrations are subject to approval]",
+          "Label": "Which event at the Spring Retail Festival are you attending? (your attendance includes a free copy of the relevant research report)",
+          "Type": "text"
+        },
+        {
+          "Name": "Iwouldliketobeconsideredtoattendthepre-eventdinner",
+          "Value": "No",
+          "Label": "I would like to be considered to attend the pre-event dinner",
+          "Type": "text"
+        },
+        {
+          "Name": "IwouldliketoattendtheSpringRetailFestivalAwards",
+          "Value": "No",
+          "Label": "I would like to attend the Spring Retail Festival Awards",
+          "Type": "text"
+        },
+        {
+          "Name": "IwouldlikeaccesstotheRetailXIntelligencedataplatform(freetrial)",
+          "Value": "No",
+          "Label": "I would like access to the RetailX Intelligence data platform (free trial)",
+          "Type": "text"
+        },
+        {
+          "Name": "Iagreetoparticipationintheintroductorymeetingprogramme\"Connect\"inanetworkingbreak",
+          "Value": "Yes",
+          "Label": "I agree to participation in the introductory meeting programme \"Connect\" in a networking break",
+          "Type": "text"
+        },
+        {
+          "Name": "IagreetotheT&C'sofregistrationincludingreceivingafreecopyoftherelevanteventresearchreport",
+          "Value": "Yes",
+          "Label": "I agree to the T&C's of registration including receiving a free copy of the relevant event research report",
+          "Type": "text"
+        },
+        {
+          "Name": "AddressLine1",
+          "Value": "",
+          "Label": "Address Line 1",
+          "Type": "text"
+        },
+        {
+          "Name": "AddressLine2",
+          "Value": "",
+          "Label": "Address Line 2",
+          "Type": "text"
+        },
+        {
+          "Name": "AddressLine3",
+          "Value": "",
+          "Label": "Address Line 3",
+          "Type": "text"
+        },
+        {
+          "Name": "WhichtracksatRMXareyoumostinterestedtoattend",
+          "Value": [],
+          "Label": "Which tracks at RMX are you most interested to attend",
+          "Type": "multiselect"
+        },
+        {
+          "Name": "IwouldliketoattendtheRMXAwards",
+          "Value": "",
+          "Label": "I would like to attend the RMX Awards",
+          "Type": "select"
+        }
+      ],
+      "DefaultFields": [],
+      "PreSignupFields": [],
+      "FirstName": "Keith",
+      "LastName": "O'Brien",
+      "Email": "keith.obrien@reandup.com",
+      "PhoneCountryCode": "",
+      "Phone": "+447738249065",
+      "Address": "",
+      "Zip": "",
+      "qr_code": "A91C8fp",
+      "qr": "https://cdn.tickettailor.com/userfiles/cache/barcode/qr/attendee/85312735/f5392b70723c0ef5f2dc.png",
+      "Company": "RE&UP",
+      "Designation": "Senior Marketing & PR Manager",
+      "isComplete": true
+    },
+    {
+      "sendMail": 0,
+      "ShowInCMSAttendeeList": 1,
+      "FormType": "FREE",
+      "RegistrationType": {
+        "ColorCode": "#000",
+        "RegistrationType": "Attendee",
+        "RegistrationTypeId": "IDcDKMY6E6l9z2Ad394v"
+      },
+      "DynamicFields": [
+        {
+          "Name": "JobTitle",
+          "Value": "New Business & Partnership Development Manager",
+          "Label": "Job Title",
+          "Type": "text"
+        },
+        {
+          "Name": "Company/Organisation",
+          "Value": "Street Child",
+          "Label": "Company/Organisation",
+          "Type": "text"
+        },
+        {
+          "Name": "LinkedinProfile",
+          "Value": "https://www.linkedin.com/in/alanna-ramsay2024/",
+          "Label": "Linkedin Profile",
+          "Type": "text"
+        },
+        {
+          "Name": "Country/Region",
+          "Value": "United Kingdom",
+          "Label": "Country / Region",
+          "Type": "text"
+        },
+        {
+          "Name": "WhicheventattheSpringRetailFestivalareyouattending?(yourattendanceincludesafreecopyoftherelevantresearchreport)",
+          "Value": "SustainabilityX [retailers & brands only, all registrations are subject to approval]",
+          "Label": "Which event at the Spring Retail Festival are you attending? (your attendance includes a free copy of the relevant research report)",
+          "Type": "text"
+        },
+        {
+          "Name": "Iwouldliketobeconsideredtoattendthepre-eventdinner",
+          "Value": "Yes",
+          "Label": "I would like to be considered to attend the pre-event dinner",
+          "Type": "text"
+        },
+        {
+          "Name": "IwouldliketoattendtheSpringRetailFestivalAwards",
+          "Value": "No",
+          "Label": "I would like to attend the Spring Retail Festival Awards",
+          "Type": "text"
+        },
+        {
+          "Name": "IwouldlikeaccesstotheRetailXIntelligencedataplatform(freetrial)",
+          "Value": "Yes",
+          "Label": "I would like access to the RetailX Intelligence data platform (free trial)",
+          "Type": "text"
+        },
+        {
+          "Name": "Iagreetoparticipationintheintroductorymeetingprogramme\"Connect\"inanetworkingbreak",
+          "Value": "Yes",
+          "Label": "I agree to participation in the introductory meeting programme \"Connect\" in a networking break",
+          "Type": "text"
+        },
+        {
+          "Name": "IagreetotheT&C'sofregistrationincludingreceivingafreecopyoftherelevanteventresearchreport",
+          "Value": "Yes",
+          "Label": "I agree to the T&C's of registration including receiving a free copy of the relevant event research report",
+          "Type": "text"
+        },
+        {
+          "Name": "AddressLine1",
+          "Value": "",
+          "Label": "Address Line 1",
+          "Type": "text"
+        },
+        {
+          "Name": "AddressLine2",
+          "Value": "",
+          "Label": "Address Line 2",
+          "Type": "text"
+        },
+        {
+          "Name": "AddressLine3",
+          "Value": "",
+          "Label": "Address Line 3",
+          "Type": "text"
+        },
+        {
+          "Name": "WhichtracksatRMXareyoumostinterestedtoattend",
+          "Value": [],
+          "Label": "Which tracks at RMX are you most interested to attend",
+          "Type": "multiselect"
+        },
+        {
+          "Name": "IwouldliketoattendtheRMXAwards",
+          "Value": "",
+          "Label": "I would like to attend the RMX Awards",
+          "Type": "select"
+        }
+      ],
+      "DefaultFields": [],
+      "PreSignupFields": [],
+      "FirstName": "Alanna",
+      "LastName": "Ramsay",
+      "Email": "alanna.ramsay@street-child.org",
+      "PhoneCountryCode": "",
+      "Phone": "+447918789020",
+      "Address": "",
+      "Zip": "",
+      "qr_code": "hg1HTs7",
+      "qr": "https://cdn.tickettailor.com/userfiles/cache/barcode/qr/attendee/85321878/3899bae84f0f510e3234.png",
+      "Company": "Street Child",
+      "Designation": "New Business & Partnership Development Manager",
+      "isComplete": true
+    },
+    {
+      "sendMail": 0,
+      "ShowInCMSAttendeeList": 1,
+      "FormType": "FREE",
+      "RegistrationType": {
+        "ColorCode": "#000",
+        "RegistrationType": "Attendee",
+        "RegistrationTypeId": "IDcDKMY6E6l9z2Ad394v"
+      },
+      "DynamicFields": [
+        {
+          "Name": "JobTitle",
+          "Value": "Associate Director",
+          "Label": "Job Title",
+          "Type": "text"
+        },
+        {
+          "Name": "Company/Organisation",
+          "Value": "Lloyds",
+          "Label": "Company/Organisation",
+          "Type": "text"
+        },
+        {
+          "Name": "LinkedinProfile",
+          "Value": "N/A",
+          "Label": "Linkedin Profile",
+          "Type": "text"
+        },
+        {
+          "Name": "Country/Region",
+          "Value": "UK",
+          "Label": "Country / Region",
+          "Type": "text"
+        },
+        {
+          "Name": "WhicheventattheSpringRetailFestivalareyouattending?(yourattendanceincludesafreecopyoftherelevantresearchreport)",
+          "Value": "SustainabilityX [retailers & brands only, all registrations are subject to approval]",
+          "Label": "Which event at the Spring Retail Festival are you attending? (your attendance includes a free copy of the relevant research report)",
+          "Type": "text"
+        },
+        {
+          "Name": "Iwouldliketobeconsideredtoattendthepre-eventdinner",
+          "Value": "No",
+          "Label": "I would like to be considered to attend the pre-event dinner",
+          "Type": "text"
+        },
+        {
+          "Name": "IwouldliketoattendtheSpringRetailFestivalAwards",
+          "Value": "No",
+          "Label": "I would like to attend the Spring Retail Festival Awards",
+          "Type": "text"
+        },
+        {
+          "Name": "IwouldlikeaccesstotheRetailXIntelligencedataplatform(freetrial)",
+          "Value": "No",
+          "Label": "I would like access to the RetailX Intelligence data platform (free trial)",
+          "Type": "text"
+        },
+        {
+          "Name": "Iagreetoparticipationintheintroductorymeetingprogramme\"Connect\"inanetworkingbreak",
+          "Value": "Yes",
+          "Label": "I agree to participation in the introductory meeting programme \"Connect\" in a networking break",
+          "Type": "text"
+        },
+        {
+          "Name": "IagreetotheT&C'sofregistrationincludingreceivingafreecopyoftherelevanteventresearchreport",
+          "Value": "Yes",
+          "Label": "I agree to the T&C's of registration including receiving a free copy of the relevant event research report",
+          "Type": "text"
+        },
+        {
+          "Name": "AddressLine1",
+          "Value": "",
+          "Label": "Address Line 1",
+          "Type": "text"
+        },
+        {
+          "Name": "AddressLine2",
+          "Value": "",
+          "Label": "Address Line 2",
+          "Type": "text"
+        },
+        {
+          "Name": "AddressLine3",
+          "Value": "",
+          "Label": "Address Line 3",
+          "Type": "text"
+        },
+        {
+          "Name": "WhichtracksatRMXareyoumostinterestedtoattend",
+          "Value": [],
+          "Label": "Which tracks at RMX are you most interested to attend",
+          "Type": "multiselect"
+        },
+        {
+          "Name": "IwouldliketoattendtheRMXAwards",
+          "Value": "",
+          "Label": "I would like to attend the RMX Awards",
+          "Type": "select"
+        }
+      ],
+      "DefaultFields": [],
+      "PreSignupFields": [],
+      "FirstName": "Scott",
+      "LastName": "Efford",
+      "Email": "scott.efford2@lloydsbanking.com",
+      "PhoneCountryCode": "",
+      "Phone": "+447584263516",
+      "Address": "",
+      "Zip": "",
+      "qr_code": "zC3G2p7",
+      "qr": "https://cdn.tickettailor.com/userfiles/cache/barcode/qr/attendee/85706300/da310c24798a30e4d562.png",
+      "Company": "Lloyds",
+      "Designation": "Associate Director",
+      "isComplete": true
+    },
+    {
+      "sendMail": 0,
+      "ShowInCMSAttendeeList": 1,
+      "FormType": "FREE",
+      "RegistrationType": {
+        "ColorCode": "#000",
+        "RegistrationType": "Attendee",
+        "RegistrationTypeId": "IDcDKMY6E6l9z2Ad394v"
+      },
+      "DynamicFields": [
+        {
+          "Name": "JobTitle",
+          "Value": "Sustainability Consultant",
+          "Label": "Job Title",
+          "Type": "text"
+        },
+        {
+          "Name": "Company/Organisation",
+          "Value": "Seven Clean Seas",
+          "Label": "Company/Organisation",
+          "Type": "text"
+        },
+        {
+          "Name": "LinkedinProfile",
+          "Value": "https://www.linkedin.com/in/amanda-diniz-94194599/",
+          "Label": "Linkedin Profile",
+          "Type": "text"
+        },
+        {
+          "Name": "Country/Region",
+          "Value": "United Kingdom",
+          "Label": "Country / Region",
+          "Type": "text"
+        },
+        {
+          "Name": "WhicheventattheSpringRetailFestivalareyouattending?(yourattendanceincludesafreecopyoftherelevantresearchreport)",
+          "Value": "SustainabilityX [retailers & brands only, all registrations are subject to approval]",
+          "Label": "Which event at the Spring Retail Festival are you attending? (your attendance includes a free copy of the relevant research report)",
+          "Type": "text"
+        },
+        {
+          "Name": "Iwouldliketobeconsideredtoattendthepre-eventdinner",
+          "Value": "No",
+          "Label": "I would like to be considered to attend the pre-event dinner",
+          "Type": "text"
+        },
+        {
+          "Name": "IwouldliketoattendtheSpringRetailFestivalAwards",
+          "Value": "No",
+          "Label": "I would like to attend the Spring Retail Festival Awards",
+          "Type": "text"
+        },
+        {
+          "Name": "IwouldlikeaccesstotheRetailXIntelligencedataplatform(freetrial)",
+          "Value": "No",
+          "Label": "I would like access to the RetailX Intelligence data platform (free trial)",
+          "Type": "text"
+        },
+        {
+          "Name": "Iagreetoparticipationintheintroductorymeetingprogramme\"Connect\"inanetworkingbreak",
+          "Value": "Yes",
+          "Label": "I agree to participation in the introductory meeting programme \"Connect\" in a networking break",
+          "Type": "text"
+        },
+        {
+          "Name": "IagreetotheT&C'sofregistrationincludingreceivingafreecopyoftherelevanteventresearchreport",
+          "Value": "Yes",
+          "Label": "I agree to the T&C's of registration including receiving a free copy of the relevant event research report",
+          "Type": "text"
+        },
+        {
+          "Name": "AddressLine1",
+          "Value": "",
+          "Label": "Address Line 1",
+          "Type": "text"
+        },
+        {
+          "Name": "AddressLine2",
+          "Value": "",
+          "Label": "Address Line 2",
+          "Type": "text"
+        },
+        {
+          "Name": "AddressLine3",
+          "Value": "",
+          "Label": "Address Line 3",
+          "Type": "text"
+        },
+        {
+          "Name": "WhichtracksatRMXareyoumostinterestedtoattend",
+          "Value": [],
+          "Label": "Which tracks at RMX are you most interested to attend",
+          "Type": "multiselect"
+        },
+        {
+          "Name": "IwouldliketoattendtheRMXAwards",
+          "Value": "",
+          "Label": "I would like to attend the RMX Awards",
+          "Type": "select"
+        }
+      ],
+      "DefaultFields": [],
+      "PreSignupFields": [],
+      "FirstName": "Amanda",
+      "LastName": "Diniz",
+      "Email": "amanda@sevencleanseas.com",
+      "PhoneCountryCode": "",
+      "Phone": "+442852737653",
+      "Address": "",
+      "Zip": "",
+      "qr_code": "RN9psYT",
+      "qr": "https://cdn.tickettailor.com/userfiles/cache/barcode/qr/attendee/86146812/276e1fb301fc804cd6b9.png",
+      "Company": "Seven Clean Seas",
+      "Designation": "Sustainability Consultant",
+      "isComplete": true
+    },
+    {
+      "sendMail": 0,
+      "ShowInCMSAttendeeList": 1,
+      "FormType": "FREE",
+      "RegistrationType": {
+        "ColorCode": "#000",
+        "RegistrationType": "Attendee",
+        "RegistrationTypeId": "IDcDKMY6E6l9z2Ad394v"
+      },
+      "DynamicFields": [
+        {
+          "Name": "JobTitle",
+          "Value": "CSR Manager",
+          "Label": "Job Title",
+          "Type": "text"
+        },
+        {
+          "Name": "Company/Organisation",
+          "Value": "Different Kind",
+          "Label": "Company/Organisation",
+          "Type": "text"
+        },
+        {
+          "Name": "LinkedinProfile",
+          "Value": "https://www.linkedin.com/in/ola-a-1855b791/",
+          "Label": "Linkedin Profile",
+          "Type": "text"
+        },
+        {
+          "Name": "Country/Region",
+          "Value": "London, UK",
+          "Label": "Country / Region",
+          "Type": "text"
+        },
+        {
+          "Name": "WhicheventattheSpringRetailFestivalareyouattending?(yourattendanceincludesafreecopyoftherelevantresearchreport)",
+          "Value": "SustainabilityX [retailers & brands only, all registrations are subject to approval]",
+          "Label": "Which event at the Spring Retail Festival are you attending? (your attendance includes a free copy of the relevant research report)",
+          "Type": "text"
+        },
+        {
+          "Name": "Iwouldliketobeconsideredtoattendthepre-eventdinner",
+          "Value": "Yes",
+          "Label": "I would like to be considered to attend the pre-event dinner",
+          "Type": "text"
+        },
+        {
+          "Name": "IwouldliketoattendtheSpringRetailFestivalAwards",
+          "Value": "Yes",
+          "Label": "I would like to attend the Spring Retail Festival Awards",
+          "Type": "text"
+        },
+        {
+          "Name": "IwouldlikeaccesstotheRetailXIntelligencedataplatform(freetrial)",
+          "Value": "Yes",
+          "Label": "I would like access to the RetailX Intelligence data platform (free trial)",
+          "Type": "text"
+        },
+        {
+          "Name": "Iagreetoparticipationintheintroductorymeetingprogramme\"Connect\"inanetworkingbreak",
+          "Value": "Yes",
+          "Label": "I agree to participation in the introductory meeting programme \"Connect\" in a networking break",
+          "Type": "text"
+        },
+        {
+          "Name": "IagreetotheT&C'sofregistrationincludingreceivingafreecopyoftherelevanteventresearchreport",
+          "Value": "Yes",
+          "Label": "I agree to the T&C's of registration including receiving a free copy of the relevant event research report",
+          "Type": "text"
+        },
+        {
+          "Name": "AddressLine1",
+          "Value": "",
+          "Label": "Address Line 1",
+          "Type": "text"
+        },
+        {
+          "Name": "AddressLine2",
+          "Value": "",
+          "Label": "Address Line 2",
+          "Type": "text"
+        },
+        {
+          "Name": "AddressLine3",
+          "Value": "",
+          "Label": "Address Line 3",
+          "Type": "text"
+        },
+        {
+          "Name": "WhichtracksatRMXareyoumostinterestedtoattend",
+          "Value": [],
+          "Label": "Which tracks at RMX are you most interested to attend",
+          "Type": "multiselect"
+        },
+        {
+          "Name": "IwouldliketoattendtheRMXAwards",
+          "Value": "",
+          "Label": "I would like to attend the RMX Awards",
+          "Type": "select"
+        }
+      ],
+      "DefaultFields": [],
+      "PreSignupFields": [],
+      "FirstName": "Ola",
+      "LastName": "Alatishe",
+      "Email": "ola@thedifferentkind.com",
+      "PhoneCountryCode": "",
+      "Phone": "+447505034618",
+      "Address": "",
+      "Zip": "",
+      "qr_code": "gS8fHLg",
+      "qr": "https://cdn.tickettailor.com/userfiles/cache/barcode/qr/attendee/86503144/b183b7bcf97b39930cb6.png",
+      "Company": "Different Kind",
+      "Designation": "CSR Manager",
+      "isComplete": true
+    },
+    {
+      "sendMail": 0,
+      "ShowInCMSAttendeeList": 1,
+      "FormType": "FREE",
+      "RegistrationType": {
+        "ColorCode": "#000",
+        "RegistrationType": "Attendee",
+        "RegistrationTypeId": "IDcDKMY6E6l9z2Ad394v"
+      },
+      "DynamicFields": [
+        {
+          "Name": "JobTitle",
+          "Value": "Director",
+          "Label": "Job Title",
+          "Type": "text"
+        },
+        {
+          "Name": "Company/Organisation",
+          "Value": "Carbon Detectives | Sustainability Made Easy Limited",
+          "Label": "Company/Organisation",
+          "Type": "text"
+        },
+        {
+          "Name": "LinkedinProfile",
+          "Value": "https://www.linkedin.com/in/loretalingyte/",
+          "Label": "Linkedin Profile",
+          "Type": "text"
+        },
+        {
+          "Name": "Country/Region",
+          "Value": "United Kingdom",
+          "Label": "Country / Region",
+          "Type": "text"
+        },
+        {
+          "Name": "WhicheventattheSpringRetailFestivalareyouattending?(yourattendanceincludesafreecopyoftherelevantresearchreport)",
+          "Value": "SustainabilityX [retailers & brands only, all registrations are subject to approval]",
+          "Label": "Which event at the Spring Retail Festival are you attending? (your attendance includes a free copy of the relevant research report)",
+          "Type": "text"
+        },
+        {
+          "Name": "Iwouldliketobeconsideredtoattendthepre-eventdinner",
+          "Value": "Yes",
+          "Label": "I would like to be considered to attend the pre-event dinner",
+          "Type": "text"
+        },
+        {
+          "Name": "IwouldlikeaccesstotheRetailXIntelligencedataplatform(freetrial)",
+          "Value": "Yes",
+          "Label": "I would like access to the RetailX Intelligence data platform (free trial)",
+          "Type": "text"
+        },
+        {
+          "Name": "Iagreetoparticipationintheintroductorymeetingprogramme\"Connect\"inanetworkingbreak",
+          "Value": "Yes",
+          "Label": "I agree to participation in the introductory meeting programme \"Connect\" in a networking break",
+          "Type": "text"
+        },
+        {
+          "Name": "IagreetotheT&C'sofregistrationincludingreceivingafreecopyoftherelevanteventresearchreport",
+          "Value": "Yes",
+          "Label": "I agree to the T&C's of registration including receiving a free copy of the relevant event research report",
+          "Type": "text"
+        },
+        {
+          "Name": "AddressLine1",
+          "Value": "38",
+          "Label": "Address Line 1",
+          "Type": "text"
+        },
+        {
+          "Name": "AddressLine2",
+          "Value": "High Oaks",
+          "Label": "Address Line 2",
+          "Type": "text"
+        },
+        {
+          "Name": "AddressLine3",
+          "Value": "",
+          "Label": "Address Line 3",
+          "Type": "text"
+        },
+        {
+          "Name": "WhichtracksatRMXareyoumostinterestedtoattend",
+          "Value": [],
+          "Label": "Which tracks at RMX are you most interested to attend",
+          "Type": "multiselect"
+        },
+        {
+          "Name": "IwouldliketoattendtheRMXAwards",
+          "Value": "",
+          "Label": "I would like to attend the RMX Awards",
+          "Type": "select"
+        }
+      ],
+      "DefaultFields": [],
+      "PreSignupFields": [],
+      "FirstName": "Loreta",
+      "LastName": "Lingyte",
+      "Email": "ccd@carbondetectives.co.uk",
+      "PhoneCountryCode": "",
+      "Phone": "+447464892681",
+      "Address": "38",
+      "Zip": "AL3 6DN",
+      "qr_code": "Hq9Apw5",
+      "qr": "https://cdn.tickettailor.com/userfiles/cache/barcode/qr/attendee/87775659/8a172561f3205f325c35.png",
+      "Company": "Carbon Detectives | Sustainability Made Easy Limited",
+      "Designation": "Director",
+      "isComplete": true
+    },
+    {
+      "sendMail": 0,
+      "ShowInCMSAttendeeList": 1,
+      "FormType": "FREE",
+      "RegistrationType": {
+        "ColorCode": "#000",
+        "RegistrationType": "Attendee",
+        "RegistrationTypeId": "IDcDKMY6E6l9z2Ad394v"
+      },
+      "DynamicFields": [
+        {
+          "Name": "JobTitle",
+          "Value": "Brand Partnership Director",
+          "Label": "Job Title",
+          "Type": "text"
+        },
+        {
+          "Name": "Company/Organisation",
+          "Value": "Reskinned",
+          "Label": "Company/Organisation",
+          "Type": "text"
+        },
+        {
+          "Name": "LinkedinProfile",
+          "Value": "NA",
+          "Label": "Linkedin Profile",
+          "Type": "text"
+        },
+        {
+          "Name": "Country/Region",
+          "Value": "UK",
+          "Label": "Country / Region",
+          "Type": "text"
+        },
+        {
+          "Name": "WhicheventattheSpringRetailFestivalareyouattending?(yourattendanceincludesafreecopyoftherelevantresearchreport)",
+          "Value": "SustainabilityX [retailers & brands only, all registrations are subject to approval]",
+          "Label": "Which event at the Spring Retail Festival are you attending? (your attendance includes a free copy of the relevant research report)",
+          "Type": "text"
+        },
+        {
+          "Name": "Iwouldliketobeconsideredtoattendthepre-eventdinner",
+          "Value": "No",
+          "Label": "I would like to be considered to attend the pre-event dinner",
+          "Type": "text"
+        },
+        {
+          "Name": "IwouldlikeaccesstotheRetailXIntelligencedataplatform(freetrial)",
+          "Value": "No",
+          "Label": "I would like access to the RetailX Intelligence data platform (free trial)",
+          "Type": "text"
+        },
+        {
+          "Name": "Iagreetoparticipationintheintroductorymeetingprogramme\"Connect\"inanetworkingbreak",
+          "Value": "Yes",
+          "Label": "I agree to participation in the introductory meeting programme \"Connect\" in a networking break",
+          "Type": "text"
+        },
+        {
+          "Name": "IagreetotheT&C'sofregistrationincludingreceivingafreecopyoftherelevanteventresearchreport",
+          "Value": "Yes",
+          "Label": "I agree to the T&C's of registration including receiving a free copy of the relevant event research report",
+          "Type": "text"
+        },
+        {
+          "Name": "AddressLine1",
+          "Value": "24D Grosvenor Gardens",
+          "Label": "Address Line 1",
+          "Type": "text"
+        },
+        {
+          "Name": "AddressLine2",
+          "Value": "London",
+          "Label": "Address Line 2",
+          "Type": "text"
+        },
+        {
+          "Name": "AddressLine3",
+          "Value": "",
+          "Label": "Address Line 3",
+          "Type": "text"
+        },
+        {
+          "Name": "WhichtracksatRMXareyoumostinterestedtoattend",
+          "Value": [],
+          "Label": "Which tracks at RMX are you most interested to attend",
+          "Type": "multiselect"
+        },
+        {
+          "Name": "IwouldliketoattendtheRMXAwards",
+          "Value": "",
+          "Label": "I would like to attend the RMX Awards",
+          "Type": "select"
+        }
+      ],
+      "DefaultFields": [],
+      "PreSignupFields": [],
+      "FirstName": "Francesca",
+      "LastName": "Lascelles",
+      "Email": "francesca.lascelles@reskinned.clothing",
+      "PhoneCountryCode": "",
+      "Phone": "+447411299339",
+      "Address": "24D Grosvenor Gardens",
+      "Zip": "NW2 4QP",
+      "qr_code": "yD4Gx5n",
+      "qr": "https://cdn.tickettailor.com/userfiles/cache/barcode/qr/attendee/87798897/45ebe552930d488ebd04.png",
+      "Company": "Reskinned",
+      "Designation": "Brand Partnership Director",
+      "isComplete": true
+    },
+    {
+      "sendMail": 0,
+      "ShowInCMSAttendeeList": 1,
+      "FormType": "FREE",
+      "RegistrationType": {
+        "ColorCode": "#000",
+        "RegistrationType": "Attendee",
+        "RegistrationTypeId": "IDcDKMY6E6l9z2Ad394v"
+      },
+      "DynamicFields": [
+        {
+          "Name": "JobTitle",
+          "Value": "Sales Director",
+          "Label": "Job Title",
+          "Type": "text"
+        },
+        {
+          "Name": "Company/Organisation",
+          "Value": "ReBorn Homewares",
+          "Label": "Company/Organisation",
+          "Type": "text"
+        },
+        {
+          "Name": "LinkedinProfile",
+          "Value": "https://www.linkedin.com/company/reborn-homewares/",
+          "Label": "Linkedin Profile",
+          "Type": "text"
+        },
+        {
+          "Name": "Country/Region",
+          "Value": "United Kingdom",
+          "Label": "Country / Region",
+          "Type": "text"
+        },
+        {
+          "Name": "WhicheventattheSpringRetailFestivalareyouattending?(yourattendanceincludesafreecopyoftherelevantresearchreport)",
+          "Value": "SustainabilityX [retailers & brands only, all registrations are subject to approval]",
+          "Label": "Which event at the Spring Retail Festival are you attending? (your attendance includes a free copy of the relevant research report)",
+          "Type": "text"
+        },
+        {
+          "Name": "Iwouldliketobeconsideredtoattendthepre-eventdinner",
+          "Value": "No",
+          "Label": "I would like to be considered to attend the pre-event dinner",
+          "Type": "text"
+        },
+        {
+          "Name": "IwouldlikeaccesstotheRetailXIntelligencedataplatform(freetrial)",
+          "Value": "No",
+          "Label": "I would like access to the RetailX Intelligence data platform (free trial)",
+          "Type": "text"
+        },
+        {
+          "Name": "Iagreetoparticipationintheintroductorymeetingprogramme\"Connect\"inanetworkingbreak",
+          "Value": "Yes",
+          "Label": "I agree to participation in the introductory meeting programme \"Connect\" in a networking break",
+          "Type": "text"
+        },
+        {
+          "Name": "IagreetotheT&C'sofregistrationincludingreceivingafreecopyoftherelevanteventresearchreport",
+          "Value": "Yes",
+          "Label": "I agree to the T&C's of registration including receiving a free copy of the relevant event research report",
+          "Type": "text"
+        },
+        {
+          "Name": "AddressLine1",
+          "Value": "38 Ellesmere Road",
+          "Label": "Address Line 1",
+          "Type": "text"
+        },
+        {
+          "Name": "AddressLine2",
+          "Value": "Berkhamsted",
+          "Label": "Address Line 2",
+          "Type": "text"
+        },
+        {
+          "Name": "AddressLine3",
+          "Value": "",
+          "Label": "Address Line 3",
+          "Type": "text"
+        },
+        {
+          "Name": "WhichtracksatRMXareyoumostinterestedtoattend",
+          "Value": [],
+          "Label": "Which tracks at RMX are you most interested to attend",
+          "Type": "multiselect"
+        },
+        {
+          "Name": "IwouldliketoattendtheRMXAwards",
+          "Value": "",
+          "Label": "I would like to attend the RMX Awards",
+          "Type": "select"
+        }
+      ],
+      "DefaultFields": [],
+      "PreSignupFields": [],
+      "FirstName": "Sara",
+      "LastName": "Allbright",
+      "Email": "sara@reborn.homes",
+      "PhoneCountryCode": "",
+      "Phone": "+447989911268",
+      "Address": "38 Ellesmere Road",
+      "Zip": "HP4 2EU",
+      "qr_code": "UK6z2sa",
+      "qr": "https://cdn.tickettailor.com/userfiles/cache/barcode/qr/attendee/87847494/3293ff74efbd62949a0a.png",
+      "Company": "ReBorn Homewares",
+      "Designation": "Sales Director",
+      "isComplete": true
+    },
+    {
+      "sendMail": 0,
+      "ShowInCMSAttendeeList": 1,
+      "FormType": "FREE",
+      "RegistrationType": {
+        "ColorCode": "#000",
+        "RegistrationType": "Attendee",
+        "RegistrationTypeId": "IDcDKMY6E6l9z2Ad394v"
+      },
+      "DynamicFields": [
+        {
+          "Name": "JobTitle",
+          "Value": "Director",
+          "Label": "Job Title",
+          "Type": "text"
+        },
+        {
+          "Name": "Company/Organisation",
+          "Value": "ReBorn Homewares",
+          "Label": "Company/Organisation",
+          "Type": "text"
+        },
+        {
+          "Name": "LinkedinProfile",
+          "Value": "https://www.linkedin.com/company/reborn-homewares/posts/?feedView=all",
+          "Label": "Linkedin Profile",
+          "Type": "text"
+        },
+        {
+          "Name": "Country/Region",
+          "Value": "United Kingdom",
+          "Label": "Country / Region",
+          "Type": "text"
+        },
+        {
+          "Name": "WhicheventattheSpringRetailFestivalareyouattending?(yourattendanceincludesafreecopyoftherelevantresearchreport)",
+          "Value": "SustainabilityX [retailers & brands only, all registrations are subject to approval]",
+          "Label": "Which event at the Spring Retail Festival are you attending? (your attendance includes a free copy of the relevant research report)",
+          "Type": "text"
+        },
+        {
+          "Name": "Iwouldliketobeconsideredtoattendthepre-eventdinner",
+          "Value": "No",
+          "Label": "I would like to be considered to attend the pre-event dinner",
+          "Type": "text"
+        },
+        {
+          "Name": "IwouldlikeaccesstotheRetailXIntelligencedataplatform(freetrial)",
+          "Value": "No",
+          "Label": "I would like access to the RetailX Intelligence data platform (free trial)",
+          "Type": "text"
+        },
+        {
+          "Name": "Iagreetoparticipationintheintroductorymeetingprogramme\"Connect\"inanetworkingbreak",
+          "Value": "Yes",
+          "Label": "I agree to participation in the introductory meeting programme \"Connect\" in a networking break",
+          "Type": "text"
+        },
+        {
+          "Name": "IagreetotheT&C'sofregistrationincludingreceivingafreecopyoftherelevanteventresearchreport",
+          "Value": "Yes",
+          "Label": "I agree to the T&C's of registration including receiving a free copy of the relevant event research report",
+          "Type": "text"
+        },
+        {
+          "Name": "AddressLine1",
+          "Value": "Blackrock House",
+          "Label": "Address Line 1",
+          "Type": "text"
+        },
+        {
+          "Name": "AddressLine2",
+          "Value": "Spekes Road",
+          "Label": "Address Line 2",
+          "Type": "text"
+        },
+        {
+          "Name": "AddressLine3",
+          "Value": "Hempstead Rainham Kent ME7 3RS",
+          "Label": "Address Line 3",
+          "Type": "text"
+        },
+        {
+          "Name": "WhichtracksatRMXareyoumostinterestedtoattend",
+          "Value": [],
+          "Label": "Which tracks at RMX are you most interested to attend",
+          "Type": "multiselect"
+        },
+        {
+          "Name": "IwouldliketoattendtheRMXAwards",
+          "Value": "",
+          "Label": "I would like to attend the RMX Awards",
+          "Type": "select"
+        }
+      ],
+      "DefaultFields": [],
+      "PreSignupFields": [],
+      "FirstName": "Anna",
+      "LastName": "Berry",
+      "Email": "sara@reborn.homes",
+      "PhoneCountryCode": "",
+      "Phone": "+447989911268",
+      "Address": "Blackrock House",
+      "Zip": "ME7 3RS",
+      "qr_code": "ZB7Wxrf",
+      "qr": "https://cdn.tickettailor.com/userfiles/cache/barcode/qr/attendee/87852958/c4046f826c85f44370e2.png",
+      "Company": "ReBorn Homewares",
+      "Designation": "Director",
+      "isComplete": true
+    },
+    {
+      "sendMail": 0,
+      "ShowInCMSAttendeeList": 1,
+      "FormType": "FREE",
+      "RegistrationType": {
+        "ColorCode": "#000",
+        "RegistrationType": "Attendee",
+        "RegistrationTypeId": "IDcDKMY6E6l9z2Ad394v"
+      },
+      "DynamicFields": [
+        {
+          "Name": "JobTitle",
+          "Value": "Head of Sales",
+          "Label": "Job Title",
+          "Type": "text"
+        },
+        {
+          "Name": "Company/Organisation",
+          "Value": "Skandinavisk",
+          "Label": "Company/Organisation",
+          "Type": "text"
+        },
+        {
+          "Name": "LinkedinProfile",
+          "Value": "https://www.linkedin.com/company/skandinavisk/",
+          "Label": "Linkedin Profile",
+          "Type": "text"
+        },
+        {
+          "Name": "Country/Region",
+          "Value": "UK",
+          "Label": "Country / Region",
+          "Type": "text"
+        },
+        {
+          "Name": "WhicheventattheSpringRetailFestivalareyouattending?(yourattendanceincludesafreecopyoftherelevantresearchreport)",
+          "Value": "SustainabilityX [retailers & brands only, all registrations are subject to approval]",
+          "Label": "Which event at the Spring Retail Festival are you attending? (your attendance includes a free copy of the relevant research report)",
+          "Type": "text"
+        },
+        {
+          "Name": "Iwouldliketobeconsideredtoattendthepre-eventdinner",
+          "Value": "No",
+          "Label": "I would like to be considered to attend the pre-event dinner",
+          "Type": "text"
+        },
+        {
+          "Name": "IwouldlikeaccesstotheRetailXIntelligencedataplatform(freetrial)",
+          "Value": "No",
+          "Label": "I would like access to the RetailX Intelligence data platform (free trial)",
+          "Type": "text"
+        },
+        {
+          "Name": "Iagreetoparticipationintheintroductorymeetingprogramme\"Connect\"inanetworkingbreak",
+          "Value": "Yes",
+          "Label": "I agree to participation in the introductory meeting programme \"Connect\" in a networking break",
+          "Type": "text"
+        },
+        {
+          "Name": "IagreetotheT&C'sofregistrationincludingreceivingafreecopyoftherelevanteventresearchreport",
+          "Value": "Yes",
+          "Label": "I agree to the T&C's of registration including receiving a free copy of the relevant event research report",
+          "Type": "text"
+        },
+        {
+          "Name": "AddressLine1",
+          "Value": "Flat 9 Mural House",
+          "Label": "Address Line 1",
+          "Type": "text"
+        },
+        {
+          "Name": "AddressLine2",
+          "Value": "5a Havil Street",
+          "Label": "Address Line 2",
+          "Type": "text"
+        },
+        {
+          "Name": "AddressLine3",
+          "Value": "",
+          "Label": "Address Line 3",
+          "Type": "text"
+        },
+        {
+          "Name": "WhichtracksatRMXareyoumostinterestedtoattend",
+          "Value": [],
+          "Label": "Which tracks at RMX are you most interested to attend",
+          "Type": "multiselect"
+        },
+        {
+          "Name": "IwouldliketoattendtheRMXAwards",
+          "Value": "",
+          "Label": "I would like to attend the RMX Awards",
+          "Type": "select"
+        }
+      ],
+      "DefaultFields": [],
+      "PreSignupFields": [],
+      "FirstName": "Neil",
+      "LastName": "Amer",
+      "Email": "neil@skandinavisk.com",
+      "PhoneCountryCode": "",
+      "Phone": "+447870819635",
+      "Address": "Flat 9 Mural House",
+      "Zip": "SE5 7FS",
+      "qr_code": "wV3xEDX",
+      "qr": "https://cdn.tickettailor.com/userfiles/cache/barcode/qr/attendee/87855921/c71e259ff790255f3d44.png",
+      "Company": "Skandinavisk",
+      "Designation": "Head of Sales",
+      "isComplete": true
+    },
+    {
+      "sendMail": 0,
+      "ShowInCMSAttendeeList": 1,
+      "FormType": "FREE",
+      "RegistrationType": {
+        "ColorCode": "#000",
+        "RegistrationType": "Attendee",
+        "RegistrationTypeId": "IDcDKMY6E6l9z2Ad394v"
+      },
+      "DynamicFields": [
+        {
+          "Name": "JobTitle",
+          "Value": "Head of Revenue ",
+          "Label": "Job Title",
+          "Type": "text"
+        },
+        {
+          "Name": "Company/Organisation",
+          "Value": "Olio",
+          "Label": "Company/Organisation",
+          "Type": "text"
+        },
+        {
+          "Name": "LinkedinProfile",
+          "Value": "https://www.linkedin.com/in/liam-jones-30396b184?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app",
+          "Label": "Linkedin Profile",
+          "Type": "text"
+        },
+        {
+          "Name": "Country/Region",
+          "Value": "Uk",
+          "Label": "Country / Region",
+          "Type": "text"
+        },
+        {
+          "Name": "WhicheventattheSpringRetailFestivalareyouattending?(yourattendanceincludesafreecopyoftherelevantresearchreport)",
+          "Value": "SustainabilityX [retailers & brands only, all registrations are subject to approval]",
+          "Label": "Which event at the Spring Retail Festival are you attending? (your attendance includes a free copy of the relevant research report)",
+          "Type": "text"
+        },
+        {
+          "Name": "Iwouldliketobeconsideredtoattendthepre-eventdinner",
+          "Value": "Yes",
+          "Label": "I would like to be considered to attend the pre-event dinner",
+          "Type": "text"
+        },
+        {
+          "Name": "IwouldlikeaccesstotheRetailXIntelligencedataplatform(freetrial)",
+          "Value": "Yes",
+          "Label": "I would like access to the RetailX Intelligence data platform (free trial)",
+          "Type": "text"
+        },
+        {
+          "Name": "Iagreetoparticipationintheintroductorymeetingprogramme\"Connect\"inanetworkingbreak",
+          "Value": "Yes",
+          "Label": "I agree to participation in the introductory meeting programme \"Connect\" in a networking break",
+          "Type": "text"
+        },
+        {
+          "Name": "IagreetotheT&C'sofregistrationincludingreceivingafreecopyoftherelevanteventresearchreport",
+          "Value": "Yes",
+          "Label": "I agree to the T&C's of registration including receiving a free copy of the relevant event research report",
+          "Type": "text"
+        },
+        {
+          "Name": "AddressLine1",
+          "Value": "78",
+          "Label": "Address Line 1",
+          "Type": "text"
+        },
+        {
+          "Name": "AddressLine2",
+          "Value": "Regina Road",
+          "Label": "Address Line 2",
+          "Type": "text"
+        },
+        {
+          "Name": "AddressLine3",
+          "Value": "",
+          "Label": "Address Line 3",
+          "Type": "text"
+        },
+        {
+          "Name": "WhichtracksatRMXareyoumostinterestedtoattend",
+          "Value": [],
+          "Label": "Which tracks at RMX are you most interested to attend",
+          "Type": "multiselect"
+        },
+        {
+          "Name": "IwouldliketoattendtheRMXAwards",
+          "Value": "",
+          "Label": "I would like to attend the RMX Awards",
+          "Type": "select"
+        }
+      ],
+      "DefaultFields": [],
+      "PreSignupFields": [],
+      "FirstName": "Liam",
+      "LastName": "Jones",
+      "Email": "liam@olioapp.com",
+      "PhoneCountryCode": "",
+      "Phone": "+447929667279",
+      "Address": "78",
+      "Zip": "N43pp",
+      "qr_code": "KK6vyjD",
+      "qr": "https://cdn.tickettailor.com/userfiles/cache/barcode/qr/attendee/87900329/111b04a4570aafa49863.png",
+      "Company": "Olio",
+      "Designation": "Head of Revenue ",
+      "isComplete": true
+    },
+    {
+      "sendMail": 0,
+      "ShowInCMSAttendeeList": 1,
+      "FormType": "FREE",
+      "RegistrationType": {
+        "ColorCode": "#000",
+        "RegistrationType": "Attendee",
+        "RegistrationTypeId": "IDcDKMY6E6l9z2Ad394v"
+      },
+      "DynamicFields": [
+        {
+          "Name": "JobTitle",
+          "Value": "Product Design Engineer",
+          "Label": "Job Title",
+          "Type": "text"
+        },
+        {
+          "Name": "Company/Organisation",
+          "Value": "SharkNinja",
+          "Label": "Company/Organisation",
+          "Type": "text"
+        },
+        {
+          "Name": "LinkedinProfile",
+          "Value": "https://uk.linkedin.com/in/kathleen-castell",
+          "Label": "Linkedin Profile",
+          "Type": "text"
+        },
+        {
+          "Name": "Country/Region",
+          "Value": "United Kingdom",
+          "Label": "Country / Region",
+          "Type": "text"
+        },
+        {
+          "Name": "WhicheventattheSpringRetailFestivalareyouattending?(yourattendanceincludesafreecopyoftherelevantresearchreport)",
+          "Value": "SustainabilityX [retailers & brands only, all registrations are subject to approval]",
+          "Label": "Which event at the Spring Retail Festival are you attending? (your attendance includes a free copy of the relevant research report)",
+          "Type": "text"
+        },
+        {
+          "Name": "IfattendingSubscriptionX,whichtrackareyoumostinterestedtoattend",
+          "Value": "N/A",
+          "Label": "If attending SubscriptionX, which track are you most interested to attend",
+          "Type": "text"
+        },
+        {
+          "Name": "Iwouldliketobeconsideredtoattendthepre-eventdinner",
+          "Value": "Yes",
+          "Label": "I would like to be considered to attend the pre-event dinner",
+          "Type": "text"
+        },
+        {
+          "Name": "IwouldlikeaccesstotheRetailXIntelligencedataplatform(freetrial)",
+          "Value": "No",
+          "Label": "I would like access to the RetailX Intelligence data platform (free trial)",
+          "Type": "text"
+        },
+        {
+          "Name": "Iagreetoparticipationintheintroductorymeetingprogramme\"Connect\"inanetworkingbreak",
+          "Value": "Yes",
+          "Label": "I agree to participation in the introductory meeting programme \"Connect\" in a networking break",
+          "Type": "text"
+        },
+        {
+          "Name": "IagreetotheT&C'sofregistrationincludingreceivingafreecopyoftherelevanteventresearchreport",
+          "Value": "Yes",
+          "Label": "I agree to the T&C's of registration including receiving a free copy of the relevant event research report",
+          "Type": "text"
+        },
+        {
+          "Name": "AddressLine1",
+          "Value": "43A Wingford Road",
+          "Label": "Address Line 1",
+          "Type": "text"
+        },
+        {
+          "Name": "AddressLine2",
+          "Value": "London",
+          "Label": "Address Line 2",
+          "Type": "text"
+        },
+        {
+          "Name": "AddressLine3",
+          "Value": "",
+          "Label": "Address Line 3",
+          "Type": "text"
+        },
+        {
+          "Name": "WhichtracksatRMXareyoumostinterestedtoattend",
+          "Value": [],
+          "Label": "Which tracks at RMX are you most interested to attend",
+          "Type": "multiselect"
+        },
+        {
+          "Name": "IwouldliketoattendtheRMXAwards",
+          "Value": "",
+          "Label": "I would like to attend the RMX Awards",
+          "Type": "select"
+        }
+      ],
+      "DefaultFields": [],
+      "PreSignupFields": [],
+      "FirstName": "Kat",
+      "LastName": "Castell",
+      "Email": "kcastell@sharkninja.com",
+      "PhoneCountryCode": "",
+      "Phone": "+447913995811",
+      "Address": "43A Wingford Road",
+      "Zip": "SW2 4DR",
+      "qr_code": "5e3cbyz",
+      "qr": "https://cdn.tickettailor.com/userfiles/cache/barcode/qr/attendee/88229368/1061763a6fa0eb56ec67.png",
+      "Company": "SharkNinja",
+      "Designation": "Product Design Engineer",
+      "isComplete": true
+    },
+    {
+      "sendMail": 0,
+      "ShowInCMSAttendeeList": 1,
+      "FormType": "FREE",
+      "RegistrationType": {
+        "ColorCode": "#000",
+        "RegistrationType": "Attendee",
+        "RegistrationTypeId": "IDcDKMY6E6l9z2Ad394v"
+      },
+      "DynamicFields": [
+        {
+          "Name": "JobTitle",
+          "Value": "CEO/Founder",
+          "Label": "Job Title",
+          "Type": "text"
+        },
+        {
+          "Name": "Company/Organisation",
+          "Value": "Eleven as One Ltd",
+          "Label": "Company/Organisation",
+          "Type": "text"
+        },
+        {
+          "Name": "LinkedinProfile",
+          "Value": "https://www.linkedin.com/in/julia-cove-smith-96560b1b/",
+          "Label": "Linkedin Profile",
+          "Type": "text"
+        },
+        {
+          "Name": "Country/Region",
+          "Value": "United Kingdom",
+          "Label": "Country / Region",
+          "Type": "text"
+        },
+        {
+          "Name": "WhicheventattheSpringRetailFestivalareyouattending?(yourattendanceincludesafreecopyoftherelevantresearchreport)",
+          "Value": "SustainabilityX [retailers & brands only, all registrations are subject to approval]",
+          "Label": "Which event at the Spring Retail Festival are you attending? (your attendance includes a free copy of the relevant research report)",
+          "Type": "text"
+        },
+        {
+          "Name": "IfattendingSubscriptionX,whichtrackareyoumostinterestedtoattend",
+          "Value": "N/A",
+          "Label": "If attending SubscriptionX, which track are you most interested to attend",
+          "Type": "text"
+        },
+        {
+          "Name": "Iwouldliketobeconsideredtoattendthepre-eventdinner",
+          "Value": "Yes",
+          "Label": "I would like to be considered to attend the pre-event dinner",
+          "Type": "text"
+        },
+        {
+          "Name": "IwouldlikeaccesstotheRetailXIntelligencedataplatform(freetrial)",
+          "Value": "Yes",
+          "Label": "I would like access to the RetailX Intelligence data platform (free trial)",
+          "Type": "text"
+        },
+        {
+          "Name": "Iagreetoparticipationintheintroductorymeetingprogramme\"Connect\"inanetworkingbreak",
+          "Value": "Yes",
+          "Label": "I agree to participation in the introductory meeting programme \"Connect\" in a networking break",
+          "Type": "text"
+        },
+        {
+          "Name": "IagreetotheT&C'sofregistrationincludingreceivingafreecopyoftherelevanteventresearchreport",
+          "Value": "Yes",
+          "Label": "I agree to the T&C's of registration including receiving a free copy of the relevant event research report",
+          "Type": "text"
+        },
+        {
+          "Name": "AddressLine1",
+          "Value": "19 Hartswood Road",
+          "Label": "Address Line 1",
+          "Type": "text"
+        },
+        {
+          "Name": "AddressLine2",
+          "Value": "London",
+          "Label": "Address Line 2",
+          "Type": "text"
+        },
+        {
+          "Name": "AddressLine3",
+          "Value": "",
+          "Label": "Address Line 3",
+          "Type": "text"
+        },
+        {
+          "Name": "WhichtracksatRMXareyoumostinterestedtoattend",
+          "Value": [],
+          "Label": "Which tracks at RMX are you most interested to attend",
+          "Type": "multiselect"
+        },
+        {
+          "Name": "IwouldliketoattendtheRMXAwards",
+          "Value": "",
+          "Label": "I would like to attend the RMX Awards",
+          "Type": "select"
+        }
+      ],
+      "DefaultFields": [],
+      "PreSignupFields": [],
+      "FirstName": "Julia",
+      "LastName": "Cove-Smith",
+      "Email": "julia@elevenasone.co.uk",
+      "PhoneCountryCode": "",
+      "Phone": "+447930314614",
+      "Address": "19 Hartswood Road",
+      "Zip": "W12 9NE",
+      "qr_code": "PQ3sZAf",
+      "qr": "https://cdn.tickettailor.com/userfiles/cache/barcode/qr/attendee/88299100/942f5390bfe365d9ec26.png",
+      "Company": "Eleven as One Ltd",
+      "Designation": "CEO/Founder",
+      "isComplete": true
+    },
+    {
+      "sendMail": 0,
+      "ShowInCMSAttendeeList": 1,
+      "FormType": "FREE",
+      "RegistrationType": {
+        "ColorCode": "#000",
+        "RegistrationType": "Attendee",
+        "RegistrationTypeId": "IDcDKMY6E6l9z2Ad394v"
+      },
+      "DynamicFields": [
+        {
+          "Name": "JobTitle",
+          "Value": "Chief Technology Officer",
+          "Label": "Job Title",
+          "Type": "text"
+        },
+        {
+          "Name": "Company/Organisation",
+          "Value": "Seven Clean Seas",
+          "Label": "Company/Organisation",
+          "Type": "text"
+        },
+        {
+          "Name": "LinkedinProfile",
+          "Value": "https://www.linkedin.com/in/oliver-k-264028a1/",
+          "Label": "Linkedin Profile",
+          "Type": "text"
+        },
+        {
+          "Name": "Country/Region",
+          "Value": "United Kingdom",
+          "Label": "Country / Region",
+          "Type": "text"
+        },
+        {
+          "Name": "WhicheventattheSpringRetailFestivalareyouattending?(yourattendanceincludesafreecopyoftherelevantresearchreport)",
+          "Value": "SustainabilityX [retailers & brands only, all registrations are subject to approval]",
+          "Label": "Which event at the Spring Retail Festival are you attending? (your attendance includes a free copy of the relevant research report)",
+          "Type": "text"
+        },
+        {
+          "Name": "IfattendingSubscriptionX,whichtrackareyoumostinterestedtoattend",
+          "Value": "N/A",
+          "Label": "If attending SubscriptionX, which track are you most interested to attend",
+          "Type": "text"
+        },
+        {
+          "Name": "Iwouldliketobeconsideredtoattendthepre-eventdinner",
+          "Value": "Yes",
+          "Label": "I would like to be considered to attend the pre-event dinner",
+          "Type": "text"
+        },
+        {
+          "Name": "IwouldlikeaccesstotheRetailXIntelligencedataplatform(freetrial)",
+          "Value": "No",
+          "Label": "I would like access to the RetailX Intelligence data platform (free trial)",
+          "Type": "text"
+        },
+        {
+          "Name": "Iagreetoparticipationintheintroductorymeetingprogramme\"Connect\"inanetworkingbreak",
+          "Value": "Yes",
+          "Label": "I agree to participation in the introductory meeting programme \"Connect\" in a networking break",
+          "Type": "text"
+        },
+        {
+          "Name": "IagreetotheT&C'sofregistrationincludingreceivingafreecopyoftherelevanteventresearchreport",
+          "Value": "Yes",
+          "Label": "I agree to the T&C's of registration including receiving a free copy of the relevant event research report",
+          "Type": "text"
+        },
+        {
+          "Name": "AddressLine1",
+          "Value": "29a Montague Road",
+          "Label": "Address Line 1",
+          "Type": "text"
+        },
+        {
+          "Name": "AddressLine2",
+          "Value": "Hackney",
+          "Label": "Address Line 2",
+          "Type": "text"
+        },
+        {
+          "Name": "AddressLine3",
+          "Value": "",
+          "Label": "Address Line 3",
+          "Type": "text"
+        },
+        {
+          "Name": "WhichtracksatRMXareyoumostinterestedtoattend",
+          "Value": [],
+          "Label": "Which tracks at RMX are you most interested to attend",
+          "Type": "multiselect"
+        },
+        {
+          "Name": "IwouldliketoattendtheRMXAwards",
+          "Value": "",
+          "Label": "I would like to attend the RMX Awards",
+          "Type": "select"
+        }
+      ],
+      "DefaultFields": [],
+      "PreSignupFields": [],
+      "FirstName": "Oliver",
+      "LastName": "Kade",
+      "Email": "oli@sevencleanseas.com",
+      "PhoneCountryCode": "",
+      "Phone": "+44787788203",
+      "Address": "29a Montague Road",
+      "Zip": "E8 2HN",
+      "qr_code": "Na39ApB",
+      "qr": "https://cdn.tickettailor.com/userfiles/cache/barcode/qr/attendee/88566738/24df6b0fafde265ec6c1.png",
+      "Company": "Seven Clean Seas",
+      "Designation": "Chief Technology Officer",
+      "isComplete": true
+    },
+    {
+      "sendMail": 0,
+      "ShowInCMSAttendeeList": 1,
+      "FormType": "FREE",
+      "RegistrationType": {
+        "ColorCode": "#000",
+        "RegistrationType": "Attendee",
+        "RegistrationTypeId": "IDcDKMY6E6l9z2Ad394v"
+      },
+      "DynamicFields": [
+        {
+          "Name": "JobTitle",
+          "Value": "Managing Director",
+          "Label": "Job Title",
+          "Type": "text"
+        },
+        {
+          "Name": "Company/Organisation",
+          "Value": "The OUTNET",
+          "Label": "Company/Organisation",
+          "Type": "text"
+        },
+        {
+          "Name": "LinkedinProfile",
+          "Value": "XXXXXXX",
+          "Label": "Linkedin Profile",
+          "Type": "text"
+        },
+        {
+          "Name": "Country/Region",
+          "Value": "United Kingdom",
+          "Label": "Country / Region",
+          "Type": "text"
+        },
+        {
+          "Name": "WhicheventattheSpringRetailFestivalareyouattending?(yourattendanceincludesafreecopyoftherelevantresearchreport)",
+          "Value": "SustainabilityX [retailers & brands only, all registrations are subject to approval]",
+          "Label": "Which event at the Spring Retail Festival are you attending? (your attendance includes a free copy of the relevant research report)",
+          "Type": "text"
+        },
+        {
+          "Name": "IfattendingSubscriptionX,whichtrackareyoumostinterestedtoattend",
+          "Value": "Acquisition & Retention,Growth & Innovation",
+          "Label": "If attending SubscriptionX, which track are you most interested to attend",
+          "Type": "text"
+        },
+        {
+          "Name": "Iwouldliketobeconsideredtoattendthepre-eventdinner",
+          "Value": "Yes",
+          "Label": "I would like to be considered to attend the pre-event dinner",
+          "Type": "text"
+        },
+        {
+          "Name": "IwouldlikeaccesstotheRetailXIntelligencedataplatform(freetrial)",
+          "Value": "Yes",
+          "Label": "I would like access to the RetailX Intelligence data platform (free trial)",
+          "Type": "text"
+        },
+        {
+          "Name": "Iagreetoparticipationintheintroductorymeetingprogramme\"Connect\"inanetworkingbreak",
+          "Value": "Yes",
+          "Label": "I agree to participation in the introductory meeting programme \"Connect\" in a networking break",
+          "Type": "text"
+        },
+        {
+          "Name": "IagreetotheT&C'sofregistrationincludingreceivingafreecopyoftherelevanteventresearchreport",
+          "Value": "Yes",
+          "Label": "I agree to the T&C's of registration including receiving a free copy of the relevant event research report",
+          "Type": "text"
+        },
+        {
+          "Name": "AddressLine1",
+          "Value": "1 The Village Offices",
+          "Label": "Address Line 1",
+          "Type": "text"
+        },
+        {
+          "Name": "AddressLine2",
+          "Value": "Ariel Way, Westfield",
+          "Label": "Address Line 2",
+          "Type": "text"
+        },
+        {
+          "Name": "AddressLine3",
+          "Value": "",
+          "Label": "Address Line 3",
+          "Type": "text"
+        },
+        {
+          "Name": "WhichtracksatRMXareyoumostinterestedtoattend",
+          "Value": [],
+          "Label": "Which tracks at RMX are you most interested to attend",
+          "Type": "multiselect"
+        },
+        {
+          "Name": "IwouldliketoattendtheRMXAwards",
+          "Value": "",
+          "Label": "I would like to attend the RMX Awards",
+          "Type": "select"
+        }
+      ],
+      "DefaultFields": [],
+      "PreSignupFields": [],
+      "FirstName": "Sabah",
+      "LastName": "Naqushbandi",
+      "Email": "sabah.naqushbandi@ynap.com",
+      "PhoneCountryCode": "",
+      "Phone": "+447834318095",
+      "Address": "1 The Village Offices",
+      "Zip": "W12 7GF",
+      "qr_code": "pT5X3vS",
+      "qr": "https://cdn.tickettailor.com/userfiles/cache/barcode/qr/attendee/88663105/c0fa69ece16bdffd8f4d.png",
+      "Company": "The OUTNET",
+      "Designation": "Managing Director",
+      "isComplete": true
+    },
+    {
+      "sendMail": 0,
+      "ShowInCMSAttendeeList": 1,
+      "FormType": "FREE",
+      "RegistrationType": {
+        "ColorCode": "#000",
+        "RegistrationType": "Attendee",
+        "RegistrationTypeId": "IDcDKMY6E6l9z2Ad394v"
+      },
+      "DynamicFields": [
+        {
+          "Name": "JobTitle",
+          "Value": "Sustainability Manager",
+          "Label": "Job Title",
+          "Type": "text"
+        },
+        {
+          "Name": "Company/Organisation",
+          "Value": "Wickes Group Plc",
+          "Label": "Company/Organisation",
+          "Type": "text"
+        },
+        {
+          "Name": "LinkedinProfile",
+          "Value": "https://www.linkedin.com/in/inessordo/",
+          "Label": "Linkedin Profile",
+          "Type": "text"
+        },
+        {
+          "Name": "Country/Region",
+          "Value": "United Kingdom",
+          "Label": "Country / Region",
+          "Type": "text"
+        },
+        {
+          "Name": "WhicheventattheSpringRetailFestivalareyouattending?(yourattendanceincludesafreecopyoftherelevantresearchreport)",
+          "Value": "SustainabilityX [retailers & brands only, all registrations are subject to approval]",
+          "Label": "Which event at the Spring Retail Festival are you attending? (your attendance includes a free copy of the relevant research report)",
+          "Type": "text"
+        },
+        {
+          "Name": "IfattendingSubscriptionX,whichtrackareyoumostinterestedtoattend",
+          "Value": "N/A",
+          "Label": "If attending SubscriptionX, which track are you most interested to attend",
+          "Type": "text"
+        },
+        {
+          "Name": "Iwouldliketobeconsideredtoattendthepre-eventdinner",
+          "Value": "Yes",
+          "Label": "I would like to be considered to attend the pre-event dinner",
+          "Type": "text"
+        },
+        {
+          "Name": "IwouldlikeaccesstotheRetailXIntelligencedataplatform(freetrial)",
+          "Value": "Yes",
+          "Label": "I would like access to the RetailX Intelligence data platform (free trial)",
+          "Type": "text"
+        },
+        {
+          "Name": "Iagreetoparticipationintheintroductorymeetingprogramme\"Connect\"inanetworkingbreak",
+          "Value": "Yes",
+          "Label": "I agree to participation in the introductory meeting programme \"Connect\" in a networking break",
+          "Type": "text"
+        },
+        {
+          "Name": "IagreetotheT&C'sofregistrationincludingreceivingafreecopyoftherelevanteventresearchreport",
+          "Value": "Yes",
+          "Label": "I agree to the T&C's of registration including receiving a free copy of the relevant event research report",
+          "Type": "text"
+        },
+        {
+          "Name": "AddressLine1",
+          "Value": "19 colonial Way",
+          "Label": "Address Line 1",
+          "Type": "text"
+        },
+        {
+          "Name": "AddressLine2",
+          "Value": "Watford",
+          "Label": "Address Line 2",
+          "Type": "text"
+        },
+        {
+          "Name": "AddressLine3",
+          "Value": "",
+          "Label": "Address Line 3",
+          "Type": "text"
+        },
+        {
+          "Name": "WhichtracksatRMXareyoumostinterestedtoattend",
+          "Value": [],
+          "Label": "Which tracks at RMX are you most interested to attend",
+          "Type": "multiselect"
+        },
+        {
+          "Name": "IwouldliketoattendtheRMXAwards",
+          "Value": "",
+          "Label": "I would like to attend the RMX Awards",
+          "Type": "select"
+        }
+      ],
+      "DefaultFields": [],
+      "PreSignupFields": [],
+      "FirstName": "Ines",
+      "LastName": "Sordo",
+      "Email": "ines.sordo@wickes.co.uk",
+      "PhoneCountryCode": "",
+      "Phone": "+447531318006",
+      "Address": "19 colonial Way",
+      "Zip": "WD24 4JL",
+      "qr_code": "e81fX27",
+      "qr": "https://cdn.tickettailor.com/userfiles/cache/barcode/qr/attendee/88903642/e4e04d088f1ba4b8aee6.png",
+      "Company": "Wickes Group Plc",
+      "Designation": "Sustainability Manager",
+      "isComplete": true
+    },
+    {
+      "sendMail": 0,
+      "ShowInCMSAttendeeList": 1,
+      "FormType": "FREE",
+      "RegistrationType": {
+        "ColorCode": "#000",
+        "RegistrationType": "Attendee",
+        "RegistrationTypeId": "IDcDKMY6E6l9z2Ad394v"
+      },
+      "DynamicFields": [
+        {
+          "Name": "JobTitle",
+          "Value": "Senior Associate ",
+          "Label": "Job Title",
+          "Type": "text"
+        },
+        {
+          "Name": "Company/Organisation",
+          "Value": "Greenwoods Legal LLP",
+          "Label": "Company/Organisation",
+          "Type": "text"
+        },
+        {
+          "Name": "LinkedinProfile",
+          "Value": "www.linkedin.com/in/harry-rudolf",
+          "Label": "Linkedin Profile",
+          "Type": "text"
+        },
+        {
+          "Name": "Country/Region",
+          "Value": "United Kingdom",
+          "Label": "Country / Region",
+          "Type": "text"
+        },
+        {
+          "Name": "WhicheventattheSpringRetailFestivalareyouattending?(yourattendanceincludesafreecopyoftherelevantresearchreport)",
+          "Value": "SustainabilityX [retailers & brands only, all registrations are subject to approval]",
+          "Label": "Which event at the Spring Retail Festival are you attending? (your attendance includes a free copy of the relevant research report)",
+          "Type": "text"
+        },
+        {
+          "Name": "IfattendingSubscriptionX,whichtrackareyoumostinterestedtoattend",
+          "Value": "Acquisition & Retention",
+          "Label": "If attending SubscriptionX, which track are you most interested to attend",
+          "Type": "text"
+        },
+        {
+          "Name": "Iwouldliketobeconsideredtoattendthepre-eventdinner",
+          "Value": "No",
+          "Label": "I would like to be considered to attend the pre-event dinner",
+          "Type": "text"
+        },
+        {
+          "Name": "IwouldlikeaccesstotheRetailXIntelligencedataplatform(freetrial)",
+          "Value": "No",
+          "Label": "I would like access to the RetailX Intelligence data platform (free trial)",
+          "Type": "text"
+        },
+        {
+          "Name": "Iagreetoparticipationintheintroductorymeetingprogramme\"Connect\"inanetworkingbreak",
+          "Value": "Yes",
+          "Label": "I agree to participation in the introductory meeting programme \"Connect\" in a networking break",
+          "Type": "text"
+        },
+        {
+          "Name": "IagreetotheT&C'sofregistrationincludingreceivingafreecopyoftherelevanteventresearchreport",
+          "Value": "Yes",
+          "Label": "I agree to the T&C's of registration including receiving a free copy of the relevant event research report",
+          "Type": "text"
+        },
+        {
+          "Name": "AddressLine1",
+          "Value": "Queens House, 55-55 Lincoln's Inn Fields",
+          "Label": "Address Line 1",
+          "Type": "text"
+        },
+        {
+          "Name": "AddressLine2",
+          "Value": "London",
+          "Label": "Address Line 2",
+          "Type": "text"
+        },
+        {
+          "Name": "AddressLine3",
+          "Value": "",
+          "Label": "Address Line 3",
+          "Type": "text"
+        },
+        {
+          "Name": "WhichtracksatRMXareyoumostinterestedtoattend",
+          "Value": [],
+          "Label": "Which tracks at RMX are you most interested to attend",
+          "Type": "multiselect"
+        },
+        {
+          "Name": "IwouldliketoattendtheRMXAwards",
+          "Value": "",
+          "Label": "I would like to attend the RMX Awards",
+          "Type": "select"
+        }
+      ],
+      "DefaultFields": [],
+      "PreSignupFields": [],
+      "FirstName": "Harry",
+      "LastName": "Rudolf",
+      "Email": "hprudolf@greenwoods.co.uk",
+      "PhoneCountryCode": "",
+      "Phone": "+447545484934",
+      "Address": "Queens House, 55-55 Lincoln's Inn Fields",
+      "Zip": "WC2A 3LJ",
+      "qr_code": "ka3wgNS",
+      "qr": "https://cdn.tickettailor.com/userfiles/cache/barcode/qr/attendee/89318240/415b3643508a4e276568.png",
+      "Company": "Greenwoods Legal LLP",
+      "Designation": "Senior Associate ",
+      "isComplete": true
+    },
+    {
+      "sendMail": 0,
+      "ShowInCMSAttendeeList": 1,
+      "FormType": "FREE",
+      "RegistrationType": {
+        "ColorCode": "#000",
+        "RegistrationType": "Attendee",
+        "RegistrationTypeId": "IDcDKMY6E6l9z2Ad394v"
+      },
+      "DynamicFields": [
+        {
+          "Name": "JobTitle",
+          "Value": "Media Leader",
+          "Label": "Job Title",
+          "Type": "text"
+        },
+        {
+          "Name": "Company/Organisation",
+          "Value": "Diageo",
+          "Label": "Company/Organisation",
+          "Type": "text"
+        },
+        {
+          "Name": "LinkedinProfile",
+          "Value": "emilygroberts",
+          "Label": "Linkedin Profile",
+          "Type": "text"
+        },
+        {
+          "Name": "Country/Region",
+          "Value": "United Kingdom",
+          "Label": "Country / Region",
+          "Type": "text"
+        },
+        {
+          "Name": "WhicheventattheSpringRetailFestivalareyouattending?(yourattendanceincludesafreecopyoftherelevantresearchreport)",
+          "Value": "SustainabilityX [retailers & brands only, all registrations are subject to approval]",
+          "Label": "Which event at the Spring Retail Festival are you attending? (your attendance includes a free copy of the relevant research report)",
+          "Type": "text"
+        },
+        {
+          "Name": "IfattendingSubscriptionX,whichtrackareyoumostinterestedtoattend",
+          "Value": "Growth & Innovation",
+          "Label": "If attending SubscriptionX, which track are you most interested to attend",
+          "Type": "text"
+        },
+        {
+          "Name": "Iwouldliketobeconsideredtoattendthepre-eventdinner",
+          "Value": "Yes",
+          "Label": "I would like to be considered to attend the pre-event dinner",
+          "Type": "text"
+        },
+        {
+          "Name": "IwouldlikeaccesstotheRetailXIntelligencedataplatform(freetrial)",
+          "Value": "No",
+          "Label": "I would like access to the RetailX Intelligence data platform (free trial)",
+          "Type": "text"
+        },
+        {
+          "Name": "Iagreetoparticipationintheintroductorymeetingprogramme\"Connect\"inanetworkingbreak",
+          "Value": "Yes",
+          "Label": "I agree to participation in the introductory meeting programme \"Connect\" in a networking break",
+          "Type": "text"
+        },
+        {
+          "Name": "IagreetotheT&C'sofregistrationincludingreceivingafreecopyoftherelevanteventresearchreport",
+          "Value": "Yes",
+          "Label": "I agree to the T&C's of registration including receiving a free copy of the relevant event research report",
+          "Type": "text"
+        },
+        {
+          "Name": "AddressLine1",
+          "Value": "309a Trinity Road",
+          "Label": "Address Line 1",
+          "Type": "text"
+        },
+        {
+          "Name": "AddressLine2",
+          "Value": "Earlsfield",
+          "Label": "Address Line 2",
+          "Type": "text"
+        },
+        {
+          "Name": "AddressLine3",
+          "Value": "",
+          "Label": "Address Line 3",
+          "Type": "text"
+        },
+        {
+          "Name": "WhichtracksatRMXareyoumostinterestedtoattend",
+          "Value": [],
+          "Label": "Which tracks at RMX are you most interested to attend",
+          "Type": "multiselect"
+        },
+        {
+          "Name": "IwouldliketoattendtheRMXAwards",
+          "Value": "",
+          "Label": "I would like to attend the RMX Awards",
+          "Type": "select"
+        }
+      ],
+      "DefaultFields": [],
+      "PreSignupFields": [],
+      "FirstName": "Emily",
+      "LastName": "Roberts",
+      "Email": "emily.roberts@diageo.com",
+      "PhoneCountryCode": "",
+      "Phone": "+447815152731",
+      "Address": "309a Trinity Road",
+      "Zip": "309A Trinity Road, London, SW18 3SN",
+      "qr_code": "EH5DGgj",
+      "qr": "https://cdn.tickettailor.com/userfiles/cache/barcode/qr/attendee/89877826/0e9bd847aa8d4340b1db.png",
+      "Company": "Diageo",
+      "Designation": "Media Leader",
+      "isComplete": true
+    },
+    {
+      "sendMail": 0,
+      "ShowInCMSAttendeeList": 1,
+      "FormType": "FREE",
+      "RegistrationType": {
+        "ColorCode": "#000",
+        "RegistrationType": "Attendee",
+        "RegistrationTypeId": "IDcDKMY6E6l9z2Ad394v"
+      },
+      "DynamicFields": [
+        {
+          "Name": "JobTitle",
+          "Value": "Marketing Intern",
+          "Label": "Job Title",
+          "Type": "text"
+        },
+        {
+          "Name": "Company/Organisation",
+          "Value": "KinKind Ltd",
+          "Label": "Company/Organisation",
+          "Type": "text"
+        },
+        {
+          "Name": "LinkedinProfile",
+          "Value": "https://www.linkedin.com/in/holly-wetter/",
+          "Label": "Linkedin Profile",
+          "Type": "text"
+        },
+        {
+          "Name": "Country/Region",
+          "Value": "UK",
+          "Label": "Country / Region",
+          "Type": "text"
+        },
+        {
+          "Name": "WhicheventattheSpringRetailFestivalareyouattending?(yourattendanceincludesafreecopyoftherelevantresearchreport)",
+          "Value": "SustainabilityX [retailers & brands only, all registrations are subject to approval]",
+          "Label": "Which event at the Spring Retail Festival are you attending? (your attendance includes a free copy of the relevant research report)",
+          "Type": "text"
+        },
+        {
+          "Name": "IfattendingSubscriptionX,whichtrackareyoumostinterestedtoattend",
+          "Value": "",
+          "Label": "If attending SubscriptionX, which track are you most interested to attend",
+          "Type": "text"
+        },
+        {
+          "Name": "Iwouldliketobeconsideredtoattendthepre-eventdinner",
+          "Value": "No",
+          "Label": "I would like to be considered to attend the pre-event dinner",
+          "Type": "text"
+        },
+        {
+          "Name": "IwouldlikeaccesstotheRetailXIntelligencedataplatform(freetrial)",
+          "Value": "Yes",
+          "Label": "I would like access to the RetailX Intelligence data platform (free trial)",
+          "Type": "text"
+        },
+        {
+          "Name": "Iagreetoparticipationintheintroductorymeetingprogramme\"Connect\"inanetworkingbreak",
+          "Value": "Yes",
+          "Label": "I agree to participation in the introductory meeting programme \"Connect\" in a networking break",
+          "Type": "text"
+        },
+        {
+          "Name": "IagreetotheT&C'sofregistrationincludingreceivingafreecopyoftherelevanteventresearchreport",
+          "Value": "Yes",
+          "Label": "I agree to the T&C's of registration including receiving a free copy of the relevant event research report",
+          "Type": "text"
+        },
+        {
+          "Name": "AddressLine1",
+          "Value": "xxxxx",
+          "Label": "Address Line 1",
+          "Type": "text"
+        },
+        {
+          "Name": "AddressLine2",
+          "Value": "xxxxx",
+          "Label": "Address Line 2",
+          "Type": "text"
+        },
+        {
+          "Name": "AddressLine3",
+          "Value": "",
+          "Label": "Address Line 3",
+          "Type": "text"
+        },
+        {
+          "Name": "WhichtracksatRMXareyoumostinterestedtoattend",
+          "Value": [],
+          "Label": "Which tracks at RMX are you most interested to attend",
+          "Type": "multiselect"
+        },
+        {
+          "Name": "IwouldliketoattendtheRMXAwards",
+          "Value": "",
+          "Label": "I would like to attend the RMX Awards",
+          "Type": "select"
+        }
+      ],
+      "DefaultFields": [],
+      "PreSignupFields": [],
+      "FirstName": "Holly",
+      "LastName": "Wetter",
+      "Email": "holly.wetter@kinkind.co.uk",
+      "PhoneCountryCode": "",
+      "Phone": "+447777777777",
+      "Address": "xxxxx",
+      "Zip": "xxxxx",
+      "qr_code": "Uq3NBUE",
+      "qr": "https://cdn.tickettailor.com/userfiles/cache/barcode/qr/attendee/90208845/693b7539b0858d3d3043.png",
+      "Company": "KinKind Ltd",
+      "Designation": "Marketing Intern",
+      "isComplete": true
+    },
+    {
+      "sendMail": 0,
+      "ShowInCMSAttendeeList": 1,
+      "FormType": "FREE",
+      "RegistrationType": {
+        "ColorCode": "#000",
+        "RegistrationType": "Attendee",
+        "RegistrationTypeId": "IDcDKMY6E6l9z2Ad394v"
+      },
+      "DynamicFields": [
+        {
+          "Name": "JobTitle",
+          "Value": "Deputy Chief Executive",
+          "Label": "Job Title",
+          "Type": "text"
+        },
+        {
+          "Name": "Company/Organisation",
+          "Value": "Charity Retail Association",
+          "Label": "Company/Organisation",
+          "Type": "text"
+        },
+        {
+          "Name": "LinkedinProfile",
+          "Value": "https://www.linkedin.com/in/susan-meredith-6807b7b8/",
+          "Label": "Linkedin Profile",
+          "Type": "text"
+        },
+        {
+          "Name": "Country/Region",
+          "Value": "UK",
+          "Label": "Country / Region",
+          "Type": "text"
+        },
+        {
+          "Name": "WhicheventattheSpringRetailFestivalareyouattending?(yourattendanceincludesafreecopyoftherelevantresearchreport)",
+          "Value": "SustainabilityX [retailers & brands only, all registrations are subject to approval]",
+          "Label": "Which event at the Spring Retail Festival are you attending? (your attendance includes a free copy of the relevant research report)",
+          "Type": "text"
+        },
+        {
+          "Name": "IfattendingSubscriptionX,whichtrackareyoumostinterestedtoattend",
+          "Value": "N/A",
+          "Label": "If attending SubscriptionX, which track are you most interested to attend",
+          "Type": "text"
+        },
+        {
+          "Name": "Iwouldliketobeconsideredtoattendthepre-eventdinner",
+          "Value": "Yes",
+          "Label": "I would like to be considered to attend the pre-event dinner",
+          "Type": "text"
+        },
+        {
+          "Name": "IwouldlikeaccesstotheRetailXIntelligencedataplatform(freetrial)",
+          "Value": "Yes",
+          "Label": "I would like access to the RetailX Intelligence data platform (free trial)",
+          "Type": "text"
+        },
+        {
+          "Name": "Iagreetoparticipationintheintroductorymeetingprogramme\"Connect\"inanetworkingbreak",
+          "Value": "Yes",
+          "Label": "I agree to participation in the introductory meeting programme \"Connect\" in a networking break",
+          "Type": "text"
+        },
+        {
+          "Name": "IagreetotheT&C'sofregistrationincludingreceivingafreecopyoftherelevanteventresearchreport",
+          "Value": "Yes",
+          "Label": "I agree to the T&C's of registration including receiving a free copy of the relevant event research report",
+          "Type": "text"
+        },
+        {
+          "Name": "AddressLine1",
+          "Value": "xxxxx",
+          "Label": "Address Line 1",
+          "Type": "text"
+        },
+        {
+          "Name": "AddressLine2",
+          "Value": "xxxxx",
+          "Label": "Address Line 2",
+          "Type": "text"
+        },
+        {
+          "Name": "AddressLine3",
+          "Value": "",
+          "Label": "Address Line 3",
+          "Type": "text"
+        },
+        {
+          "Name": "WhichtracksatRMXareyoumostinterestedtoattend",
+          "Value": [],
+          "Label": "Which tracks at RMX are you most interested to attend",
+          "Type": "multiselect"
+        },
+        {
+          "Name": "IwouldliketoattendtheRMXAwards",
+          "Value": "",
+          "Label": "I would like to attend the RMX Awards",
+          "Type": "select"
+        }
+      ],
+      "DefaultFields": [],
+      "PreSignupFields": [],
+      "FirstName": "Susan",
+      "LastName": "Meredith",
+      "Email": "susan@charityretail.org.uk",
+      "PhoneCountryCode": "",
+      "Phone": "+447777777777",
+      "Address": "xxxxx",
+      "Zip": "xxxxx",
+      "qr_code": "zf6xg53",
+      "qr": "https://cdn.tickettailor.com/userfiles/cache/barcode/qr/attendee/90209775/fcf0ea963615c05605b3.png",
+      "Company": "Charity Retail Association",
+      "Designation": "Deputy Chief Executive",
+      "isComplete": true
+    },
+    {
+      "sendMail": 0,
+      "ShowInCMSAttendeeList": 1,
+      "FormType": "FREE",
+      "RegistrationType": {
+        "ColorCode": "#000",
+        "RegistrationType": "Attendee",
+        "RegistrationTypeId": "IDcDKMY6E6l9z2Ad394v"
+      },
+      "DynamicFields": [
+        {
+          "Name": "JobTitle",
+          "Value": "Corporate Partnerships Manager",
+          "Label": "Job Title",
+          "Type": "text"
+        },
+        {
+          "Name": "Company/Organisation",
+          "Value": "Charity Retail Association",
+          "Label": "Company/Organisation",
+          "Type": "text"
+        },
+        {
+          "Name": "LinkedinProfile",
+          "Value": "https://www.linkedin.com/in/anna-pashley-b992211a1/",
+          "Label": "Linkedin Profile",
+          "Type": "text"
+        },
+        {
+          "Name": "Country/Region",
+          "Value": "UK",
+          "Label": "Country / Region",
+          "Type": "text"
+        },
+        {
+          "Name": "WhicheventattheSpringRetailFestivalareyouattending?(yourattendanceincludesafreecopyoftherelevantresearchreport)",
+          "Value": "SustainabilityX [retailers & brands only, all registrations are subject to approval]",
+          "Label": "Which event at the Spring Retail Festival are you attending? (your attendance includes a free copy of the relevant research report)",
+          "Type": "text"
+        },
+        {
+          "Name": "IfattendingSubscriptionX,whichtrackareyoumostinterestedtoattend",
+          "Value": "N/A",
+          "Label": "If attending SubscriptionX, which track are you most interested to attend",
+          "Type": "text"
+        },
+        {
+          "Name": "Iwouldliketobeconsideredtoattendthepre-eventdinner",
+          "Value": "Yes",
+          "Label": "I would like to be considered to attend the pre-event dinner",
+          "Type": "text"
+        },
+        {
+          "Name": "IwouldlikeaccesstotheRetailXIntelligencedataplatform(freetrial)",
+          "Value": "Yes",
+          "Label": "I would like access to the RetailX Intelligence data platform (free trial)",
+          "Type": "text"
+        },
+        {
+          "Name": "Iagreetoparticipationintheintroductorymeetingprogramme\"Connect\"inanetworkingbreak",
+          "Value": "Yes",
+          "Label": "I agree to participation in the introductory meeting programme \"Connect\" in a networking break",
+          "Type": "text"
+        },
+        {
+          "Name": "IagreetotheT&C'sofregistrationincludingreceivingafreecopyoftherelevanteventresearchreport",
+          "Value": "Yes",
+          "Label": "I agree to the T&C's of registration including receiving a free copy of the relevant event research report",
+          "Type": "text"
+        },
+        {
+          "Name": "AddressLine1",
+          "Value": "xxxxx",
+          "Label": "Address Line 1",
+          "Type": "text"
+        },
+        {
+          "Name": "AddressLine2",
+          "Value": "xxxxx",
+          "Label": "Address Line 2",
+          "Type": "text"
+        },
+        {
+          "Name": "AddressLine3",
+          "Value": "",
+          "Label": "Address Line 3",
+          "Type": "text"
+        },
+        {
+          "Name": "WhichtracksatRMXareyoumostinterestedtoattend",
+          "Value": [],
+          "Label": "Which tracks at RMX are you most interested to attend",
+          "Type": "multiselect"
+        },
+        {
+          "Name": "IwouldliketoattendtheRMXAwards",
+          "Value": "",
+          "Label": "I would like to attend the RMX Awards",
+          "Type": "select"
+        }
+      ],
+      "DefaultFields": [],
+      "PreSignupFields": [],
+      "FirstName": "Anna",
+      "LastName": "Pashley",
+      "Email": "anna@charityretail.org.uk",
+      "PhoneCountryCode": "",
+      "Phone": "+447777777777",
+      "Address": "xxxxx",
+      "Zip": "xxxxx",
+      "qr_code": "Sv7UyuC",
+      "qr": "https://cdn.tickettailor.com/userfiles/cache/barcode/qr/attendee/90209832/1a140eec0f131f703744.png",
+      "Company": "Charity Retail Association",
+      "Designation": "Corporate Partnerships Manager",
+      "isComplete": true
+    },
+    {
+      "sendMail": 0,
+      "ShowInCMSAttendeeList": 1,
+      "FormType": "FREE",
+      "RegistrationType": {
+        "ColorCode": "#000",
+        "RegistrationType": "Attendee",
+        "RegistrationTypeId": "IDcDKMY6E6l9z2Ad394v"
+      },
+      "DynamicFields": [
+        {
+          "Name": "JobTitle",
+          "Value": "Customer Journey & Returns Optimisation Manager",
+          "Label": "Job Title",
+          "Type": "text"
+        },
+        {
+          "Name": "Company/Organisation",
+          "Value": "New Look",
+          "Label": "Company/Organisation",
+          "Type": "text"
+        },
+        {
+          "Name": "LinkedinProfile",
+          "Value": "https://www.linkedin.com/in/daniele-thomas-98481217/",
+          "Label": "Linkedin Profile",
+          "Type": "text"
+        },
+        {
+          "Name": "Country/Region",
+          "Value": "UK",
+          "Label": "Country / Region",
+          "Type": "text"
+        },
+        {
+          "Name": "WhicheventattheSpringRetailFestivalareyouattending?(yourattendanceincludesafreecopyoftherelevantresearchreport)",
+          "Value": "SustainabilityX [retailers & brands only, all registrations are subject to approval]",
+          "Label": "Which event at the Spring Retail Festival are you attending? (your attendance includes a free copy of the relevant research report)",
+          "Type": "text"
+        },
+        {
+          "Name": "IfattendingSubscriptionX,whichtrackareyoumostinterestedtoattend",
+          "Value": "N/A",
+          "Label": "If attending SubscriptionX, which track are you most interested to attend",
+          "Type": "text"
+        },
+        {
+          "Name": "Iwouldliketobeconsideredtoattendthepre-eventdinner",
+          "Value": "Yes",
+          "Label": "I would like to be considered to attend the pre-event dinner",
+          "Type": "text"
+        },
+        {
+          "Name": "IwouldlikeaccesstotheRetailXIntelligencedataplatform(freetrial)",
+          "Value": "Yes",
+          "Label": "I would like access to the RetailX Intelligence data platform (free trial)",
+          "Type": "text"
+        },
+        {
+          "Name": "Iagreetoparticipationintheintroductorymeetingprogramme\"Connect\"inanetworkingbreak",
+          "Value": "Yes",
+          "Label": "I agree to participation in the introductory meeting programme \"Connect\" in a networking break",
+          "Type": "text"
+        },
+        {
+          "Name": "IagreetotheT&C'sofregistrationincludingreceivingafreecopyoftherelevanteventresearchreport",
+          "Value": "Yes",
+          "Label": "I agree to the T&C's of registration including receiving a free copy of the relevant event research report",
+          "Type": "text"
+        },
+        {
+          "Name": "AddressLine1",
+          "Value": "xxxxx",
+          "Label": "Address Line 1",
+          "Type": "text"
+        },
+        {
+          "Name": "AddressLine2",
+          "Value": "xxxxx",
+          "Label": "Address Line 2",
+          "Type": "text"
+        },
+        {
+          "Name": "AddressLine3",
+          "Value": "",
+          "Label": "Address Line 3",
+          "Type": "text"
+        },
+        {
+          "Name": "WhichtracksatRMXareyoumostinterestedtoattend",
+          "Value": [],
+          "Label": "Which tracks at RMX are you most interested to attend",
+          "Type": "multiselect"
+        },
+        {
+          "Name": "IwouldliketoattendtheRMXAwards",
+          "Value": "",
+          "Label": "I would like to attend the RMX Awards",
+          "Type": "select"
+        }
+      ],
+      "DefaultFields": [],
+      "PreSignupFields": [],
+      "FirstName": "Daniele",
+      "LastName": "Thomas",
+      "Email": "daniele.thomas@newlook.com",
+      "PhoneCountryCode": "",
+      "Phone": "+447777777777",
+      "Address": "xxxxx",
+      "Zip": "xxxxx",
+      "qr_code": "es7rzLZ",
+      "qr": "https://cdn.tickettailor.com/userfiles/cache/barcode/qr/attendee/90210602/8e8835fb581215059f8b.png",
+      "Company": "New Look",
+      "Designation": "Customer Journey & Returns Optimisation Manager",
+      "isComplete": true
+    },
+    {
+      "sendMail": 0,
+      "ShowInCMSAttendeeList": 1,
+      "FormType": "FREE",
+      "RegistrationType": {
+        "ColorCode": "#000",
+        "RegistrationType": "Attendee",
+        "RegistrationTypeId": "IDcDKMY6E6l9z2Ad394v"
+      },
+      "DynamicFields": [
+        {
+          "Name": "JobTitle",
+          "Value": "Junior Sustainability Manager",
+          "Label": "Job Title",
+          "Type": "text"
+        },
+        {
+          "Name": "Company/Organisation",
+          "Value": "New Look",
+          "Label": "Company/Organisation",
+          "Type": "text"
+        },
+        {
+          "Name": "LinkedinProfile",
+          "Value": "https://www.linkedin.com/in/hannah-parsons-387965165/",
+          "Label": "Linkedin Profile",
+          "Type": "text"
+        },
+        {
+          "Name": "Country/Region",
+          "Value": "UK",
+          "Label": "Country / Region",
+          "Type": "text"
+        },
+        {
+          "Name": "WhicheventattheSpringRetailFestivalareyouattending?(yourattendanceincludesafreecopyoftherelevantresearchreport)",
+          "Value": "SustainabilityX [retailers & brands only, all registrations are subject to approval]",
+          "Label": "Which event at the Spring Retail Festival are you attending? (your attendance includes a free copy of the relevant research report)",
+          "Type": "text"
+        },
+        {
+          "Name": "IfattendingSubscriptionX,whichtrackareyoumostinterestedtoattend",
+          "Value": "N/A",
+          "Label": "If attending SubscriptionX, which track are you most interested to attend",
+          "Type": "text"
+        },
+        {
+          "Name": "Iwouldliketobeconsideredtoattendthepre-eventdinner",
+          "Value": "Yes",
+          "Label": "I would like to be considered to attend the pre-event dinner",
+          "Type": "text"
+        },
+        {
+          "Name": "IwouldlikeaccesstotheRetailXIntelligencedataplatform(freetrial)",
+          "Value": "Yes",
+          "Label": "I would like access to the RetailX Intelligence data platform (free trial)",
+          "Type": "text"
+        },
+        {
+          "Name": "Iagreetoparticipationintheintroductorymeetingprogramme\"Connect\"inanetworkingbreak",
+          "Value": "Yes",
+          "Label": "I agree to participation in the introductory meeting programme \"Connect\" in a networking break",
+          "Type": "text"
+        },
+        {
+          "Name": "IagreetotheT&C'sofregistrationincludingreceivingafreecopyoftherelevanteventresearchreport",
+          "Value": "Yes",
+          "Label": "I agree to the T&C's of registration including receiving a free copy of the relevant event research report",
+          "Type": "text"
+        },
+        {
+          "Name": "AddressLine1",
+          "Value": "xxxxx",
+          "Label": "Address Line 1",
+          "Type": "text"
+        },
+        {
+          "Name": "AddressLine2",
+          "Value": "xxxxx",
+          "Label": "Address Line 2",
+          "Type": "text"
+        },
+        {
+          "Name": "AddressLine3",
+          "Value": "",
+          "Label": "Address Line 3",
+          "Type": "text"
+        },
+        {
+          "Name": "WhichtracksatRMXareyoumostinterestedtoattend",
+          "Value": [],
+          "Label": "Which tracks at RMX are you most interested to attend",
+          "Type": "multiselect"
+        },
+        {
+          "Name": "IwouldliketoattendtheRMXAwards",
+          "Value": "",
+          "Label": "I would like to attend the RMX Awards",
+          "Type": "select"
+        }
+      ],
+      "DefaultFields": [],
+      "PreSignupFields": [],
+      "FirstName": "Hannah",
+      "LastName": "Parsons",
+      "Email": "hannah.parsons@newlook.com",
+      "PhoneCountryCode": "",
+      "Phone": "+447777777777",
+      "Address": "xxxxx",
+      "Zip": "xxxxx",
+      "qr_code": "yS3L8t8",
+      "qr": "https://cdn.tickettailor.com/userfiles/cache/barcode/qr/attendee/90210656/9bff25125d0b26313d2b.png",
+      "Company": "New Look",
+      "Designation": "Junior Sustainability Manager",
+      "isComplete": true
+    },
+    {
+      "sendMail": 0,
+      "ShowInCMSAttendeeList": 1,
+      "FormType": "FREE",
+      "RegistrationType": {
+        "ColorCode": "#000",
+        "RegistrationType": "Attendee",
+        "RegistrationTypeId": "IDcDKMY6E6l9z2Ad394v"
+      },
+      "DynamicFields": [
+        {
+          "Name": "JobTitle",
+          "Value": "Purpose & Social Impact",
+          "Label": "Job Title",
+          "Type": "text"
+        },
+        {
+          "Name": "Company/Organisation",
+          "Value": "Avon",
+          "Label": "Company/Organisation",
+          "Type": "text"
+        },
+        {
+          "Name": "LinkedinProfile",
+          "Value": "https://www.linkedin.com/in/carolinesilke/",
+          "Label": "Linkedin Profile",
+          "Type": "text"
+        },
+        {
+          "Name": "Country/Region",
+          "Value": "UK",
+          "Label": "Country / Region",
+          "Type": "text"
+        },
+        {
+          "Name": "WhicheventattheSpringRetailFestivalareyouattending?(yourattendanceincludesafreecopyoftherelevantresearchreport)",
+          "Value": "SustainabilityX [retailers & brands only, all registrations are subject to approval]",
+          "Label": "Which event at the Spring Retail Festival are you attending? (your attendance includes a free copy of the relevant research report)",
+          "Type": "text"
+        },
+        {
+          "Name": "IfattendingSubscriptionX,whichtrackareyoumostinterestedtoattend",
+          "Value": "N/A",
+          "Label": "If attending SubscriptionX, which track are you most interested to attend",
+          "Type": "text"
+        },
+        {
+          "Name": "Iwouldliketobeconsideredtoattendthepre-eventdinner",
+          "Value": "Yes",
+          "Label": "I would like to be considered to attend the pre-event dinner",
+          "Type": "text"
+        },
+        {
+          "Name": "IwouldlikeaccesstotheRetailXIntelligencedataplatform(freetrial)",
+          "Value": "Yes",
+          "Label": "I would like access to the RetailX Intelligence data platform (free trial)",
+          "Type": "text"
+        },
+        {
+          "Name": "Iagreetoparticipationintheintroductorymeetingprogramme\"Connect\"inanetworkingbreak",
+          "Value": "Yes",
+          "Label": "I agree to participation in the introductory meeting programme \"Connect\" in a networking break",
+          "Type": "text"
+        },
+        {
+          "Name": "IagreetotheT&C'sofregistrationincludingreceivingafreecopyoftherelevanteventresearchreport",
+          "Value": "Yes",
+          "Label": "I agree to the T&C's of registration including receiving a free copy of the relevant event research report",
+          "Type": "text"
+        },
+        {
+          "Name": "AddressLine1",
+          "Value": "xxxxx",
+          "Label": "Address Line 1",
+          "Type": "text"
+        },
+        {
+          "Name": "AddressLine2",
+          "Value": "xxxxx",
+          "Label": "Address Line 2",
+          "Type": "text"
+        },
+        {
+          "Name": "AddressLine3",
+          "Value": "",
+          "Label": "Address Line 3",
+          "Type": "text"
+        },
+        {
+          "Name": "WhichtracksatRMXareyoumostinterestedtoattend",
+          "Value": [],
+          "Label": "Which tracks at RMX are you most interested to attend",
+          "Type": "multiselect"
+        },
+        {
+          "Name": "IwouldliketoattendtheRMXAwards",
+          "Value": "",
+          "Label": "I would like to attend the RMX Awards",
+          "Type": "select"
+        }
+      ],
+      "DefaultFields": [],
+      "PreSignupFields": [],
+      "FirstName": "Caroline",
+      "LastName": "Silke",
+      "Email": "caroline.silke@avon.com",
+      "PhoneCountryCode": "",
+      "Phone": "+447777777777",
+      "Address": "xxxxx",
+      "Zip": "xxxxx",
+      "qr_code": "Np8tw9t",
+      "qr": "https://cdn.tickettailor.com/userfiles/cache/barcode/qr/attendee/90211705/a1f448443bdcf9e4758b.png",
+      "Company": "Avon",
+      "Designation": "Purpose & Social Impact",
+      "isComplete": true
+    },
+    {
+      "sendMail": 0,
+      "ShowInCMSAttendeeList": 1,
+      "FormType": "FREE",
+      "RegistrationType": {
+        "ColorCode": "#000",
+        "RegistrationType": "Attendee",
+        "RegistrationTypeId": "IDcDKMY6E6l9z2Ad394v"
+      },
+      "DynamicFields": [
+        {
+          "Name": "JobTitle",
+          "Value": "Head of Recruitment",
+          "Label": "Job Title",
+          "Type": "text"
+        },
+        {
+          "Name": "Company/Organisation",
+          "Value": "South 57 Recruitment",
+          "Label": "Company/Organisation",
+          "Type": "text"
+        },
+        {
+          "Name": "LinkedinProfile",
+          "Value": "https://www.linkedin.com/in/klaudia-french-a6b46241/",
+          "Label": "Linkedin Profile",
+          "Type": "text"
+        },
+        {
+          "Name": "Country/Region",
+          "Value": "UK",
+          "Label": "Country / Region",
+          "Type": "text"
+        },
+        {
+          "Name": "WhicheventattheSpringRetailFestivalareyouattending?(yourattendanceincludesafreecopyoftherelevantresearchreport)",
+          "Value": "SustainabilityX [retailers & brands only, all registrations are subject to approval]",
+          "Label": "Which event at the Spring Retail Festival are you attending? (your attendance includes a free copy of the relevant research report)",
+          "Type": "text"
+        },
+        {
+          "Name": "IfattendingSubscriptionX,whichtrackareyoumostinterestedtoattend",
+          "Value": "N/A",
+          "Label": "If attending SubscriptionX, which track are you most interested to attend",
+          "Type": "text"
+        },
+        {
+          "Name": "Iwouldliketobeconsideredtoattendthepre-eventdinner",
+          "Value": "Yes",
+          "Label": "I would like to be considered to attend the pre-event dinner",
+          "Type": "text"
+        },
+        {
+          "Name": "IwouldlikeaccesstotheRetailXIntelligencedataplatform(freetrial)",
+          "Value": "Yes",
+          "Label": "I would like access to the RetailX Intelligence data platform (free trial)",
+          "Type": "text"
+        },
+        {
+          "Name": "Iagreetoparticipationintheintroductorymeetingprogramme\"Connect\"inanetworkingbreak",
+          "Value": "Yes",
+          "Label": "I agree to participation in the introductory meeting programme \"Connect\" in a networking break",
+          "Type": "text"
+        },
+        {
+          "Name": "IagreetotheT&C'sofregistrationincludingreceivingafreecopyoftherelevanteventresearchreport",
+          "Value": "Yes",
+          "Label": "I agree to the T&C's of registration including receiving a free copy of the relevant event research report",
+          "Type": "text"
+        },
+        {
+          "Name": "AddressLine1",
+          "Value": "xxxxx",
+          "Label": "Address Line 1",
+          "Type": "text"
+        },
+        {
+          "Name": "AddressLine2",
+          "Value": "xxxxx",
+          "Label": "Address Line 2",
+          "Type": "text"
+        },
+        {
+          "Name": "AddressLine3",
+          "Value": "",
+          "Label": "Address Line 3",
+          "Type": "text"
+        },
+        {
+          "Name": "WhichtracksatRMXareyoumostinterestedtoattend",
+          "Value": [],
+          "Label": "Which tracks at RMX are you most interested to attend",
+          "Type": "multiselect"
+        },
+        {
+          "Name": "IwouldliketoattendtheRMXAwards",
+          "Value": "",
+          "Label": "I would like to attend the RMX Awards",
+          "Type": "select"
+        }
+      ],
+      "DefaultFields": [],
+      "PreSignupFields": [],
+      "FirstName": "Klaudia",
+      "LastName": "French",
+      "Email": "frenchklaudia@gmail.com",
+      "PhoneCountryCode": "",
+      "Phone": "+447777777777",
+      "Address": "xxxxx",
+      "Zip": "xxxxx",
+      "qr_code": "2x56gfh",
+      "qr": "https://cdn.tickettailor.com/userfiles/cache/barcode/qr/attendee/90211988/61f2ea3a6c9ef3184566.png",
+      "Company": "South 57 Recruitment",
+      "Designation": "Head of Recruitment",
+      "isComplete": true
+    },
+    {
+      "sendMail": 0,
+      "ShowInCMSAttendeeList": 1,
+      "FormType": "FREE",
+      "RegistrationType": {
+        "ColorCode": "#000",
+        "RegistrationType": "Attendee",
+        "RegistrationTypeId": "IDcDKMY6E6l9z2Ad394v"
+      },
+      "DynamicFields": [
+        {
+          "Name": "JobTitle",
+          "Value": "Managing Director ",
+          "Label": "Job Title",
+          "Type": "text"
+        },
+        {
+          "Name": "Company/Organisation",
+          "Value": "YOOX NET-A-PORTER",
+          "Label": "Company/Organisation",
+          "Type": "text"
+        },
+        {
+          "Name": "LinkedinProfile",
+          "Value": "https://www.linkedin.com/in/sabahnaqushbandi/",
+          "Label": "Linkedin Profile",
+          "Type": "text"
+        },
+        {
+          "Name": "Country/Region",
+          "Value": "UK",
+          "Label": "Country / Region",
+          "Type": "text"
+        },
+        {
+          "Name": "WhicheventattheSpringRetailFestivalareyouattending?(yourattendanceincludesafreecopyoftherelevantresearchreport)",
+          "Value": "SustainabilityX [retailers & brands only, all registrations are subject to approval]",
+          "Label": "Which event at the Spring Retail Festival are you attending? (your attendance includes a free copy of the relevant research report)",
+          "Type": "text"
+        },
+        {
+          "Name": "IfattendingSubscriptionX,whichtrackareyoumostinterestedtoattend",
+          "Value": "N/A",
+          "Label": "If attending SubscriptionX, which track are you most interested to attend",
+          "Type": "text"
+        },
+        {
+          "Name": "Iwouldliketobeconsideredtoattendthepre-eventdinner",
+          "Value": "Yes",
+          "Label": "I would like to be considered to attend the pre-event dinner",
+          "Type": "text"
+        },
+        {
+          "Name": "IwouldlikeaccesstotheRetailXIntelligencedataplatform(freetrial)",
+          "Value": "Yes",
+          "Label": "I would like access to the RetailX Intelligence data platform (free trial)",
+          "Type": "text"
+        },
+        {
+          "Name": "Iagreetoparticipationintheintroductorymeetingprogramme\"Connect\"inanetworkingbreak",
+          "Value": "Yes",
+          "Label": "I agree to participation in the introductory meeting programme \"Connect\" in a networking break",
+          "Type": "text"
+        },
+        {
+          "Name": "IagreetotheT&C'sofregistrationincludingreceivingafreecopyoftherelevanteventresearchreport",
+          "Value": "Yes",
+          "Label": "I agree to the T&C's of registration including receiving a free copy of the relevant event research report",
+          "Type": "text"
+        },
+        {
+          "Name": "AddressLine1",
+          "Value": "xxxxx",
+          "Label": "Address Line 1",
+          "Type": "text"
+        },
+        {
+          "Name": "AddressLine2",
+          "Value": "xxxxx",
+          "Label": "Address Line 2",
+          "Type": "text"
+        },
+        {
+          "Name": "AddressLine3",
+          "Value": "",
+          "Label": "Address Line 3",
+          "Type": "text"
+        },
+        {
+          "Name": "WhichtracksatRMXareyoumostinterestedtoattend",
+          "Value": [],
+          "Label": "Which tracks at RMX are you most interested to attend",
+          "Type": "multiselect"
+        },
+        {
+          "Name": "IwouldliketoattendtheRMXAwards",
+          "Value": "",
+          "Label": "I would like to attend the RMX Awards",
+          "Type": "select"
+        }
+      ],
+      "DefaultFields": [],
+      "PreSignupFields": [],
+      "FirstName": "Sabah",
+      "LastName": "Naqushbandi",
+      "Email": "sabah.naqushbandi@net-a-porter.com",
+      "PhoneCountryCode": "",
+      "Phone": "+447777777777",
+      "Address": "xxxxx",
+      "Zip": "xxxxx",
+      "qr_code": "3k6uxFy",
+      "qr": "https://cdn.tickettailor.com/userfiles/cache/barcode/qr/attendee/90212104/78993e21deca197a3b80.png",
+      "Company": "YOOX NET-A-PORTER",
+      "Designation": "Managing Director ",
+      "isComplete": true
+    },
+    {
+      "sendMail": 0,
+      "ShowInCMSAttendeeList": 1,
+      "FormType": "FREE",
+      "RegistrationType": {
+        "ColorCode": "#000",
+        "RegistrationType": "Attendee",
+        "RegistrationTypeId": "IDcDKMY6E6l9z2Ad394v"
+      },
+      "DynamicFields": [
+        {
+          "Name": "JobTitle",
+          "Value": "Former Group Vice President Sustainability",
+          "Label": "Job Title",
+          "Type": "text"
+        },
+        {
+          "Name": "Company/Organisation",
+          "Value": "Reckitt",
+          "Label": "Company/Organisation",
+          "Type": "text"
+        },
+        {
+          "Name": "LinkedinProfile",
+          "Value": "linkedin.com/in/edwardbutt",
+          "Label": "Linkedin Profile",
+          "Type": "text"
+        },
+        {
+          "Name": "Country/Region",
+          "Value": "United Kingdom",
+          "Label": "Country / Region",
+          "Type": "text"
+        },
+        {
+          "Name": "WhicheventattheSpringRetailFestivalareyouattending?(yourattendanceincludesafreecopyoftherelevantresearchreport)",
+          "Value": "SustainabilityX [retailers & brands only, all registrations are subject to approval]",
+          "Label": "Which event at the Spring Retail Festival are you attending? (your attendance includes a free copy of the relevant research report)",
+          "Type": "text"
+        },
+        {
+          "Name": "IfattendingSubscriptionX,whichtrackareyoumostinterestedtoattend",
+          "Value": "N/A",
+          "Label": "If attending SubscriptionX, which track are you most interested to attend",
+          "Type": "text"
+        },
+        {
+          "Name": "Confirmdietaryrestrictions?WriteNAifnothingapplies.",
+          "Value": "NA",
+          "Label": "Confirm dietary restrictions? Write NA if nothing applies.",
+          "Type": "text"
+        },
+        {
+          "Name": "Iwouldliketobeconsideredtoattendthepre-eventdinner",
+          "Value": "Yes",
+          "Label": "I would like to be considered to attend the pre-event dinner",
+          "Type": "text"
+        },
+        {
+          "Name": "IwouldlikeaccesstotheRetailXIntelligencedataplatform(freetrial)",
+          "Value": "Yes",
+          "Label": "I would like access to the RetailX Intelligence data platform (free trial)",
+          "Type": "text"
+        },
+        {
+          "Name": "Iagreetoparticipationintheintroductorymeetingprogramme\"Connect\"inanetworkingbreak",
+          "Value": "Yes",
+          "Label": "I agree to participation in the introductory meeting programme \"Connect\" in a networking break",
+          "Type": "text"
+        },
+        {
+          "Name": "IagreetotheT&C'sofregistrationincludingreceivingafreecopyoftherelevanteventresearchreport",
+          "Value": "Yes",
+          "Label": "I agree to the T&C's of registration including receiving a free copy of the relevant event research report",
+          "Type": "text"
+        },
+        {
+          "Name": "AddressLine1",
+          "Value": "31 Oak Tree Road",
+          "Label": "Address Line 1",
+          "Type": "text"
+        },
+        {
+          "Name": "AddressLine2",
+          "Value": "Marlow",
+          "Label": "Address Line 2",
+          "Type": "text"
+        },
+        {
+          "Name": "AddressLine3",
+          "Value": "Buckinghamshire",
+          "Label": "Address Line 3",
+          "Type": "text"
+        },
+        {
+          "Name": "WhichtracksatRMXareyoumostinterestedtoattend",
+          "Value": [],
+          "Label": "Which tracks at RMX are you most interested to attend",
+          "Type": "multiselect"
+        },
+        {
+          "Name": "IwouldliketoattendtheRMXAwards",
+          "Value": "",
+          "Label": "I would like to attend the RMX Awards",
+          "Type": "select"
+        }
+      ],
+      "DefaultFields": [],
+      "PreSignupFields": [],
+      "FirstName": "Edward",
+      "LastName": "Butt",
+      "Email": "edward.butt@gmail.com",
+      "PhoneCountryCode": "",
+      "Phone": "+447764776620",
+      "Address": "31 Oak Tree Road",
+      "Zip": "SL7 3ED",
+      "qr_code": "AV75E4z",
+      "qr": "https://cdn.tickettailor.com/userfiles/cache/barcode/qr/attendee/90810790/bc5f12efb26b683d3dc5.png",
+      "Company": "Reckitt",
+      "Designation": "Former Group Vice President Sustainability",
+      "isComplete": true
+    },
+    {
+      "sendMail": 0,
+      "ShowInCMSAttendeeList": 1,
+      "FormType": "FREE",
+      "RegistrationType": {
+        "ColorCode": "#000",
+        "RegistrationType": "Attendee",
+        "RegistrationTypeId": "IDcDKMY6E6l9z2Ad394v"
+      },
+      "DynamicFields": [
+        {
+          "Name": "JobTitle",
+          "Value": "Chief Marketing Officer",
+          "Label": "Job Title",
+          "Type": "text"
+        },
+        {
+          "Name": "Company/Organisation",
+          "Value": "Tiny Box Company Limited",
+          "Label": "Company/Organisation",
+          "Type": "text"
+        },
+        {
+          "Name": "LinkedinProfile",
+          "Value": ".",
+          "Label": "Linkedin Profile",
+          "Type": "text"
+        },
+        {
+          "Name": "Country/Region",
+          "Value": "United Kingdom",
+          "Label": "Country / Region",
+          "Type": "text"
+        },
+        {
+          "Name": "WhicheventattheSpringRetailFestivalareyouattending?(yourattendanceincludesafreecopyoftherelevantresearchreport)",
+          "Value": "SustainabilityX [retailers & brands only, all registrations are subject to approval]",
+          "Label": "Which event at the Spring Retail Festival are you attending? (your attendance includes a free copy of the relevant research report)",
+          "Type": "text"
+        },
+        {
+          "Name": "IfattendingSubscriptionX,whichtrackareyoumostinterestedtoattend",
+          "Value": "Acquisition & Retention,Growth & Innovation",
+          "Label": "If attending SubscriptionX, which track are you most interested to attend",
+          "Type": "text"
+        },
+        {
+          "Name": "Confirmdietaryrestrictions?WriteNAifnothingapplies.",
+          "Value": "N/A",
+          "Label": "Confirm dietary restrictions? Write NA if nothing applies.",
+          "Type": "text"
+        },
+        {
+          "Name": "Iwouldliketobeconsideredtoattendthepre-eventdinner",
+          "Value": "Yes",
+          "Label": "I would like to be considered to attend the pre-event dinner",
+          "Type": "text"
+        },
+        {
+          "Name": "IwouldlikeaccesstotheRetailXIntelligencedataplatform(freetrial)",
+          "Value": "No",
+          "Label": "I would like access to the RetailX Intelligence data platform (free trial)",
+          "Type": "text"
+        },
+        {
+          "Name": "Iagreetoparticipationintheintroductorymeetingprogramme\"Connect\"inanetworkingbreak",
+          "Value": "Yes",
+          "Label": "I agree to participation in the introductory meeting programme \"Connect\" in a networking break",
+          "Type": "text"
+        },
+        {
+          "Name": "IagreetotheT&C'sofregistrationincludingreceivingafreecopyoftherelevanteventresearchreport",
+          "Value": "Yes",
+          "Label": "I agree to the T&C's of registration including receiving a free copy of the relevant event research report",
+          "Type": "text"
+        },
+        {
+          "Name": "AddressLine1",
+          "Value": "Units 1-2 Bluebell Business Estate",
+          "Label": "Address Line 1",
+          "Type": "text"
+        },
+        {
+          "Name": "AddressLine2",
+          "Value": "East Grinstead Road",
+          "Label": "Address Line 2",
+          "Type": "text"
+        },
+        {
+          "Name": "AddressLine3",
+          "Value": "North Chailey",
+          "Label": "Address Line 3",
+          "Type": "text"
+        },
+        {
+          "Name": "WhichtracksatRMXareyoumostinterestedtoattend",
+          "Value": [],
+          "Label": "Which tracks at RMX are you most interested to attend",
+          "Type": "multiselect"
+        },
+        {
+          "Name": "IwouldliketoattendtheRMXAwards",
+          "Value": "",
+          "Label": "I would like to attend the RMX Awards",
+          "Type": "select"
+        }
+      ],
+      "DefaultFields": [],
+      "PreSignupFields": [],
+      "FirstName": "Neil",
+      "LastName": "Hall-Watts MBE",
+      "Email": "n.hall-watts@tinyboxcompany.com",
+      "PhoneCountryCode": "",
+      "Phone": "+447943587888",
+      "Address": "Units 1-2 Bluebell Business Estate",
+      "Zip": "TN22 3FB",
+      "qr_code": "ss3UfvH",
+      "qr": "https://cdn.tickettailor.com/userfiles/cache/barcode/qr/attendee/90855976/b6ec4b124eda2dd232aa.png",
+      "Company": "Tiny Box Company Limited",
+      "Designation": "Chief Marketing Officer",
+      "isComplete": true
+    },
+    {
+      "sendMail": 0,
+      "ShowInCMSAttendeeList": 1,
+      "FormType": "FREE",
+      "RegistrationType": {
+        "ColorCode": "#000",
+        "RegistrationType": "Attendee",
+        "RegistrationTypeId": "IDcDKMY6E6l9z2Ad394v"
+      },
+      "DynamicFields": [
+        {
+          "Name": "JobTitle",
+          "Value": "Climate & Nature MAnager",
+          "Label": "Job Title",
+          "Type": "text"
+        },
+        {
+          "Name": "Company/Organisation",
+          "Value": "Kingfisher",
+          "Label": "Company/Organisation",
+          "Type": "text"
+        },
+        {
+          "Name": "LinkedinProfile",
+          "Value": "https://www.linkedin.com/in/arifaakther1996/",
+          "Label": "Linkedin Profile",
+          "Type": "text"
+        },
+        {
+          "Name": "Country/Region",
+          "Value": "UK",
+          "Label": "Country / Region",
+          "Type": "text"
+        },
+        {
+          "Name": "WhicheventattheSpringRetailFestivalareyouattending?(yourattendanceincludesafreecopyoftherelevantresearchreport)",
+          "Value": "SustainabilityX [retailers & brands only, all registrations are subject to approval]",
+          "Label": "Which event at the Spring Retail Festival are you attending? (your attendance includes a free copy of the relevant research report)",
+          "Type": "text"
+        },
+        {
+          "Name": "IfattendingSubscriptionX,whichtrackareyoumostinterestedtoattend",
+          "Value": "Growth & Innovation",
+          "Label": "If attending SubscriptionX, which track are you most interested to attend",
+          "Type": "text"
+        },
+        {
+          "Name": "Confirmdietaryrestrictions?WriteNAifnothingapplies.",
+          "Value": "Veggie",
+          "Label": "Confirm dietary restrictions? Write NA if nothing applies.",
+          "Type": "text"
+        },
+        {
+          "Name": "Iwouldliketobeconsideredtoattendthepre-eventdinner",
+          "Value": "Yes",
+          "Label": "I would like to be considered to attend the pre-event dinner",
+          "Type": "text"
+        },
+        {
+          "Name": "IwouldlikeaccesstotheRetailXIntelligencedataplatform(freetrial)",
+          "Value": "No",
+          "Label": "I would like access to the RetailX Intelligence data platform (free trial)",
+          "Type": "text"
+        },
+        {
+          "Name": "Iagreetoparticipationintheintroductorymeetingprogramme\"Connect\"inanetworkingbreak",
+          "Value": "Yes",
+          "Label": "I agree to participation in the introductory meeting programme \"Connect\" in a networking break",
+          "Type": "text"
+        },
+        {
+          "Name": "IagreetotheT&C'sofregistrationincludingreceivingafreecopyoftherelevanteventresearchreport",
+          "Value": "Yes",
+          "Label": "I agree to the T&C's of registration including receiving a free copy of the relevant event research report",
+          "Type": "text"
+        },
+        {
+          "Name": "AddressLine1",
+          "Value": "flat 205 dovecote house",
+          "Label": "Address Line 1",
+          "Type": "text"
+        },
+        {
+          "Name": "AddressLine2",
+          "Value": "watergardens",
+          "Label": "Address Line 2",
+          "Type": "text"
+        },
+        {
+          "Name": "AddressLine3",
+          "Value": "",
+          "Label": "Address Line 3",
+          "Type": "text"
+        },
+        {
+          "Name": "WhichtracksatRMXareyoumostinterestedtoattend",
+          "Value": [],
+          "Label": "Which tracks at RMX are you most interested to attend",
+          "Type": "multiselect"
+        },
+        {
+          "Name": "IwouldliketoattendtheRMXAwards",
+          "Value": "",
+          "Label": "I would like to attend the RMX Awards",
+          "Type": "select"
+        }
+      ],
+      "DefaultFields": [],
+      "PreSignupFields": [],
+      "FirstName": "Arifa",
+      "LastName": "Akther",
+      "Email": "arifa.akther@kingfisher.com",
+      "PhoneCountryCode": "",
+      "Phone": "+447535601549",
+      "Address": "flat 205 dovecote house",
+      "Zip": "SE16 6RG",
+      "qr_code": "uJ9tWy8",
+      "qr": "https://cdn.tickettailor.com/userfiles/cache/barcode/qr/attendee/90917249/e8011307590ec79faf04.png",
+      "Company": "Kingfisher",
+      "Designation": "Climate & Nature MAnager",
+      "isComplete": true
+    },
+    {
+      "sendMail": 0,
+      "ShowInCMSAttendeeList": 1,
+      "FormType": "FREE",
+      "RegistrationType": {
+        "ColorCode": "#000",
+        "RegistrationType": "Attendee",
+        "RegistrationTypeId": "IDcDKMY6E6l9z2Ad394v"
+      },
+      "DynamicFields": [
+        {
+          "Name": "JobTitle",
+          "Value": "Founder",
+          "Label": "Job Title",
+          "Type": "text"
+        },
+        {
+          "Name": "Company/Organisation",
+          "Value": "We Know Rugby",
+          "Label": "Company/Organisation",
+          "Type": "text"
+        },
+        {
+          "Name": "LinkedinProfile",
+          "Value": "https://www.linkedin.com/in/c-thompson7/",
+          "Label": "Linkedin Profile",
+          "Type": "text"
+        },
+        {
+          "Name": "Country/Region",
+          "Value": "United Kingdom",
+          "Label": "Country / Region",
+          "Type": "text"
+        },
+        {
+          "Name": "WhicheventattheSpringRetailFestivalareyouattending?(yourattendanceincludesafreecopyoftherelevantresearchreport)",
+          "Value": "SustainabilityX [retailers & brands only, all registrations are subject to approval]",
+          "Label": "Which event at the Spring Retail Festival are you attending? (your attendance includes a free copy of the relevant research report)",
+          "Type": "text"
+        },
+        {
+          "Name": "IfattendingSubscriptionX,whichtrackareyoumostinterestedtoattend",
+          "Value": "N/A",
+          "Label": "If attending SubscriptionX, which track are you most interested to attend",
+          "Type": "text"
+        },
+        {
+          "Name": "Confirmdietaryrestrictions?WriteNAifnothingapplies.",
+          "Value": "-",
+          "Label": "Confirm dietary restrictions? Write NA if nothing applies.",
+          "Type": "text"
+        },
+        {
+          "Name": "Iwouldliketobeconsideredtoattendthepre-eventdinner",
+          "Value": "No",
+          "Label": "I would like to be considered to attend the pre-event dinner",
+          "Type": "text"
+        },
+        {
+          "Name": "IwouldlikeaccesstotheRetailXIntelligencedataplatform(freetrial)",
+          "Value": "No",
+          "Label": "I would like access to the RetailX Intelligence data platform (free trial)",
+          "Type": "text"
+        },
+        {
+          "Name": "Iagreetoparticipationintheintroductorymeetingprogramme\"Connect\"inanetworkingbreak",
+          "Value": "Yes",
+          "Label": "I agree to participation in the introductory meeting programme \"Connect\" in a networking break",
+          "Type": "text"
+        },
+        {
+          "Name": "IagreetotheT&C'sofregistrationincludingreceivingafreecopyoftherelevanteventresearchreport",
+          "Value": "Yes",
+          "Label": "I agree to the T&C's of registration including receiving a free copy of the relevant event research report",
+          "Type": "text"
+        },
+        {
+          "Name": "AddressLine1",
+          "Value": "5 Somerset Gardens",
+          "Label": "Address Line 1",
+          "Type": "text"
+        },
+        {
+          "Name": "AddressLine2",
+          "Value": "Teddington",
+          "Label": "Address Line 2",
+          "Type": "text"
+        },
+        {
+          "Name": "AddressLine3",
+          "Value": "",
+          "Label": "Address Line 3",
+          "Type": "text"
+        },
+        {
+          "Name": "WhichtracksatRMXareyoumostinterestedtoattend",
+          "Value": [],
+          "Label": "Which tracks at RMX are you most interested to attend",
+          "Type": "multiselect"
+        },
+        {
+          "Name": "IwouldliketoattendtheRMXAwards",
+          "Value": "",
+          "Label": "I would like to attend the RMX Awards",
+          "Type": "select"
+        }
+      ],
+      "DefaultFields": [],
+      "PreSignupFields": [],
+      "FirstName": "Chris",
+      "LastName": "Thompson",
+      "Email": "chris@weknowrugby.com",
+      "PhoneCountryCode": "",
+      "Phone": "+447873649597",
+      "Address": "5 Somerset Gardens",
+      "Zip": "TW11 8TA",
+      "qr_code": "NH55bWr",
+      "qr": "https://cdn.tickettailor.com/userfiles/cache/barcode/qr/attendee/90923104/e9dbaa51ee03d764ab63.png",
+      "Company": "We Know Rugby",
+      "Designation": "Founder",
+      "isComplete": true
+    }
+  ]
+}

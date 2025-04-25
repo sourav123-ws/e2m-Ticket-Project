@@ -3,8 +3,7 @@ import fs from 'fs';
 import dotenv from "dotenv";
 dotenv.config();
 
-
-const API_URL = process.env.API_URL ;
+const API_URL = process.env.API_URL;
 const AUTH_TOKEN = process.env.AUTH_TOKEN;
 const SPRING_FESTIVAL_EVENT_ID = 'ev_4644551';
 const QUESTION_TEXT = "Which event at the Spring Retail Festival are you attending?";
@@ -14,6 +13,7 @@ const fetchSpringFestivalOrders = async () => {
     let nextCursor = null;
 
     try {
+        // Fetch all orders with pagination
         while (true) {
             let url = `${API_URL}?event_id=${SPRING_FESTIVAL_EVENT_ID}`;
             if (nextCursor) {
@@ -32,7 +32,7 @@ const fetchSpringFestivalOrders = async () => {
             const orders = response.data.data;
             allOrders.push(...orders);
 
-            if (orders.length < 100) break;
+            if (orders.length < 100) break; // Stop if last page (<100 records)
 
             nextCursor = orders[orders.length - 1].id;
         }
@@ -41,49 +41,45 @@ const fetchSpringFestivalOrders = async () => {
 
         const groupedOrders = {};
 
-        allOrders.forEach((order, index) => {
-            const issuedTickets = order.issued_tickets || [];
+        allOrders.forEach((order) => {
+            const customQuestions = order.buyer_details?.custom_questions || [];
 
-            // Filter only orders with "Sponsors" in the description
-            issuedTickets.forEach((ticket) => {
-                const description = ticket?.description?.toLowerCase() || '';
-                if (description.includes("sponsors")) {
+            customQuestions.forEach((question) => {
+                const questionText = question?.question?.trim();
+                const answerText = question?.answer?.trim();
 
-                    const customQuestions = order.buyer_details?.custom_questions || [];
+                // Skip if question/answer is missing or doesn't match
+                if (!questionText || !answerText) return;
+                if (!questionText.toLowerCase().includes(QUESTION_TEXT.toLowerCase())) return;
 
-                    customQuestions.forEach((question) => {
-                        const questionText = question?.question?.trim();
-                        const answerText = question?.answer?.trim();
-
-                        if (!questionText || !answerText) {
-                            console.log("⚠️ Skipping: Missing question or answer");
-                            return;
-                        }
-
-                        if (questionText.toLowerCase().includes(QUESTION_TEXT.toLowerCase())) {
-
-                            if (!groupedOrders[answerText]) {
-                                groupedOrders[answerText] = [];
-                            }
-
-                            groupedOrders[answerText].push(order);
-                        }
-                    });
+                // Group by answer (e.g., "Amazon Sellers Summit")
+                if (!groupedOrders[answerText]) {
+                    groupedOrders[answerText] = [];
                 }
+                groupedOrders[answerText].push(order);
             });
         });
 
-        // Save filtered orders to a file
+        // Save results to a file
         fs.writeFileSync(
-            "spring_festival_grouped_orders_sponsors.json",
+            "spring_festival_all_grouped_orders.json",
             JSON.stringify(groupedOrders, null, 2)
         );
 
-        console.log("✅ Data saved to spring_festival_grouped_orders_sponsors.json");
+        console.log("✅ All orders grouped by event and saved to 'spring_festival_all_grouped_orders.json'");
         return groupedOrders;
     } catch (error) {
         console.error("❌ Error fetching orders:", error.response?.data || error.message);
+        fs.writeFileSync(
+            "spring_festival_orders_ERROR.json",
+            JSON.stringify(
+                { error: error.response?.data || error.message },
+                null,
+                2
+            )
+        );
         return {};
     }
 };
 
+fetchSpringFestivalOrders();

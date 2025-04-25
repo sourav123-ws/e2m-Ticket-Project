@@ -5,12 +5,7 @@ dotenv.config();
 
 const API_URL = process.env.API_URL ;
 const AUTH_TOKEN = process.env.AUTH_TOKEN;
-
-console.log(API_URL,AUTH_TOKEN)
-
-const SPRING_FESTIVAL_EVENT_ID = "ev_4644551";
 const RETAILX_EVENT_ID = "ev_4519856";
-const QUESTION_TEXT = "Which event at the Spring Retail Festival are you attending?";
 const REGISTRATION_API_URL = "https://us-central1-e2monair.cloudfunctions.net/e2mreg-prd-register-attendee";
 
 const companyWithCode = [{key:'Criteo',value:'34050000'},
@@ -48,108 +43,112 @@ const companyWithCode = [{key:'Criteo',value:'34050000'},
   {key:'FMCG Guys',value:'34082000'},
   {key:'IAB Europe',value:'34083000'}]
 
-const pushTransformedOrder = async (order) => {
-  const payload = {
-    postToCRM: false,
-    key: {
-      instanceId: "OA_UAT",
-      clientId: "C1742212403583",
-      eventId: "E1742214690559",
-      bundleId: "u7KpSiKT0MtZ2z4JccWS",
-    },
-    data: order,
-  };
-
-  console.log("payload", payload);
-  // fs.writeFileSync("payload.txt", JSON.stringify(payload, null, 2));
-
-  try {
-    const response = await axios.post(REGISTRATION_API_URL, payload, {
-      headers: { "Content-Type": "application/json" },
-    });
-
-    console.log("✅ Successfully pushed transformed order:", response.data);
-  } catch (error) {
-    console.log("❌ Error pushing transformed order:", error.response?.data || error.message);
-  }
-};
-
-
-const fetchSpringFestivalOrders = async () => {
-  let allOrders = [];
-  let nextCursor = null;
-
-  try {
-    while (true) {
-      let url = `${API_URL}?event_id=${SPRING_FESTIVAL_EVENT_ID}`;
-      if (nextCursor) {
-        url += `&starting_after=${nextCursor}`;
-      }
-
-      const response = await axios.get(url, {
-        headers: { Authorization: AUTH_TOKEN },
+  const pushTransformedOrder = async (order, attempt = 1) => {
+    const payload = {
+      postToCRM: false,
+      key: {
+        instanceId: "OA_UAT",
+        clientId: "C1742212403583",
+        eventId: "E1742214690559",
+        bundleId: "u7KpSiKT0MtZ2z4JccWS",
+      },
+      data: [order],
+    };
+  
+  
+    try {
+      const response = await axios.post(REGISTRATION_API_URL, payload, {
+        headers: { "Content-Type": "application/json" },
       });
-
-      if (!response.data.data || response.data.data.length === 0) {
-        console.log("✅ No more data to fetch for Spring Festival Event.");
-        break;
+  
+      if (response.data?.success) {
+        console.log(`✅ [Try ${attempt}] Pushed: ${order.Email}`);
+        return true;
+      } else {
+        console.warn(`⚠️ [Try ${attempt}] API responded with failure:`, response.data);
+        return false;
       }
-
-      const orders = response.data.data;
-      allOrders.push(...orders);
-
-      if (orders.length < 100) break;
-
-      nextCursor = orders[orders.length - 1].id;
+    } catch (error) {
+      console.error(`❌ [Try ${attempt}] Exception while pushing:`, error.response?.data || error.message);
+      return false;
     }
+  };
+  
+// const fetchSpringFestivalOrders = async () => {
+//   let allOrders = [];
+//   let nextCursor = null;
 
-    console.log(`✅ Fetched ${allOrders.length} orders for Spring Festival Event.`);
+//   try {
+//     while (true) {
+//       let url = `${API_URL}?event_id=${SPRING_FESTIVAL_EVENT_ID}`;
+//       if (nextCursor) {
+//         url += `&starting_after=${nextCursor}`;
+//       }
 
-    const groupedOrders = {};
+//       const response = await axios.get(url, {
+//         headers: { Authorization: AUTH_TOKEN },
+//       });
 
-    allOrders.forEach((order, index) => {
-      const customQuestions = order.buyer_details?.custom_questions || [];
+//       if (!response.data.data || response.data.data.length === 0) {
+//         console.log("✅ No more data to fetch for Spring Festival Event.");
+//         break;
+//       }
 
-      if (index < 5) {
-        console.log(`🔍 Debugging Order ${index + 1}:`, JSON.stringify(customQuestions, null, 2));
-      }
+//       const orders = response.data.data;
+//       allOrders.push(...orders);
 
-      customQuestions.forEach((question) => {
-        const questionText = question?.question?.trim();
-        const answerText = question?.answer?.trim();
+//       if (orders.length < 100) break;
 
-        // console.log(`📌 Checking question: "${questionText}"`);
+//       nextCursor = orders[orders.length - 1].id;
+//     }
 
-        if (!questionText || !answerText) {
-          console.log("⚠️ Skipping: Missing question or answer");
-          return;
-        }
+//     console.log(`✅ Fetched ${allOrders.length} orders for Spring Festival Event.`);
 
-        if (questionText.toLowerCase().includes(QUESTION_TEXT.toLowerCase())) {
-          // console.log(`✅ Matched question! Answer: "${answerText}"`);
+//     const groupedOrders = {};
 
-          if (!groupedOrders[answerText]) {
-            groupedOrders[answerText] = [];
-          }
+//     allOrders.forEach((order, index) => {
+//       const customQuestions = order.buyer_details?.custom_questions || [];
 
-          groupedOrders[answerText].push(order);
-        }
-      });
-    });
+//       if (index < 5) {
+//         console.log(`🔍 Debugging Order ${index + 1}:`, JSON.stringify(customQuestions, null, 2));
+//       }
 
-    // Save grouped data to file
-    fs.writeFileSync(
-      "spring_festival_grouped_orders.json",
-      JSON.stringify(groupedOrders, null, 2)
-    );
+//       customQuestions.forEach((question) => {
+//         const questionText = question?.question?.trim();
+//         const answerText = question?.answer?.trim();
 
-    // console.log("✅ Data saved to spring_festival_grouped_orders.json");
-    return groupedOrders;
-  } catch (error) {
-    console.log("❌ Error fetching orders:", error.response?.data || error.message);
-    return {};
-  }
-};
+//         // console.log(`📌 Checking question: "${questionText}"`);
+
+//         if (!questionText || !answerText) {
+//           console.log("⚠️ Skipping: Missing question or answer");
+//           return;
+//         }
+
+//         if (questionText.toLowerCase().includes(QUESTION_TEXT.toLowerCase())) {
+//           // console.log(`✅ Matched question! Answer: "${answerText}"`);
+
+//           if (!groupedOrders[answerText]) {
+//             groupedOrders[answerText] = [];
+//           }
+
+//           groupedOrders[answerText].push(order);
+//         }
+//       });
+//     });
+
+//     // Save grouped data to file
+//     fs.writeFileSync(
+//       "spring_festival_grouped_orders.json",
+//       JSON.stringify(groupedOrders, null, 2)
+//     );
+
+//     // console.log("✅ Data saved to spring_festival_grouped_orders.json");
+//     return groupedOrders;
+//   } catch (error) {
+//     console.log("❌ Error fetching orders:", error.response?.data || error.message);
+//     return {};
+//   }
+// };
 
 // export const fetchRetailXOrders = async (req,res) => {
 //   let allOrders = [];
@@ -234,99 +233,99 @@ const fetchSpringFestivalOrders = async () => {
 // };
 
 
-export const fetchRetailXOrders = async (req, res) => {
-  let allOrders = [];
-  let nextCursor = null;
+// export const fetchRetailXOrders = async (req, res) => {
+//   let allOrders = [];
+//   let nextCursor = null;
 
-  try {
-    // Fetch all paginated data
-    while (true) {
-      let url = `${API_URL}?event_id=${RETAILX_EVENT_ID}`;
-      if (nextCursor) {
-        url += `&starting_after=${nextCursor}`;
-      }
+//   try {
+//     // Fetch all paginated data
+//     while (true) {
+//       let url = `${API_URL}?event_id=${RETAILX_EVENT_ID}`;
+//       if (nextCursor) {
+//         url += `&starting_after=${nextCursor}`;
+//       }
 
-      const response = await axios.get(url, {
-        headers: { Authorization: AUTH_TOKEN },
-      });
+//       const response = await axios.get(url, {
+//         headers: { Authorization: AUTH_TOKEN },
+//       });
 
-      const data = response.data?.data || [];
+//       const data = response.data?.data || [];
 
-      if (data.length === 0) {
-        console.log("✅ No more data to fetch for RetailX Event.");
-        break;
-      }
+//       if (data.length === 0) {
+//         console.log("✅ No more data to fetch for RetailX Event.");
+//         break;
+//       }
 
-      // Filter out cancelled orders
-      const validOrders = data.filter(order => order && order.status !== "cancelled");
-      allOrders.push(...validOrders);
+//       // Filter out cancelled orders
+//       const validOrders = data.filter(order => order && order.status !== "cancelled");
+//       allOrders.push(...validOrders);
 
-      // Set cursor to last ID
-      nextCursor = data[data.length - 1].id;
+//       // Set cursor to last ID
+//       nextCursor = data[data.length - 1].id;
 
-      // Break if less than 100 — no more pages
-      if (data.length < 100) break;
-    }
+//       // Break if less than 100 — no more pages
+//       if (data.length < 100) break;
+//     }
 
-    console.log(`🧾 Total fetched valid orders: ${allOrders.length}`);
+//     console.log(`🧾 Total fetched valid orders: ${allOrders.length}`);
 
-    // Transform and enrich
-    const transformedOrders = transformRetailXOrders(allOrders);
+//     // Transform and enrich
+//     const transformedOrders = transformRetailXOrders(allOrders);
 
-    const finalOrders = transformedOrders.map(order => {
-      if (order.RegistrationType?.RegistrationType === "Sponsor") {
-        const companyField = order.DynamicFields.find(
-          field => field.Name === "Company/Organisation" || field.Label === "Company/Organisation"
-        );
+//     const finalOrders = transformedOrders.map(order => {
+//       if (order.RegistrationType?.RegistrationType === "Sponsor") {
+//         const companyField = order.DynamicFields.find(
+//           field => field.Name === "Company/Organisation" || field.Label === "Company/Organisation"
+//         );
 
-        if (companyField) {
-          const companyName = companyField.Value?.toLowerCase();
-          const companyMatch = companyWithCode.find(company =>
-            companyName?.includes(company.key.toLowerCase()) ||
-            company.key.toLowerCase().includes(companyName)
-          );
+//         if (companyField) {
+//           const companyName = companyField.Value?.toLowerCase();
+//           const companyMatch = companyWithCode.find(company =>
+//             companyName?.includes(company.key.toLowerCase()) ||
+//             company.key.toLowerCase().includes(companyName)
+//           );
 
-          if (companyMatch) {
-            return {
-              ...order,
-              RegistrationType: {
-                ...order.RegistrationType,
-                RegistrationTypeEntityId: companyMatch.value
-              }
-            };
-          }
-        }
-      }
-      return order;
-    });
+//           if (companyMatch) {
+//             return {
+//               ...order,
+//               RegistrationType: {
+//                 ...order.RegistrationType,
+//                 RegistrationTypeEntityId: companyMatch.value
+//               }
+//             };
+//           }
+//         }
+//       }
+//       return order;
+//     });
 
-    // ✅ Insert in chunks (faster + no rate limits)
-    const chunkSize = 25;
-    let totalInserted = 0;
+//     // ✅ Insert in chunks (faster + no rate limits)
+//     const chunkSize = 25;
+//     let totalInserted = 0;
 
-    for (let i = 0; i < finalOrders.length; i += chunkSize) {
-      const chunk = finalOrders.slice(i, i + chunkSize);
-      await pushTransformedOrder(chunk);
-      totalInserted += chunk.length;
-      console.log(`📦 Inserted ${totalInserted}/${finalOrders.length}`);
-      await new Promise(resolve => setTimeout(resolve, 300)); // slight delay to avoid overload
-    }
+//     for (let i = 0; i < finalOrders.length; i += chunkSize) {
+//       const chunk = finalOrders.slice(i, i + chunkSize);
+//       await pushTransformedOrder(chunk);
+//       totalInserted += chunk.length;
+//       console.log(`📦 Inserted ${totalInserted}/${finalOrders.length}`);
+//       await new Promise(resolve => setTimeout(resolve, 300)); // slight delay to avoid overload
+//     }
 
-    return res.status(200).json({
-      success: true,
-      message: "✅ All RetailX data processed and pushed",
-      count: finalOrders.length,
-      data: finalOrders,
-    });
+//     return res.status(200).json({
+//       success: true,
+//       message: "✅ All RetailX data processed and pushed",
+//       count: finalOrders.length,
+//       data: finalOrders,
+//     });
 
-  } catch (error) {
-    return res.status(500).json({
-      success: false,
-      message: "Error fetching RetailX orders",
-      error: error.message
-    });
-  }
-};
+//   } catch (error) {
+//     return res.status(500).json({
+//       success: false,
+//       message: "Error fetching RetailX orders",
+//       error: error.message
+//     });
+//   }
+// };
 
 
 const transformRetailXOrders = (orders) => {
@@ -444,7 +443,7 @@ const transformRetailXOrders = (orders) => {
       Address: order.buyer_details?.address?.address_1 || "",
       Zip: order.buyer_details?.address?.postal_code || "",
       qr_code : order.issued_tickets[0].barcode,
-      qr : order.issued_tickets[0].barcode_url,
+      qr : order.issued_tickets[0].qr_code_url,
       Company: Company,
       Designation: Designation,
       isComplete: true
@@ -456,4 +455,95 @@ const transformRetailXOrders = (orders) => {
 
 
 
+export const fetchRetailXOrders = async (req, res) => {
+  let allOrders = [];
+  let nextCursor = null;
 
+  try {
+    // Fetch paginated data
+    while (true) {
+      let url = `${API_URL}?event_id=${RETAILX_EVENT_ID}`;
+      if (nextCursor) url += `&starting_after=${nextCursor}`;
+
+      const response = await axios.get(url, {
+        headers: { Authorization: AUTH_TOKEN },
+      });
+
+      const data = response.data?.data || [];
+      if (data.length === 0) {
+        console.log("✅ No more data to fetch for RetailX Event.");
+        break;
+      }
+
+      const validOrders = data.filter(order => order && order.status !== "cancelled");
+      allOrders.push(...validOrders);
+      nextCursor = data[data.length - 1].id;
+      if (data.length < 100) break;
+    }
+
+    console.log(`🧾 Total fetched valid orders: ${allOrders.length}`);
+
+    const transformedOrders = transformRetailXOrders(allOrders);
+
+    const finalOrders = transformedOrders.map(order => {
+      if (order.RegistrationType?.RegistrationType === "Sponsor") {
+        const companyField = order.DynamicFields.find(
+          field => field.Name === "Company/Organisation" || field.Label === "Company/Organisation"
+        );
+
+        if (companyField) {
+          const companyName = companyField.Value?.toLowerCase();
+          const companyMatch = companyWithCode.find(company =>
+            companyName?.includes(company.key.toLowerCase()) ||
+            company.key.toLowerCase().includes(companyName)
+          );
+
+          if (companyMatch) {
+            return {
+              ...order,
+              RegistrationType: {
+                ...order.RegistrationType,
+                RegistrationTypeEntityId: companyMatch.value
+              }
+            };
+          }
+        }
+      }
+      return order;
+    });
+
+    let successCount = 0;
+
+    for (const order of finalOrders) {
+      console.log(`📦 Pushing: ${order.FirstName} ${order.LastName} | ${order.Email} | QR: ${order.qr_code}`);
+      const success = await pushTransformedOrder(order,1);
+      if (success) successCount++;
+      await new Promise(resolve => setTimeout(resolve, 300)); // slight delay
+    }
+
+    fs.writeFileSync(
+          "RETAIL_X.json",
+          JSON.stringify({
+            total: transformedOrders.length,
+            orders: transformedOrders
+          }, null, 2)
+        );
+
+    return res.status(200).json({
+      success: true,
+      message: `✅ RetailX data processed and pushed (${successCount}/${finalOrders.length} successful)`,
+      pushed: successCount,
+      total: finalOrders,
+    });
+
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: "Error fetching RetailX orders",
+      error: error.message
+    });
+  }
+};
+
+
+fetchRetailXOrders();
