@@ -252,14 +252,14 @@ export const fetchAmazonSellerSummitOrders = async () => {
     console.log(`❌ Failed to push: ${failCount}`);
     console.log(`📊 Total attempted: ${successCount + failCount}`);
 
-    fs.writeFileSync(
-      "Amazon Seller Summit.json",
-      JSON.stringify({
-        event: TARGET_EVENT,
-        total: finalOrders.length,
-        orders: finalOrders
-      }, null, 2)
-    );
+    // fs.writeFileSync(
+    //   "Amazon Seller Summit.json",
+    //   JSON.stringify({
+    //     event: TARGET_EVENT,
+    //     total: finalOrders.length,
+    //     orders: finalOrders
+    //   }, null, 2)
+    // );
 
     console.log(`✅ Saved ${finalOrders.length} transformed Subscription orders`);
     return finalOrders;
@@ -273,5 +273,3 @@ export const fetchAmazonSellerSummitOrders = async () => {
     return [];
   }
 };
-
-fetchAmazonSellerSummitOrders();
