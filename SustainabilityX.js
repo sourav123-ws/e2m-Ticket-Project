@@ -251,14 +251,14 @@ export const fetchSustainabilityXOrders = async () => {
     console.log(`❌ Failed to push: ${failCount}`);
     console.log(`📊 Total attempted: ${successCount + failCount}`);
 
-    fs.writeFileSync(
-      "SUBSCRIPTION_X.json",
-      JSON.stringify({
-        event: TARGET_EVENT,
-        total: finalOrders.length,
-        orders: finalOrders
-      }, null, 2)
-    );
+    // fs.writeFileSync(
+    //   "SUBSCRIPTION_X.json",
+    //   JSON.stringify({
+    //     event: TARGET_EVENT,
+    //     total: finalOrders.length,
+    //     orders: finalOrders
+    //   }, null, 2)
+    // );
 
     console.log(`✅ Saved ${finalOrders.length} transformed Subscription orders`);
     return finalOrders;
@@ -272,5 +272,3 @@ export const fetchSustainabilityXOrders = async () => {
     return [];
   }
 };
-
-fetchSustainabilityXOrders();;
