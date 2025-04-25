@@ -259,14 +259,14 @@ export const fetchDigitalMarketingEvolutionXOrders = async () => {
     console.log(`❌ Failed to push: ${failCount}`);
     console.log(`📊 Total attempted: ${successCount + failCount}`);
 
-    fs.writeFileSync(
-      "DigitalMarkettingEvolution.json",
-      JSON.stringify({
-        event: TARGET_EVENT,
-        total: finalOrders.length,
-        orders: finalOrders
-      }, null, 2)
-    );
+    // fs.writeFileSync(
+    //   "DigitalMarkettingEvolution.json",
+    //   JSON.stringify({
+    //     event: TARGET_EVENT,
+    //     total: finalOrders.length,
+    //     orders: finalOrders
+    //   }, null, 2)
+    // );
 
     console.log(`✅ Saved ${finalOrders.length} transformed Subscription orders`);
     return finalOrders;
@@ -280,5 +280,3 @@ export const fetchDigitalMarketingEvolutionXOrders = async () => {
     return [];
   }
 };
-
-fetchDigitalMarketingEvolutionXOrders();
