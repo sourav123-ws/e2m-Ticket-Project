@@ -4,7 +4,6 @@ import { fetchRetailXOrders } from "./RetailX.js";
 import { fetchAmazonSellerSummitOrders } from "./AmazonSellerSummit.js";
 import { fetchSubscriptionXOrders } from "./SubscriptionX.js";
 import { fetchSocialMediaMastersOrders } from "./SocialMediaMasters.js";
-import { fetchAndGroupSponsors } from "./SubscriptionJSON.js";
 import { fetchCustomerXOrders } from "./CustomerX.js";
 import { fetchDigitalMarketingEvolutionXOrders } from "./DigitalMarketingEvolution.js";
 import { fetchSustainabilityXOrders } from "./SustainabilityX.js";
