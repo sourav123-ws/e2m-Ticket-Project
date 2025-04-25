@@ -529,13 +529,9 @@ export const fetchRetailXOrders = async (req, res) => {
     //       }, null, 2)
     //     );
 
-    return res.status(200).json({
-      success: true,
-      message: `✅ RetailX data processed and pushed (${successCount}/${finalOrders.length} successful)`,
-      pushed: successCount,
-      total: finalOrders,
-    });
-
+   console.log(`✅ Saved ${finalOrders.length} transformed Subscription orders`);
+    return finalOrders;
+    
   } catch (error) {
     return res.status(500).json({
       success: false,
