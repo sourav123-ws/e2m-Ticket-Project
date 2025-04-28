@@ -1,6 +1,7 @@
 import axios from 'axios';
 import fs from 'fs';
 import dotenv from "dotenv";
+import { storeEmailInSupabase } from './supabase.js';
 dotenv.config();
 
 const API_URL = process.env.API_URL;
@@ -245,15 +246,20 @@ export const fetchDigitalMarketingEvolutionXOrders = async () => {
     let failCount = 0;
 
     for (const order of finalOrders) {
-      console.log(`📦 Pushing: ${order.FirstName} ${order.LastName} | ${order.Email} | QR: ${order.qr_code}`);
-      const success = await pushTransformedOrder(order, 1);
-      if (success) {
-        successCount++;
-      } else {
-        failCount++;
+              console.log(`📦 Checking: ${order.FirstName} ${order.LastName} | ${order.Email} | QR: ${order.qr_code}`);
+            
+              const stored = await storeEmailInSupabase('digital_marketting_evolution', order.Email);
+            
+              if (!stored) {
+                console.log(`⏩ Skipping push for duplicate email: ${order.Email}`);
+                continue; // don't push if duplicate
+              }
+            
+              console.log(`📤 Pushing: ${order.FirstName} ${order.LastName} | ${order.Email}`);
+              await pushTransformedOrder(order, 1);
+            
+              await new Promise(resolve => setTimeout(resolve, 300)); // rate limiting
       }
-      await new Promise(resolve => setTimeout(resolve, 300));
-    }
 
     console.log(`✅ Successfully pushed: ${successCount}`);
     console.log(`❌ Failed to push: ${failCount}`);

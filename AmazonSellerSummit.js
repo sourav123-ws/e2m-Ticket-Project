@@ -1,6 +1,7 @@
 import axios from 'axios';
 import fs from 'fs';
 import dotenv from "dotenv";
+import { storeEmailInSupabase } from './supabase.js';
 dotenv.config();
 
 const API_URL = process.env.API_URL;
@@ -237,16 +238,22 @@ export const fetchAmazonSellerSummitOrders = async () => {
     let successCount = 0;
     let failCount = 0;
 
-    for (const order of finalOrders) {
-      console.log(`📦 Pushing: ${order.FirstName} ${order.LastName} | ${order.Email} | QR: ${order.qr_code}`);
-      const success = await pushTransformedOrder(order, 1);
-      if (success) {
-        successCount++;
-      } else {
-        failCount++;
-      }
-      await new Promise(resolve => setTimeout(resolve, 300));
-    }
+     for (const order of finalOrders) {
+          console.log(`📦 Checking: ${order.FirstName} ${order.LastName} | ${order.Email} | QR: ${order.qr_code}`);
+        
+          const stored = await storeEmailInSupabase('amazon_seller_summit', order.Email);
+        
+          if (!stored) {
+            console.log(`⏩ Skipping push for duplicate email: ${order.Email}`);
+            continue; // don't push if duplicate
+          }
+        
+          console.log(`📤 Pushing: ${order.FirstName} ${order.LastName} | ${order.Email}`);
+          await pushTransformedOrder(order, 1);
+        
+          await new Promise(resolve => setTimeout(resolve, 300)); // rate limiting
+        }
+    
 
     console.log(`✅ Successfully pushed: ${successCount}`);
     console.log(`❌ Failed to push: ${failCount}`);
