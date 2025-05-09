@@ -513,6 +513,24 @@ export const fetchRetailXOrders = async (req, res) => {
       return order;
     });
 
+    //  const ordersWithoutQr = finalOrders.filter(order => !order.qr_code);
+        
+    //     const emailsWithoutQr = ordersWithoutQr.map(order => order.Email);
+        
+    //     if (emailsWithoutQr.length > 0) {
+    //       fs.writeFileSync(
+    //         "emails_without_qr.json",
+    //         JSON.stringify({
+    //           count: emailsWithoutQr.length,
+    //           emails: emailsWithoutQr
+    //         }, null, 2)
+    //       );
+    //       console.log(`📝 Saved ${emailsWithoutQr.length} emails without QR codes to emails_without_qr.json`);
+    //     } else {
+    //       console.log(`✅ All orders have QR codes`);
+    //     }
+
+
     let successCount = 0;
 
     for (const order of finalOrders) {

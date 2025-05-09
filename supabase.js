@@ -43,3 +43,41 @@ export const storeEmailInSupabase = async (eventTable, email) => {
     }
   };
   
+
+  export const storeAllEmailInSupabase = async (eventTable, email, event_id) => {
+    try {
+      // First, check if the email already exists
+      const { data: existing, error: fetchError } = await supabase
+        .from(eventTable)
+        .select('email')
+        .eq('email', email)
+        .eq('eventId', event_id)
+        .maybeSingle();  // Since email should be unique
+  
+      if (fetchError) {
+        console.error(`❌ Error checking existing email in ${eventTable}:`, fetchError.message);
+        return false;
+      }
+  
+      if (existing) {
+        console.log(`⚠️ Email already exists in ${eventTable}: ${email}`);
+        return false;
+      }
+  
+      // Insert only if not found
+      const { error: insertError } = await supabase
+        .from(eventTable)
+        .insert([{ email: email, eventId: event_id }]);
+  
+      if (insertError) {
+        console.error(`❌ Error inserting email into ${eventTable}:`, insertError.message);
+        return false;
+      }
+  
+      console.log(`✅ Stored email in ${eventTable}: ${email}`);
+      return true;
+    } catch (err) {
+      console.error(`❌ Exception inserting email into ${eventTable}:`, err.message);
+      return false;
+    }
+  };

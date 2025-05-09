@@ -93,4 +93,3 @@ const fetchRetailXOrders = async () => {
   }
 };
 
-fetchRetailXOrders();

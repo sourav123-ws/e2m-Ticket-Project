@@ -12,10 +12,10 @@ const TARGET_EVENT = "Social Media Masters";
 const REGISTRATION_API_URL = "https://us-central1-e2monair.cloudfunctions.net/e2mreg-prd-register-attendee";
 
 
-const companyWithCode = [{key:'Checkoutchamp',value:'34331000'},
-  {key:'Dash Social',value:'34332000'},
-  {key:'PULSAR',value:'34333000'},
-  {key:'Metricool',value:'34355000'}]
+const companyWithCode = [{ key: 'Checkoutchamp', value: '34331000' },
+{ key: 'Dash Social', value: '34332000' },
+{ key: 'PULSAR', value: '34333000' },
+{ key: 'Metricool', value: '34355000' }]
 
 
 const pushTransformedOrder = async (order, attempt = 1) => {
@@ -82,7 +82,7 @@ const transformSocialMediaOrders = (orders) => {
       Value: normalizeYesNo(question.answer || ""),
       Label: question.question,
       Type: Array.isArray(question.answer) ? "multiselect" : "text"
-    })).filter(field => 
+    })).filter(field =>
       field.Name !== "Typeoftickets" && field.Name !== "repeatemail"
     );
 
@@ -125,26 +125,26 @@ const transformSocialMediaOrders = (orders) => {
     };
 
     if (lowerDescription.includes("brand") ||
-        lowerDescription.includes("retailer") ||
-        lowerDescription.includes("vendor") ||
-        lowerDescription.includes("agency")) {
+      lowerDescription.includes("retailer") ||
+      lowerDescription.includes("vendor") ||
+      lowerDescription.includes("agency")) {
       registrationType = {
-      "ColorCode": "#000",
-      "RegistrationType": "Attendee",
-      "RegistrationTypeId": "aBBEc9n1nwFuguN9i7LD"
-    }
+        "ColorCode": "#000",
+        "RegistrationType": "Attendee",
+        "RegistrationTypeId": "aBBEc9n1nwFuguN9i7LD"
+      }
     } else if (lowerDescription.includes("sponsor")) {
       registrationType = {
-      "ColorCode": "#000",
-      "RegistrationType": "Sponsor",
-      "RegistrationTypeId": "LXGs4IOLckXt9j04eUMJ"
-    }
+        "ColorCode": "#000",
+        "RegistrationType": "Sponsor",
+        "RegistrationTypeId": "LXGs4IOLckXt9j04eUMJ"
+      }
     } else if (lowerDescription.includes("speaker")) {
       registrationType = {
-      "ColorCode": "#000",
-      "RegistrationType": "Speaker",
-      "RegistrationTypeId": "Qs28qtCkv9lhnPDNfthX"
-    }
+        "ColorCode": "#000",
+        "RegistrationType": "Speaker",
+        "RegistrationTypeId": "Qs28qtCkv9lhnPDNfthX"
+      }
     }
 
     return {
@@ -199,8 +199,8 @@ export const fetchSocialMediaMastersOrders = async () => {
 
     const subscriptionXOrders = allOrders.filter(order => {
       const questions = order.buyer_details?.custom_questions || [];
-      return questions.some(q => 
-        q.question?.includes(QUESTION_TEXT) && 
+      return questions.some(q =>
+        q.question?.includes(QUESTION_TEXT) &&
         q.answer?.includes(TARGET_EVENT)
       );
     });
@@ -210,8 +210,8 @@ export const fetchSocialMediaMastersOrders = async () => {
     const finalOrders = transformedOrders.map(order => {
       if (order.RegistrationType?.RegistrationType === "Sponsor") {
         const companyField = order.DynamicFields.find(
-          field => field.Name === "Company/Organisation" || 
-                  field.Label === "Company/Organisation"
+          field => field.Name === "Company/Organisation" ||
+            field.Label === "Company/Organisation"
         );
 
         if (companyField) {
@@ -235,22 +235,39 @@ export const fetchSocialMediaMastersOrders = async () => {
       return order;
     });
 
+    // const ordersWithoutQr = finalOrders.filter(order => !order.qr_code);
+
+    // const emailsWithoutQr = ordersWithoutQr.map(order => order.Email);
+
+    // if (emailsWithoutQr.length > 0) {
+    //   fs.writeFileSync(
+    //     "emails_without_qr.json",
+    //     JSON.stringify({
+    //       count: emailsWithoutQr.length,
+    //       emails: emailsWithoutQr
+    //     }, null, 2)
+    //   );
+    //   console.log(`📝 Saved ${emailsWithoutQr.length} emails without QR codes to emails_without_qr.json`);
+    // } else {
+    //   console.log(`✅ All orders have QR codes`);
+    // }
+
     let successCount = 0;
     let failCount = 0;
 
     for (const order of finalOrders) {
       console.log(`📦 Checking: ${order.FirstName} ${order.LastName} | ${order.Email} | QR: ${order.qr_code}`);
-    
+
       const stored = await storeEmailInSupabase('social_media_masters', order.Email);
-    
+
       if (!stored) {
         console.log(`⏩ Skipping push for duplicate email: ${order.Email}`);
         continue; // don't push if duplicate
       }
-    
+
       console.log(`📤 Pushing: ${order.FirstName} ${order.LastName} | ${order.Email}`);
       await pushTransformedOrder(order, 1);
-    
+
       await new Promise(resolve => setTimeout(resolve, 300)); // rate limiting
     }
 
