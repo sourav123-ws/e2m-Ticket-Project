@@ -121,11 +121,7 @@ const transformAmazonOrders = (orders) => {
 
     const lowerDescription = description.toLowerCase();
 
-    let registrationType = {
-      ColorCode: "#000",
-      RegistrationType: "Supplier/Vendor/Agency Tech/Consultant (RMX Report included with pass)",
-      RegistrationTypeId: "yvY8aVrF1PF2bfkLZIJ4"
-    };
+    let registrationType ;
 
     if (lowerDescription.includes("brand") ||
         lowerDescription.includes("staff") ||
@@ -151,7 +147,8 @@ const transformAmazonOrders = (orders) => {
     }
     }
 
-    return {
+    if(registrationType){
+       return {
       sendMail: 0,
       ShowInCMSAttendeeList: 1,
       FormType: "FREE",
@@ -172,6 +169,7 @@ const transformAmazonOrders = (orders) => {
       Designation: Designation,
       isComplete: true
     };
+    }
   });
 };
 
@@ -257,6 +255,7 @@ export const fetchAmazonSellerSummitOrders = async () => {
     let failCount = 0;
 
      for (const order of finalOrders) {
+      if(order){
           console.log(`📦 Checking: ${order.FirstName} ${order.LastName} | ${order.Email} | QR: ${order.qr_code}`);
         
           const stored = await storeEmailInSupabase('amazon_seller_summit', order.Email);
@@ -271,7 +270,7 @@ export const fetchAmazonSellerSummitOrders = async () => {
         
           await new Promise(resolve => setTimeout(resolve, 300)); // rate limiting
         }
-    
+      }
 
     console.log(`✅ Successfully pushed: ${successCount}`);
     console.log(`❌ Failed to push: ${failCount}`);

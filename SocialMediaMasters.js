@@ -118,11 +118,7 @@ const transformSocialMediaOrders = (orders) => {
 
     const lowerDescription = description.toLowerCase();
 
-    let registrationType = {
-      ColorCode: "#000",
-      RegistrationType: "Supplier/Vendor/Agency Tech/Consultant (RMX Report included with pass)",
-      RegistrationTypeId: "yvY8aVrF1PF2bfkLZIJ4"
-    };
+    let registrationType ;
 
     if (lowerDescription.includes("brand") ||
       lowerDescription.includes("staff") ||
@@ -148,7 +144,8 @@ const transformSocialMediaOrders = (orders) => {
       }
     }
 
-    return {
+    if(registrationType){
+       return {
       sendMail: 0,
       ShowInCMSAttendeeList: 1,
       FormType: "FREE",
@@ -169,6 +166,7 @@ const transformSocialMediaOrders = (orders) => {
       Designation: Designation,
       isComplete: true
     };
+    }
   });
 };
 
@@ -257,19 +255,21 @@ export const fetchSocialMediaMastersOrders = async () => {
     let failCount = 0;
 
     for (const order of finalOrders) {
-      console.log(`📦 Checking: ${order.FirstName} ${order.LastName} | ${order.Email} | QR: ${order.qr_code}`);
+      if(order){
+        console.log(`📦 Checking: ${order.FirstName} ${order.LastName} | ${order.Email} | QR: ${order.qr_code}`);
 
-      const stored = await storeEmailInSupabase('social_media_masters', order.Email);
+        const stored = await storeEmailInSupabase('social_media_masters', order.Email);
 
-      if (!stored) {
-        console.log(`⏩ Skipping push for duplicate email: ${order.Email}`);
-        continue; // don't push if duplicate
+        if (!stored) {
+          console.log(`⏩ Skipping push for duplicate email: ${order.Email}`);
+          continue; // don't push if duplicate
+        }
+
+        console.log(`📤 Pushing: ${order.FirstName} ${order.LastName} | ${order.Email}`);
+        await pushTransformedOrder(order, 1);
+
+        await new Promise(resolve => setTimeout(resolve, 300)); // rate limiting
       }
-
-      console.log(`📤 Pushing: ${order.FirstName} ${order.LastName} | ${order.Email}`);
-      await pushTransformedOrder(order, 1);
-
-      await new Promise(resolve => setTimeout(resolve, 300)); // rate limiting
     }
 
     console.log(`✅ Successfully pushed: ${successCount}`);

@@ -398,11 +398,7 @@ const transformRetailXOrders = (orders) => {
 
     const lowerDescription = description.toLowerCase();
 
-    let registrationType = {
-      ColorCode: "#000",
-      RegistrationType: "Supplier/Vendor/Agency Tech/Consultant (RMX Report included with pass)",
-      RegistrationTypeId: "yvY8aVrF1PF2bfkLZIJ4"
-    };
+    let registrationType ;
 
     if (lowerDescription.includes("brand") ||
         lowerDescription.includes("staff") ||
@@ -451,7 +447,9 @@ const transformRetailXOrders = (orders) => {
       isComplete: true
     };
 
-    return transformedOrder;
+    if(registrationType){
+      return transformedOrder;
+    }
   });
 };
 
@@ -535,21 +533,22 @@ export const fetchRetailXOrders = async (req, res) => {
     let successCount = 0;
 
     for (const order of finalOrders) {
-                      console.log(`📦 Checking: ${order.FirstName} ${order.LastName} | ${order.Email} | QR: ${order.qr_code}`);
-                    
-                      const stored = await storeEmailInSupabase('retail_x', order.Email);
-                    
-                      if (!stored) {
-                        console.log(`⏩ Skipping push for duplicate email: ${order.Email}`);
-                        continue; // don't push if duplicate
-                      }
-                    
-                      console.log(`📤 Pushing: ${order.FirstName} ${order.LastName} | ${order.Email}`);
-                      await pushTransformedOrder(order, 1);
-                    
-                      await new Promise(resolve => setTimeout(resolve, 300)); // rate limiting
-              }
-
+      if(order){
+          console.log(`📦 Checking: ${order.FirstName} ${order.LastName} | ${order.Email} | QR: ${order.qr_code}`);
+                      
+          const stored = await storeEmailInSupabase('retail_x', order.Email);
+                      
+          if (!stored) {
+            console.log(`⏩ Skipping push for duplicate email: ${order.Email}`);
+            continue; // don't push if duplicate
+          }
+                      
+          console.log(`📤 Pushing: ${order.FirstName} ${order.LastName} | ${order.Email}`);
+          await pushTransformedOrder(order, 1);
+                      
+          await new Promise(resolve => setTimeout(resolve, 300)); // rate limiting
+      }
+    }
     // fs.writeFileSync(
     //       "RETAIL_X.json",
     //       JSON.stringify({
