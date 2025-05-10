@@ -44,7 +44,7 @@ export const storeEmailInSupabase = async (eventTable, email) => {
   };
   
 
-  export const storeAllEmailInSupabase = async (eventTable, email, event_id) => {
+  export const storeAllEmailInSupabase = async (eventTable, email, event_id, insert = false) => {
     try {
       // First, check if the email already exists
       const { data: existing, error: fetchError } = await supabase
@@ -65,6 +65,7 @@ export const storeEmailInSupabase = async (eventTable, email) => {
       }
   
       // Insert only if not found
+      //if (insert) {
       const { error: insertError } = await supabase
         .from(eventTable)
         .insert([{ email: email, eventId: event_id }]);
@@ -73,6 +74,7 @@ export const storeEmailInSupabase = async (eventTable, email) => {
         console.error(`❌ Error inserting email into ${eventTable}:`, insertError.message);
         return false;
       }
+      //}
   
       console.log(`✅ Stored email in ${eventTable}: ${email}`);
       return true;

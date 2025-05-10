@@ -126,6 +126,7 @@ const transformSustainabilityXOrders = (orders) => {
     };
 
     if (lowerDescription.includes("brand") ||
+        lowerDescription.includes("staff") ||
         lowerDescription.includes("retailer") ||
         lowerDescription.includes("vendor") ||
         lowerDescription.includes("agency")) {

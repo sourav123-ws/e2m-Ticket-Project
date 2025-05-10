@@ -161,7 +161,8 @@ const pushTransformedOrder = async (order, attempt = 1, event_id) => {
     });
 
     if (response.data?.success) {
-      console.log(`✅ [Try ${attempt}] Pushed: ${order.Email}`);
+      console.log(`✅ [Try ${attempt}] Pushed: ${order.Email}`);      
+      const stored = await storeAllEmailInSupabase('all_spring_festival', order.Email, event_id, true);
       return true;
     } else {
       console.log(`⚠️ [Try ${attempt}] API responded with failure:`, response.data);
@@ -245,6 +246,7 @@ const transformOrders = (orders, event_id) => {
     let registrationType;
 
     if (lowerDescription.includes("brand") ||
+      lowerDescription.includes("staff") ||
       lowerDescription.includes("retailer") ||
       lowerDescription.includes("vendor") ||
       lowerDescription.includes("agency")) {
@@ -316,6 +318,9 @@ export const fetchSpringFestivalOrders = async () => {
     // const userEmail = "bethany.butt@screwfix.com";
     // const userEmail = "bartosz.bielecki@cm.tech";
     // const userEmail = "kerry@joolz.com";
+    // const userEmail = "ed@hanaco.ltd.uk";
+    // const userEmail = "jamesrigg@buyitdirect.co.uk";
+    // const userEmail = "andy.james@internetretailing.net";
     const subscriptionXOrders = allOrders.filter(order => {
       const questions = order.buyer_details?.custom_questions || [];
       return questions.some(q =>
@@ -420,3 +425,4 @@ export const fetchSpringFestivalOrders = async () => {
   return [];
 };
 
+fetchSpringFestivalOrders()
