@@ -6,12 +6,13 @@ dotenv.config();
 
 const API_URL = process.env.API_URL;
 const AUTH_TOKEN = process.env.AUTH_TOKEN;
-const SPRING_FESTIVAL_EVENT_ID = 'ev_4644551';
 const QUESTION_TEXT = "Which event at the Spring Retail Festival are you attending?";
 //const TARGET_EVENT = "SustainabilityX";
-const REGISTRATION_API_URL = "https://us-central1-e2monair.cloudfunctions.net/e2mreg-prd-register-attendee";
+const ATTENDEE_GET_API_URL = "https://us-central1-e2monair.cloudfunctions.net/e2mext-prd-get-attendee-list";
+const VCARD_UPDATE_API_URL = "https://us-central1-e2monair.cloudfunctions.net/e2mext-prd-update-vcard";
 
 const eventList = [
+  "E1742214690559",
   "E1743162762857",
   "E1743162842566",
   "E1743162911584",
@@ -20,6 +21,52 @@ const eventList = [
   "E1743163201304",
 ];
 const eventConfig = {
+  "E1742214690559": {
+    companyWithCode: [
+      { key: 'Criteo', value: '34050000' },
+      { key: 'dunnhumby', value: '34051000' },
+      { key: 'monday.com', value: '34052000' },
+      { key: 'Stratacache', value: '34053000' },
+      { key: 'Koddi', value: '34054000' },
+      { key: 'Epsilon', value: '34055000' },
+      { key: 'Mirakl', value: '34056000' },
+      { key: 'StackAdapt', value: '34057000' },
+      { key: 'myAthena', value: '34058000' },
+      { key: 'Zeotap', value: '34059000' },
+      { key: 'Kenshoo Skai', value: '34060000' },
+      { key: 'Sovendus', value: '34061000' },
+      { key: 'Dentsu', value: '34062000' },
+      { key: 'Commerce Media Tech', value: '34063000' },
+      { key: 'Zitcha', value: '34064000' },
+      { key: 'SAVI', value: '34065000' },
+      { key: 'Mediarithmics', value: '34066000' },
+      { key: 'VTEX', value: '34067000' },
+      { key: 'Imagino', value: '34068000' },
+      { key: 'Tealium', value: '34069000' },
+      { key: 'ADvendio', value: '34070000' },
+      { key: 'Web Spiders Group', value: '34071000' },
+      { key: 'Kevel', value: '34072000' },
+      { key: 'Broadsign', value: '34073000' },
+      { key: 'Matcha', value: '34074000' },
+      { key: 'Flow Living', value: '34075000' },
+      { key: 'Osmos', value: '34076000' },
+      { key: 'SMG', value: '34077000' },
+      { key: 'Webloyalty', value: '34078000' },
+      { key: 'RetailX', value: '34079000' },
+      { key: 'Women in Retail Media', value: '34080000' },
+      { key: 'DPAA', value: '34081000' },
+      { key: 'FMCG Guys', value: '34082000' },
+      { key: 'IAB Europe', value: '34083000' }
+    ],
+    registrationType: {
+      ColorCode: "#000",
+      RegistrationType: "Attendee",
+      RegistrationTypeId: "93oKUM9lfuq1KmljRC0D"
+    },
+    TARGET_EVENT: "Retail MediaX",
+    TT_EVENT_ID: "ev_4519856",
+    QUESTION_TEXT: "",
+  },
   "E1743162762857": {
     companyWithCode: [
       { key: 'Ecommerce Intelligence', value: '34313000' },
@@ -36,26 +83,9 @@ const eventConfig = {
       "RegistrationType": "Attendee",
       "RegistrationTypeId": "r2N1DHJ0QGU3HKSPZkgu"
     },
-    registrationTypes: {
-      "Attendee": {
-        "ColorCode": "#000",
-        "RegistrationType": "Attendee",
-        "RegistrationTypeId": "r2N1DHJ0QGU3HKSPZkgu"
-      },
-      "Sponsor": {
-        "ColorCode": "#000",
-        "RegistrationType": "Sponsor",
-        "RegistrationTypeId": "IKvEZ4lAwXKwQcNjIWlD"
-      },
-      "Speaker": {
-        registrationType: {
-          "ColorCode": "#000",
-          "RegistrationType": "Speaker",
-          "RegistrationTypeId": "zwRGDlyrF35uoSu0hPJP"
-        }
-      },
-    },
     TARGET_EVENT: "Amazon Sellers Summit",
+    TT_EVENT_ID: "ev_4644551",
+    QUESTION_TEXT: "Which event at the Spring Retail Festival are you attending?",
   },
   "E1743162842566": {
     companyWithCode: [
@@ -69,26 +99,9 @@ const eventConfig = {
       "RegistrationType": "Attendee",
       "RegistrationTypeId": "aBBEc9n1nwFuguN9i7LD"
     },
-    registrationTypes: {
-      "Attendee": {
-        "ColorCode": "#000",
-        "RegistrationType": "Attendee",
-        "RegistrationTypeId": "aBBEc9n1nwFuguN9i7LD"
-      },
-      "Sponsor": {
-        "ColorCode": "#000",
-        "RegistrationType": "Sponsor",
-        "RegistrationTypeId": "LXGs4IOLckXt9j04eUMJ"
-      },
-      "Speaker": {
-        registrationType: {
-          "ColorCode": "#000",
-          "RegistrationType": "Speaker",
-          "RegistrationTypeId": "Qs28qtCkv9lhnPDNfthX"
-        }
-      },
-    },
     TARGET_EVENT: "Social Media Masters",
+    TT_EVENT_ID: "ev_4644551",
+    QUESTION_TEXT: "Which event at the Spring Retail Festival are you attending?",
   },
   "E1743162911584": {
     companyWithCode: [
@@ -104,26 +117,9 @@ const eventConfig = {
       "RegistrationType": "Attendee",
       "RegistrationTypeId": "IDcDKMY6E6l9z2Ad394v"
     },
-    registrationTypes: {
-      "Attendee": {
-        "ColorCode": "#000",
-        "RegistrationType": "Attendee",
-        "RegistrationTypeId": "IDcDKMY6E6l9z2Ad394v"
-      },
-      "Sponsor": {
-        "ColorCode": "#000",
-        "RegistrationType": "Sponsor",
-        "RegistrationTypeId": "muphyH66ZmnnA48KlmhE"
-      },
-      "Speaker": {
-        registrationType: {
-          "ColorCode": "#000",
-          "RegistrationType": "Speaker",
-          "RegistrationTypeId": "BVdFH7eQz12qX8cEz1S1"
-        }
-      },
-    },
-    TARGET_EVENT: "SustainabilityX"
+    TARGET_EVENT: "SustainabilityX",
+    TT_EVENT_ID: "ev_4644551",
+    QUESTION_TEXT: "Which event at the Spring Retail Festival are you attending?",
   },
   "E1743163021441": {
     companyWithCode: [
@@ -139,26 +135,9 @@ const eventConfig = {
       "RegistrationType": "Attendee",
       "RegistrationTypeId": "oaWbWfKB0q3rJzrvenrT"
     },
-    registrationTypes: {
-      "Attendee": {
-        "ColorCode": "#000",
-        "RegistrationType": "Attendee",
-        "RegistrationTypeId": "oaWbWfKB0q3rJzrvenrT"
-      },
-      "Sponsor": {
-        "ColorCode": "#000",
-        "RegistrationType": "Sponsor",
-        "RegistrationTypeId": "H415FjQN53rAaWrfm47x"
-      },
-      "Speaker": {
-        registrationType: {
-          "ColorCode": "#000",
-          "RegistrationType": "Speaker",
-          "RegistrationTypeId": "eTFSFZxk98HQYo3RfRBy"
-        }
-      },
-    },
     TARGET_EVENT: "CustomerX",
+    TT_EVENT_ID: "ev_4644551",
+    QUESTION_TEXT: "Which event at the Spring Retail Festival are you attending?",
   },
   "E1743163129042": {
     companyWithCode: [
@@ -182,26 +161,9 @@ const eventConfig = {
       "RegistrationType": "Attendee",
       "RegistrationTypeId": "O3xV8xvdYNk5heJHSiyd"
     },
-    registrationTypes: {
-      "Attendee": {
-        "ColorCode": "#000",
-        "RegistrationType": "Attendee",
-        "RegistrationTypeId": "O3xV8xvdYNk5heJHSiyd"
-      },
-      "Sponsor": {
-        "ColorCode": "#000",
-        "RegistrationType": "Sponsor",
-        "RegistrationTypeId": "kCxcYVaSrfyz4uz0KPr3"
-      },
-      "Speaker": {
-        registrationType: {
-          "ColorCode": "#000",
-          "RegistrationType": "Speaker",
-          "RegistrationTypeId": "kTOVxMbVwpDji8gWCwbN"
-        }
-      },
-    },
     TARGET_EVENT: "Digital Marketing Evolution",
+    TT_EVENT_ID: "ev_4644551",
+    QUESTION_TEXT: "Which event at the Spring Retail Festival are you attending?",
   },
   "E1743163201304": {
     companyWithCode: [
@@ -227,28 +189,12 @@ const eventConfig = {
       "RegistrationType": "Attendee",
       "RegistrationTypeId": "uUT8CeS4FPNMdWAfHMK0"
     },
-    registrationTypes: {
-      "Attendee": {
-        "ColorCode": "#000",
-        "RegistrationType": "Attendee",
-        "RegistrationTypeId": "uUT8CeS4FPNMdWAfHMK0"
-      },
-      "Sponsor": {
-        "ColorCode": "#000",
-        "RegistrationType": "Sponsor",
-        "RegistrationTypeId": "AgZUfUjgdJSeiWxkjaar"
-      },
-      "Speaker": {
-        registrationType: {
-          "ColorCode": "#000",
-          "RegistrationType": "Speaker",
-          "RegistrationTypeId": "tT5mKR9CsBoREbypYOF9"
-        }
-      },
-    },
     TARGET_EVENT: "SubscriptionX",
+    TT_EVENT_ID: "ev_4644551",
+    QUESTION_TEXT: "Which event at the Spring Retail Festival are you attending?",
   },
 };
+
 // const companyWithCode = [{ key: 'SpiderX', value: '34670000' },
 // { key: 'Emarsys', value: '34671000' },
 // { key: 'Adobe', value: '34672000' },
@@ -256,7 +202,47 @@ const eventConfig = {
 // { key: 'RetailX', value: '34674000' },
 // { key: 'FUTR', value: '34675000' }]
 
-const pushTransformedOrder = async (order, attempt = 1, event_id) => {
+const getAttendees = async (event_id) => {
+  const payload = {
+    postToCRM: false,
+    key: {
+      instanceId: "OA_UAT",
+      clientId: "C1742212403583",
+      eventId: event_id,
+    },
+    "data": {
+      // "attendeeId": "221000",
+      // "attendeeId": "99934031",
+      // "attendeeId": "99935226",
+      // "attendeeId": "99935054",
+      "fields": [
+        "AttendeeId",
+        "Email",
+        "VCard"
+      ]
+    },
+  };
+
+  try {
+    const response = await axios.post(ATTENDEE_GET_API_URL, payload, {
+      headers: { "Content-Type": "application/json" },
+    });
+
+    if (response.data?.status == 0) {
+      // console.log(response.data.result.length);
+      // console.log(response.data.result);
+      // console.log(response.data.result[0].VCard);
+      return response.data.result;
+    } else {
+      return [];
+    }
+  } catch (error) {
+    console.log(`Error in getAttendees:`, error.response?.data || error.message);
+    return false;
+  }
+};
+
+const updateVCards = async (orders, event_id) => {
   const payload = {
     postToCRM: false,
     key: {
@@ -264,26 +250,24 @@ const pushTransformedOrder = async (order, attempt = 1, event_id) => {
       clientId: "C1742212403583",
       // eventId: "E1743162911584",
       eventId: event_id,
-      bundleId: "u7KpSiKT0MtZ2z4JccWS",
     },
-    data: [order],
+    data: orders,
   };
-
+  console.log("updateVCards payload", payload);
   try {
-    const response = await axios.post(REGISTRATION_API_URL, payload, {
+    const response = await axios.post(VCARD_UPDATE_API_URL, payload, {
       headers: { "Content-Type": "application/json" },
     });
-
-    if (response.data?.success) {
-      console.log(`✅ [Try ${attempt}] Pushed: ${order.Email}`);
-      const stored = await storeAllEmailInSupabase('all_spring_festival', order.Email, event_id, true);
+    console.log(response.data)
+    if (response.data?.status == 0) {
+      console.log(`VCard Updated successfully`);
       return true;
     } else {
-      console.log(`⚠️ [Try ${attempt}] API responded with failure:`, response.data);
+      console.log(`⚠️ [API responded with failure:`, response.data);
       return false;
     }
   } catch (error) {
-    console.log(`❌ [Try ${attempt}] Error pushing transformed order:`, error.response?.data || error.message);
+    console.log(`❌ [Try Error updating VCard order:`, error.response?.data || error.message);
     return false;
   }
 };
@@ -357,95 +341,89 @@ const transformOrders = (orders, event_id) => {
 
     const lowerDescription = description.toLowerCase();
 
-    let registrationType;
+    let regFlag = false;
 
     if (lowerDescription.includes("brand") ||
       lowerDescription.includes("staff") ||
       lowerDescription.includes("retailer") ||
       lowerDescription.includes("vendor") ||
       lowerDescription.includes("agency")) {
-      // registrationType = eventConfig[event_id].registrationType;
-      registrationType = eventConfig[event_id].registrationTypes.Attendee;
-      // } else if (lowerDescription.includes("sponsor")) {
-      //   registrationType = eventConfig[event_id].registrationTypes.Sponsor;
-      // } else if (lowerDescription.includes("speaker")) {
-      //   registrationType = eventConfig[event_id].registrationTypes.Speaker;
+      regFlag = true;
+    } else if (lowerDescription.includes("sponsor")) {
+      regFlag = true;
+    } else if (lowerDescription.includes("speaker")) {
+      regFlag = true;
     }
 
-    if (registrationType) {
+    if (regFlag) {
       return {
-        sendMail: 0,
-        ShowInCMSAttendeeList: 1,
-        FormType: "FREE",
-        RegistrationType: registrationType,
-        DynamicFields: filteredDynamicFields,
-        DefaultFields: [],
-        PreSignupFields: [],
-        FirstName: order.buyer_details?.first_name || "",
-        LastName: order.buyer_details?.last_name || "",
         Email: order.buyer_details?.email || "",
-        PhoneCountryCode: order.buyer_details?.phone_country_code || "",
-        Phone: order.buyer_details?.phone || "",
-        Address: order.buyer_details?.address?.address_1 || "",
-        Zip: order.buyer_details?.address?.postal_code || "",
         qr_code: order.issued_tickets?.[0]?.barcode || "",
-        qr: order.issued_tickets?.[0]?.qr_code_url || "",
-        Company: Company,
-        Designation: Designation,
-        isComplete: true
+        qr_code_url: order.issued_tickets?.[0]?.qr_code_url || "",
       };
     }
+    // else {
+    //   return null
+    // }
   });
 };
 
-export const fetchSpringFestivalOrders = async () => {
-  let allOrders = [];
-  let nextCursor = null;
-
+export const fetchOrders = async () => {
+  console.log("Fetching orders...");
   try {
-    while (true) {
-      let url = `${API_URL}?event_id=${SPRING_FESTIVAL_EVENT_ID}`;
-      if (nextCursor) url += `&starting_after=${nextCursor}`;
-
-      const response = await axios.get(url, {
-        headers: { Authorization: AUTH_TOKEN },
-      });
-
-      if (!response.data.data || response.data.data.length === 0) break;
-
-      const orders = response.data.data;
-      const validOrders = orders.filter(order => order && order.status !== "cancelled");
-      allOrders.push(...validOrders);
-      if (orders.length < 100) break;
-      nextCursor = orders[orders.length - 1].id;
-    }
-
-    console.log(`✅ Fetched ${allOrders.length} total orders`);
-
-    // const userEmail = "01.mrunal@gmail.com";
-    // const userEmail = "jessica.cooke@stonegategroup.co.uk";
-    // const userEmail = "bartosz.bielecki@cm.tech";
-    // const userEmail = "starfilemedia@aol.com";
-    // const userEmail = "bethany.butt@screwfix.com";
-    // const userEmail = "bartosz.bielecki@cm.tech";
-    // const userEmail = "kerry@joolz.com";
-    // const userEmail = "ed@hanaco.ltd.uk";
-    // const userEmail = "jamesrigg@buyitdirect.co.uk";
-    // const userEmail = "andy.james@internetretailing.net";
-    // const userEmail = "daniel.bacon@epson.eu";
-    const subscriptionXOrders = allOrders.filter(order => {
-      const questions = order.buyer_details?.custom_questions || [];
-      return questions.some(q =>
-        q.question?.includes(QUESTION_TEXT)
-        // &&
-        // // q.answer?.includes(TARGET_EVENT) &&
-        // order.buyer_details?.email == userEmail
-      );
-    });
     //---------------------------
     for (let i = 0; i < eventList.length; i++) {
       const eventId = eventList[i];
-      const { companyWithCode, TARGET_EVENT } = eventConfig[eventId];
+      const { companyWithCode } = eventConfig[eventId];
+      let eventAttendees = await getAttendees(eventId);
+      if (eventAttendees.length == 0) {
+        console.log(`No attendees found for event ID: ${eventId}`);
+        return [];
+      } else {
+        console.log(`e2m - Event ID: ${eventId}; Attendees: ${eventAttendees.length}`);
+        // console.log("eventAttendees", eventAttendees);
+      }
+      let allOrders = [];
+      let nextCursor = null;
+      while (true) {
+        let url = `${API_URL}?event_id=${eventConfig[eventId].TT_EVENT_ID}`;
+        if (nextCursor) url += `&starting_after=${nextCursor}`;
+
+        const response = await axios.get(url, {
+          headers: { Authorization: AUTH_TOKEN },
+        });
+
+        if (!response.data.data || response.data.data.length === 0) break;
+
+        const orders = response.data.data;
+        const validOrders = orders.filter(order => order && order.status !== "cancelled");
+        allOrders.push(...validOrders);
+        if (orders.length < 100) break;
+        nextCursor = orders[orders.length - 1].id;
+      }
+
+      console.log(`TT Registrations: ${allOrders.length}`);
+
+      // const userEmail = "01.mrunal@gmail.com";
+      // const userEmail = "jessica.cooke@stonegategroup.co.uk";
+      // const userEmail = "bartosz.bielecki@cm.tech";
+      // const userEmail = "starfilemedia@aol.com";
+      // const userEmail = "bethany.butt@screwfix.com";
+      // const userEmail = "bartosz.bielecki@cm.tech";
+      // const userEmail = "kerry@joolz.com";
+      // const userEmail = "ed@hanaco.ltd.uk";
+      // const userEmail = "jamesrigg@buyitdirect.co.uk";
+      // const userEmail = "andy.james@internetretailing.net";
+      const subscriptionXOrders = allOrders.filter(order => {
+        const questions = order.buyer_details?.custom_questions || [];
+
+        return questions.some(q =>
+          !eventConfig[eventId].QUESTION_TEXT || q.question?.includes(eventConfig[eventId].QUESTION_TEXT)
+          // &&
+          // // q.answer?.includes(TARGET_EVENT) &&
+          // order.buyer_details?.email == userEmail
+        );
+      });
       try {
         const transformedOrders = transformOrders(subscriptionXOrders, eventId);
         // if (transformedOrders.length == 1) {
@@ -455,72 +433,61 @@ export const fetchSpringFestivalOrders = async () => {
         //   console.log("transformedOrders>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>", transformedOrders);
         //   // return [];
         // }
-        const finalOrders = transformedOrders.map(order => {
-          if (order && order.RegistrationType && order.RegistrationType?.RegistrationType === "Sponsor") {
-            const companyField = order.DynamicFields.find(
-              field => field.Name === "Company/Organisation" ||
-                field.Label === "Company/Organisation"
-            );
-
-            if (companyField) {
-              const companyName = companyField.Value?.toLowerCase();
-              const companyMatch = companyWithCode.find(company =>
-                companyName?.includes(company.key.toLowerCase()) ||
-                company.key.toLowerCase().includes(companyName)
-              );
-
-              if (companyMatch) {
-                return {
-                  ...order,
-                  RegistrationType: {
-                    ...order.RegistrationType,
-                    RegistrationTypeEntityId: companyMatch.value
+        let attendeeUpdates = [];
+        for (let i = 0; i < transformedOrders.length; i++) {
+          const order = transformedOrders[i];
+          if (!order) continue;
+          for (let j = 0; j < eventAttendees.length; j++) {
+            if (order.Email == eventAttendees[j].Email) {
+              // console.log("order.qr_code : ", order.qr_code);
+              // console.log("eventAttendees[j].EXT_QRCODE : ", eventAttendees[j].VCard.EXT_QRCODE);
+              if (!eventAttendees[j].VCard || order.qr_code != eventAttendees[j].VCard.EXT_QRCODE) {
+                const attendee = {
+                  // "Email": eventAttendees[j].Email,
+                  "AttendeeId": eventAttendees[j].AttendeeId,
+                  "VCard": {
+                    "EXT_QR": order.qr_code_url,
+                    "QR": order.qr_code_url,
+                    "EXT_QRCODE": order.qr_code,
                   }
                 };
+                attendeeUpdates.push(attendee);
+                break;
               }
             }
           }
-          return order;
-        });
+        }
 
-        // console.log("finalOrders", finalOrders);
+        console.log("VCard Changed: ", attendeeUpdates.length);
+        // console.log("VCard Changed: ", attendeeUpdates);
 
         // if (transformedOrders.length == 1) {
         //   return [];
         // } else {
         //   return [];
         // }
-        let successCount = 0;
-        let failCount = 0;
-
-        for (const order of finalOrders) {
-          if (order) {
-            console.log(`📦 Checking: ${order.FirstName} ${order.LastName} | ${order.Email} | QR: ${order.qr_code}`);
-
-            const stored = await storeAllEmailInSupabase('all_spring_festival', order.Email, eventId);
-
-            if (!stored) {
-              console.log(`⏩ Skipping push for duplicate email: ${order.Email}`);
-              continue; // don't push if duplicate
-            }
-
-            console.log(`📤 Pushing: ${order.FirstName} ${order.LastName} | ${order.Email}`);
-            await pushTransformedOrder(order, 1, eventId);
-
-            await new Promise(resolve => setTimeout(resolve, 300)); // rate limiting
-          }
+        if (attendeeUpdates.length == 0) {
+          console.log("No VCard changes found");
+          return [];
+        } else {
+          await updateVCards(attendeeUpdates, eventId);
         }
 
-        console.log(`✅ Saved ${finalOrders.length} transformed Subscription orders`);
-        console.log(`✅ Successfully pushed: ${successCount}`);
-        console.log(`❌ Failed to push: ${failCount}`);
-        console.log(`📊 Total attempted: ${successCount + failCount}`);
+        // for (const order of attendeeUpdates) {
+        //   await updateVCards(order, eventId);
+        //   // await new Promise(resolve => setTimeout(resolve, 300)); // rate limiting
+        // }
+
+        // console.log(`✅ Saved ${finalOrders.length} transformed Subscription orders`);
+        // console.log(`✅ Successfully pushed: ${successCount}`);
+        // console.log(`❌ Failed to push: ${failCount}`);
+        // console.log(`📊 Total attempted: ${successCount + failCount}`);
       } catch (error) {
         console.error("❌ Error:", error.message);
-        fs.writeFileSync(
-          "subscriptionx_orders_error.json",
-          JSON.stringify({ error: error.message }, null, 2)
-        );
+        // fs.writeFileSync(
+        //   "subscriptionx_orders_error.json",
+        //   JSON.stringify({ error: error.message }, null, 2)
+        // );
       }
     }
     //---------------------------
@@ -537,4 +504,4 @@ export const fetchSpringFestivalOrders = async () => {
   return [];
 };
 
-fetchSpringFestivalOrders()
+fetchOrders()

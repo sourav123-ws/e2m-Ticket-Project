@@ -12,14 +12,14 @@ const TARGET_EVENT = "Amazon Sellers Summit";
 const REGISTRATION_API_URL = "https://us-central1-e2monair.cloudfunctions.net/e2mreg-prd-register-attendee";
 
 
-const companyWithCode = [{key:'Ecommerce Intelligence',value:'34313000'},
-    {key:'Exertis Supply Chain',value:'34314000'},
-    {key:'Smart Scout',value:'34315000'},
-    {key:'Pattern',value:'34316000'},
-    {key:'WORLDFIRST',value:'34317000'},
-    {key:'Carbon6',value:'34318000'},
-    {key:'Channel Engine',value:'34319000'},
-    {key:'Ecommtent',value:'34320000'}]
+const companyWithCode = [{ key: 'Ecommerce Intelligence', value: '34313000' },
+{ key: 'Exertis Supply Chain', value: '34314000' },
+{ key: 'Smart Scout', value: '34315000' },
+{ key: 'Pattern', value: '34316000' },
+{ key: 'WORLDFIRST', value: '34317000' },
+{ key: 'Carbon6', value: '34318000' },
+{ key: 'Channel Engine', value: '34319000' },
+{ key: 'Ecommtent', value: '34320000' }]
 
 
 const pushTransformedOrder = async (order, attempt = 1) => {
@@ -85,7 +85,7 @@ const transformAmazonOrders = (orders) => {
       Value: normalizeYesNo(question.answer || ""),
       Label: question.question,
       Type: Array.isArray(question.answer) ? "multiselect" : "text"
-    })).filter(field => 
+    })).filter(field =>
       field.Name !== "Typeoftickets" && field.Name !== "repeatemail"
     );
 
@@ -121,54 +121,54 @@ const transformAmazonOrders = (orders) => {
 
     const lowerDescription = description.toLowerCase();
 
-    let registrationType ;
+    let registrationType;
 
     if (lowerDescription.includes("brand") ||
-        lowerDescription.includes("staff") ||
-        lowerDescription.includes("retailer") ||
-        lowerDescription.includes("vendor") ||
-        lowerDescription.includes("agency")) {
+      lowerDescription.includes("staff") ||
+      lowerDescription.includes("retailer") ||
+      lowerDescription.includes("vendor") ||
+      lowerDescription.includes("agency")) {
       registrationType = {
-      "ColorCode": "#000",
-      "RegistrationType": "Attendee",
-      "RegistrationTypeId": "r2N1DHJ0QGU3HKSPZkgu"
-    }
+        "ColorCode": "#000",
+        "RegistrationType": "Attendee",
+        "RegistrationTypeId": "r2N1DHJ0QGU3HKSPZkgu"
+      }
     } else if (lowerDescription.includes("sponsor")) {
       registrationType = {
-      "ColorCode": "#000",
-      "RegistrationType": "Sponsor",
-      "RegistrationTypeId": "IKvEZ4lAwXKwQcNjIWlD"
-    }
+        "ColorCode": "#000",
+        "RegistrationType": "Sponsor",
+        "RegistrationTypeId": "IKvEZ4lAwXKwQcNjIWlD"
+      }
     } else if (lowerDescription.includes("speaker")) {
       registrationType = {
         "ColorCode": "#000",
         "RegistrationType": "Speaker",
         "RegistrationTypeId": "zwRGDlyrF35uoSu0hPJP"
-    }
+      }
     }
 
-    if(registrationType){
-       return {
-      sendMail: 0,
-      ShowInCMSAttendeeList: 1,
-      FormType: "FREE",
-      RegistrationType: registrationType,
-      DynamicFields: filteredDynamicFields,
-      DefaultFields: [],
-      PreSignupFields: [],
-      FirstName: order.buyer_details?.first_name || "",
-      LastName: order.buyer_details?.last_name || "",
-      Email: order.buyer_details?.email || "",
-      PhoneCountryCode: order.buyer_details?.phone_country_code || "",
-      Phone: order.buyer_details?.phone || "",
-      Address: order.buyer_details?.address?.address_1 || "",
-      Zip: order.buyer_details?.address?.postal_code || "",
-      qr_code: order.issued_tickets?.[0]?.barcode || "",
-      qr: order.issued_tickets?.[0]?.qr_code_url || "",
-      Company: Company,
-      Designation: Designation,
-      isComplete: true
-    };
+    if (registrationType) {
+      return {
+        sendMail: 0,
+        ShowInCMSAttendeeList: 1,
+        FormType: "FREE",
+        RegistrationType: registrationType,
+        DynamicFields: filteredDynamicFields,
+        DefaultFields: [],
+        PreSignupFields: [],
+        FirstName: order.buyer_details?.first_name || "",
+        LastName: order.buyer_details?.last_name || "",
+        Email: order.buyer_details?.email || "",
+        PhoneCountryCode: order.buyer_details?.phone_country_code || "",
+        Phone: order.buyer_details?.phone || "",
+        Address: order.buyer_details?.address?.address_1 || "",
+        Zip: order.buyer_details?.address?.postal_code || "",
+        qr_code: order.issued_tickets?.[0]?.barcode || "",
+        qr: order.issued_tickets?.[0]?.qr_code_url || "",
+        Company: Company,
+        Designation: Designation,
+        isComplete: true
+      };
     }
   });
 };
@@ -198,8 +198,8 @@ export const fetchAmazonSellerSummitOrders = async () => {
 
     const subscriptionXOrders = allOrders.filter(order => {
       const questions = order.buyer_details?.custom_questions || [];
-      return questions.some(q => 
-        q.question?.includes(QUESTION_TEXT) && 
+      return questions.some(q =>
+        q.question?.includes(QUESTION_TEXT) &&
         q.answer?.includes(TARGET_EVENT)
       );
     });
@@ -207,10 +207,10 @@ export const fetchAmazonSellerSummitOrders = async () => {
     const transformedOrders = transformAmazonOrders(subscriptionXOrders);
 
     const finalOrders = transformedOrders.map(order => {
-      if (order.RegistrationType?.RegistrationType === "Sponsor") {
+      if (order && order.RegistrationType && order.RegistrationType?.RegistrationType === "Sponsor") {
         const companyField = order.DynamicFields.find(
-          field => field.Name === "Company/Organisation" || 
-                  field.Label === "Company/Organisation"
+          field => field.Name === "Company/Organisation" ||
+            field.Label === "Company/Organisation"
         );
 
         if (companyField) {
@@ -235,9 +235,9 @@ export const fetchAmazonSellerSummitOrders = async () => {
     });
 
     // const ordersWithoutQr = finalOrders.filter(order => !order.qr_code);
-    
+
     // const emailsWithoutQr = ordersWithoutQr.map(order => order.Email);
-    
+
     // if (emailsWithoutQr.length > 0) {
     //   fs.writeFileSync(
     //     "emails_without_qr.json",
@@ -254,23 +254,23 @@ export const fetchAmazonSellerSummitOrders = async () => {
     let successCount = 0;
     let failCount = 0;
 
-     for (const order of finalOrders) {
-      if(order){
-          console.log(`📦 Checking: ${order.FirstName} ${order.LastName} | ${order.Email} | QR: ${order.qr_code}`);
-        
-          const stored = await storeEmailInSupabase('amazon_seller_summit', order.Email);
-        
-          if (!stored) {
-            console.log(`⏩ Skipping push for duplicate email: ${order.Email}`);
-            continue; // don't push if duplicate
-          }
-        
-          console.log(`📤 Pushing: ${order.FirstName} ${order.LastName} | ${order.Email}`);
-          await pushTransformedOrder(order, 1);
-        
-          await new Promise(resolve => setTimeout(resolve, 300)); // rate limiting
+    for (const order of finalOrders) {
+      if (order) {
+        console.log(`📦 Checking: ${order.FirstName} ${order.LastName} | ${order.Email} | QR: ${order.qr_code}`);
+
+        const stored = await storeEmailInSupabase('amazon_seller_summit', order.Email);
+
+        if (!stored) {
+          console.log(`⏩ Skipping push for duplicate email: ${order.Email}`);
+          continue; // don't push if duplicate
         }
+
+        console.log(`📤 Pushing: ${order.FirstName} ${order.LastName} | ${order.Email}`);
+        await pushTransformedOrder(order, 1);
+
+        await new Promise(resolve => setTimeout(resolve, 300)); // rate limiting
       }
+    }
 
     console.log(`✅ Successfully pushed: ${successCount}`);
     console.log(`❌ Failed to push: ${failCount}`);

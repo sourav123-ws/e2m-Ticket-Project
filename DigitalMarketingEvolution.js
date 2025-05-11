@@ -12,20 +12,20 @@ const TARGET_EVENT = "Digital Marketing Evolution";
 const REGISTRATION_API_URL = "https://us-central1-e2monair.cloudfunctions.net/e2mreg-prd-register-attendee";
 
 
-const companyWithCode = [{key:'Anicca Digital',value:'34321000'},
-    {key:'Viamo',value:'34322000'},
-    {key:'Amplience',value:'34323000'},
-    {key:'Post Nord',value:'34324000'},
-    {key:'Smarter Ecommerce',value:'34325000'},
-    {key:'Commerce Media Tech',value:'34326000'},
-    {key:'SPIDERX',value:'34327000'},
-    {key:'Revlifler',value:'34328000'},
-    {key:'Optimizely',value:'34329000'},
-    {key:'Checkoutchamp',value:'34330000'},
-    {key:'Azoma',value:'34678000'},
-    {key:'Epsilon',value:'34679000'},
-    {key:'RetailX',value:'34680000'},
-    {key:'FUTR',value:'34681000'}]
+const companyWithCode = [{ key: 'Anicca Digital', value: '34321000' },
+{ key: 'Viamo', value: '34322000' },
+{ key: 'Amplience', value: '34323000' },
+{ key: 'Post Nord', value: '34324000' },
+{ key: 'Smarter Ecommerce', value: '34325000' },
+{ key: 'Commerce Media Tech', value: '34326000' },
+{ key: 'SPIDERX', value: '34327000' },
+{ key: 'Revlifler', value: '34328000' },
+{ key: 'Optimizely', value: '34329000' },
+{ key: 'Checkoutchamp', value: '34330000' },
+{ key: 'Azoma', value: '34678000' },
+{ key: 'Epsilon', value: '34679000' },
+{ key: 'RetailX', value: '34680000' },
+{ key: 'FUTR', value: '34681000' }]
 
 
 const pushTransformedOrder = async (order, attempt = 1) => {
@@ -91,7 +91,7 @@ const transformDigitalMarkettingEvolutionOrders = (orders) => {
       Value: normalizeYesNo(question.answer || ""),
       Label: question.question,
       Type: Array.isArray(question.answer) ? "multiselect" : "text"
-    })).filter(field => 
+    })).filter(field =>
       field.Name !== "Typeoftickets" && field.Name !== "repeatemail"
     );
 
@@ -127,54 +127,54 @@ const transformDigitalMarkettingEvolutionOrders = (orders) => {
 
     const lowerDescription = description.toLowerCase();
 
-    let registrationType ;
+    let registrationType;
 
     if (lowerDescription.includes("brand") ||
-        lowerDescription.includes("staff") ||
-        lowerDescription.includes("retailer") ||
-        lowerDescription.includes("vendor") ||
-        lowerDescription.includes("agency")) {
+      lowerDescription.includes("staff") ||
+      lowerDescription.includes("retailer") ||
+      lowerDescription.includes("vendor") ||
+      lowerDescription.includes("agency")) {
       registrationType = {
-      "ColorCode": "#000",
-      "RegistrationType": "Attendee",
-      "RegistrationTypeId": "O3xV8xvdYNk5heJHSiyd"
-    }
+        "ColorCode": "#000",
+        "RegistrationType": "Attendee",
+        "RegistrationTypeId": "O3xV8xvdYNk5heJHSiyd"
+      }
     } else if (lowerDescription.includes("sponsor")) {
       registrationType = {
-      "ColorCode": "#000",
-      "RegistrationType": "Sponsor",
-      "RegistrationTypeId": "kCxcYVaSrfyz4uz0KPr3"
-    }
+        "ColorCode": "#000",
+        "RegistrationType": "Sponsor",
+        "RegistrationTypeId": "kCxcYVaSrfyz4uz0KPr3"
+      }
     } else if (lowerDescription.includes("speaker")) {
       registrationType = {
-      "ColorCode": "#000",
-      "RegistrationType": "Speaker",
-      "RegistrationTypeId": "kTOVxMbVwpDji8gWCwbN"
-    }
+        "ColorCode": "#000",
+        "RegistrationType": "Speaker",
+        "RegistrationTypeId": "kTOVxMbVwpDji8gWCwbN"
+      }
     }
 
-    if(registrationType){
+    if (registrationType) {
       return {
-      sendMail: 0,
-      ShowInCMSAttendeeList: 1,
-      FormType: "FREE",
-      RegistrationType: registrationType,
-      DynamicFields: filteredDynamicFields,
-      DefaultFields: [],
-      PreSignupFields: [],
-      FirstName: order.buyer_details?.first_name || "",
-      LastName: order.buyer_details?.last_name || "",
-      Email: order.buyer_details?.email || "",
-      PhoneCountryCode: order.buyer_details?.phone_country_code || "",
-      Phone: order.buyer_details?.phone || "",
-      Address: order.buyer_details?.address?.address_1 || "",
-      Zip: order.buyer_details?.address?.postal_code || "",
-      qr_code: order.issued_tickets?.[0]?.barcode || "",
-      qr: order.issued_tickets?.[0]?.qr_code_url || "",
-      Company: Company,
-      Designation: Designation,
-      isComplete: true
-    };
+        sendMail: 0,
+        ShowInCMSAttendeeList: 1,
+        FormType: "FREE",
+        RegistrationType: registrationType,
+        DynamicFields: filteredDynamicFields,
+        DefaultFields: [],
+        PreSignupFields: [],
+        FirstName: order.buyer_details?.first_name || "",
+        LastName: order.buyer_details?.last_name || "",
+        Email: order.buyer_details?.email || "",
+        PhoneCountryCode: order.buyer_details?.phone_country_code || "",
+        Phone: order.buyer_details?.phone || "",
+        Address: order.buyer_details?.address?.address_1 || "",
+        Zip: order.buyer_details?.address?.postal_code || "",
+        qr_code: order.issued_tickets?.[0]?.barcode || "",
+        qr: order.issued_tickets?.[0]?.qr_code_url || "",
+        Company: Company,
+        Designation: Designation,
+        isComplete: true
+      };
     }
   });
 };
@@ -205,8 +205,8 @@ export const fetchDigitalMarketingEvolutionXOrders = async () => {
 
     const subscriptionXOrders = allOrders.filter(order => {
       const questions = order.buyer_details?.custom_questions || [];
-      return questions.some(q => 
-        q.question?.includes(QUESTION_TEXT) && 
+      return questions.some(q =>
+        q.question?.includes(QUESTION_TEXT) &&
         q.answer?.includes(TARGET_EVENT)
       );
     });
@@ -214,10 +214,10 @@ export const fetchDigitalMarketingEvolutionXOrders = async () => {
     const transformedOrders = transformDigitalMarkettingEvolutionOrders(subscriptionXOrders);
 
     const finalOrders = transformedOrders.map(order => {
-      if (order.RegistrationType?.RegistrationType === "Sponsor") {
+      if (order && order.RegistrationType && order.RegistrationType?.RegistrationType === "Sponsor") {
         const companyField = order.DynamicFields.find(
-          field => field.Name === "Company/Organisation" || 
-                  field.Label === "Company/Organisation"
+          field => field.Name === "Company/Organisation" ||
+            field.Label === "Company/Organisation"
         );
 
         if (companyField) {
@@ -242,39 +242,39 @@ export const fetchDigitalMarketingEvolutionXOrders = async () => {
     });
 
     const ordersWithoutQr = finalOrders.filter(order => !order.qr_code);
-        
-        const emailsWithoutQr = ordersWithoutQr.map(order => order.Email);
-        
-        if (emailsWithoutQr.length > 0) {
-          fs.writeFileSync(
-            "emails_without_qr.json",
-            JSON.stringify({
-              count: emailsWithoutQr.length,
-              emails: emailsWithoutQr
-            }, null, 2)
-          );
-          console.log(`📝 Saved ${emailsWithoutQr.length} emails without QR codes to emails_without_qr.json`);
-        } else {
-          console.log(`✅ All orders have QR codes`);
-        }
+
+    const emailsWithoutQr = ordersWithoutQr.map(order => order.Email);
+
+    if (emailsWithoutQr.length > 0) {
+      fs.writeFileSync(
+        "emails_without_qr.json",
+        JSON.stringify({
+          count: emailsWithoutQr.length,
+          emails: emailsWithoutQr
+        }, null, 2)
+      );
+      console.log(`📝 Saved ${emailsWithoutQr.length} emails without QR codes to emails_without_qr.json`);
+    } else {
+      console.log(`✅ All orders have QR codes`);
+    }
 
     let successCount = 0;
     let failCount = 0;
 
     for (const order of finalOrders) {
-      if(order){
+      if (order) {
         console.log(`📦 Checking: ${order.FirstName} ${order.LastName} | ${order.Email} | QR: ${order.qr_code}`);
-            
+
         const stored = await storeEmailInSupabase('digital_marketting_evolution', order.Email);
-            
+
         if (!stored) {
           console.log(`⏩ Skipping push for duplicate email: ${order.Email}`);
           continue; // don't push if duplicate
         }
-            
+
         console.log(`📤 Pushing: ${order.FirstName} ${order.LastName} | ${order.Email}`);
         await pushTransformedOrder(order, 1);
-            
+
         await new Promise(resolve => setTimeout(resolve, 300)); // rate limiting
       }
     }

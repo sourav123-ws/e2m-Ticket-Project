@@ -12,22 +12,22 @@ const TARGET_EVENT = "SubscriptionX";
 const REGISTRATION_API_URL = "https://us-central1-e2monair.cloudfunctions.net/e2mreg-prd-register-attendee";
 
 
-const companyWithCode = [{key:'Chargebee',value:'34337000'},
-  {key:'Advantage',value:'34338000'},
-  {key:'Bento Tech',value:'34339000'},
-  {key:'Ordergroove',value:'34340000'},
-  {key:'Recharge',value:'34341000'},
-  {key:'Butter payments',value:'34342000'},
-  {key:'Orchestra Solutions',value:'34344000'},
-  {key:'Adyen',value:'34345000'},
-  {key:'Sovendus',value:'34346000'},
-  {key:'Recurly',value:'34347000'},
-  {key:'Webloyalty',value:'34348000'},
-  {key:'BLUEFORT',value:'34349000'},
-  {key:'ATLAS',value:'34350000'},
-  {key:'WORLD PAY',value:'34351000'},
-  {key:'Churned',value:'34352000'},
-  {key:'RetalX Intellegence',value:'34353000'}]
+const companyWithCode = [{ key: 'Chargebee', value: '34337000' },
+{ key: 'Advantage', value: '34338000' },
+{ key: 'Bento Tech', value: '34339000' },
+{ key: 'Ordergroove', value: '34340000' },
+{ key: 'Recharge', value: '34341000' },
+{ key: 'Butter payments', value: '34342000' },
+{ key: 'Orchestra Solutions', value: '34344000' },
+{ key: 'Adyen', value: '34345000' },
+{ key: 'Sovendus', value: '34346000' },
+{ key: 'Recurly', value: '34347000' },
+{ key: 'Webloyalty', value: '34348000' },
+{ key: 'BLUEFORT', value: '34349000' },
+{ key: 'ATLAS', value: '34350000' },
+{ key: 'WORLD PAY', value: '34351000' },
+{ key: 'Churned', value: '34352000' },
+{ key: 'RetalX Intellegence', value: '34353000' }]
 
 
 const pushTransformedOrder = async (order, attempt = 1) => {
@@ -93,7 +93,7 @@ const transformASubscriptionXOrders = (orders) => {
       Value: normalizeYesNo(question.answer || ""),
       Label: question.question,
       Type: Array.isArray(question.answer) ? "multiselect" : "text"
-    })).filter(field => 
+    })).filter(field =>
       field.Name !== "Typeoftickets" && field.Name !== "repeatemail"
     );
 
@@ -129,54 +129,54 @@ const transformASubscriptionXOrders = (orders) => {
 
     const lowerDescription = description.toLowerCase();
 
-    let registrationType ;
+    let registrationType;
 
     if (lowerDescription.includes("brand") ||
-        lowerDescription.includes("staff") ||
-        lowerDescription.includes("retailer") ||
-        lowerDescription.includes("vendor") ||
-        lowerDescription.includes("agency")) {
+      lowerDescription.includes("staff") ||
+      lowerDescription.includes("retailer") ||
+      lowerDescription.includes("vendor") ||
+      lowerDescription.includes("agency")) {
       registrationType = {
-      "ColorCode": "#000",
-      "RegistrationType": "Attendee",
-      "RegistrationTypeId": "uUT8CeS4FPNMdWAfHMK0"
-    }
+        "ColorCode": "#000",
+        "RegistrationType": "Attendee",
+        "RegistrationTypeId": "uUT8CeS4FPNMdWAfHMK0"
+      }
     } else if (lowerDescription.includes("sponsor")) {
       registrationType = {
-      "ColorCode": "#000",
-      "RegistrationType": "Sponsor",
-      "RegistrationTypeId": "AgZUfUjgdJSeiWxkjaar"
-    }
+        "ColorCode": "#000",
+        "RegistrationType": "Sponsor",
+        "RegistrationTypeId": "AgZUfUjgdJSeiWxkjaar"
+      }
     } else if (lowerDescription.includes("speaker")) {
       registrationType = {
-      "ColorCode": "#000",
-      "RegistrationType": "Speaker",
-      "RegistrationTypeId": "tT5mKR9CsBoREbypYOF9"
-    }
+        "ColorCode": "#000",
+        "RegistrationType": "Speaker",
+        "RegistrationTypeId": "tT5mKR9CsBoREbypYOF9"
+      }
     }
 
-    if(registrationType){
+    if (registrationType) {
       return {
-      sendMail: 0,
-      ShowInCMSAttendeeList: 1,
-      FormType: "FREE",
-      RegistrationType: registrationType,
-      DynamicFields: filteredDynamicFields,
-      DefaultFields: [],
-      PreSignupFields: [],
-      FirstName: order.buyer_details?.first_name || "",
-      LastName: order.buyer_details?.last_name || "",
-      Email: order.buyer_details?.email || "",
-      PhoneCountryCode: order.buyer_details?.phone_country_code || "",
-      Phone: order.buyer_details?.phone || "",
-      Address: order.buyer_details?.address?.address_1 || "",
-      Zip: order.buyer_details?.address?.postal_code || "",
-      qr_code: order.issued_tickets?.[0]?.barcode || "",
-      qr: order.issued_tickets?.[0]?.qr_code_url || "",
-      Company: Company,
-      Designation: Designation,
-      isComplete: true
-    };
+        sendMail: 0,
+        ShowInCMSAttendeeList: 1,
+        FormType: "FREE",
+        RegistrationType: registrationType,
+        DynamicFields: filteredDynamicFields,
+        DefaultFields: [],
+        PreSignupFields: [],
+        FirstName: order.buyer_details?.first_name || "",
+        LastName: order.buyer_details?.last_name || "",
+        Email: order.buyer_details?.email || "",
+        PhoneCountryCode: order.buyer_details?.phone_country_code || "",
+        Phone: order.buyer_details?.phone || "",
+        Address: order.buyer_details?.address?.address_1 || "",
+        Zip: order.buyer_details?.address?.postal_code || "",
+        qr_code: order.issued_tickets?.[0]?.barcode || "",
+        qr: order.issued_tickets?.[0]?.qr_code_url || "",
+        Company: Company,
+        Designation: Designation,
+        isComplete: true
+      };
     }
   });
 };
@@ -207,8 +207,8 @@ export const fetchSubscriptionXOrders = async () => {
 
     const subscriptionXOrders = allOrders.filter(order => {
       const questions = order.buyer_details?.custom_questions || [];
-      return questions.some(q => 
-        q.question?.includes(QUESTION_TEXT) && 
+      return questions.some(q =>
+        q.question?.includes(QUESTION_TEXT) &&
         q.answer?.includes(TARGET_EVENT)
       );
     });
@@ -216,10 +216,10 @@ export const fetchSubscriptionXOrders = async () => {
     const transformedOrders = transformASubscriptionXOrders(subscriptionXOrders);
 
     const finalOrders = transformedOrders.map(order => {
-      if (order.RegistrationType?.RegistrationType === "Sponsor") {
+      if (order && order.RegistrationType && order.RegistrationType?.RegistrationType === "Sponsor") {
         const companyField = order.DynamicFields.find(
-          field => field.Name === "Company/Organisation" || 
-                  field.Label === "Company/Organisation"
+          field => field.Name === "Company/Organisation" ||
+            field.Label === "Company/Organisation"
         );
 
         if (companyField) {
@@ -244,9 +244,9 @@ export const fetchSubscriptionXOrders = async () => {
     });
 
     //  const ordersWithoutQr = finalOrders.filter(order => !order.qr_code);
-        
+
     //     const emailsWithoutQr = ordersWithoutQr.map(order => order.Email);
-        
+
     //     if (emailsWithoutQr.length > 0) {
     //       fs.writeFileSync(
     //         "emails_without_qr.json",
@@ -264,19 +264,19 @@ export const fetchSubscriptionXOrders = async () => {
     let failCount = 0;
 
     for (const order of finalOrders) {
-      if(order){
+      if (order) {
         console.log(`📦 Checking: ${order.FirstName} ${order.LastName} | ${order.Email} | QR: ${order.qr_code}`);
-                
+
         const stored = await storeEmailInSupabase('subscription_x', order.Email);
-                
+
         if (!stored) {
           console.log(`⏩ Skipping push for duplicate email: ${order.Email}`);
           continue; // don't push if duplicate
         }
-                
+
         console.log(`📤 Pushing: ${order.FirstName} ${order.LastName} | ${order.Email}`);
         await pushTransformedOrder(order, 1);
-                
+
         await new Promise(resolve => setTimeout(resolve, 300)); // rate limiting
       }
     }

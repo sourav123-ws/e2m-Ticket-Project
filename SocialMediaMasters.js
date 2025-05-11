@@ -118,7 +118,7 @@ const transformSocialMediaOrders = (orders) => {
 
     const lowerDescription = description.toLowerCase();
 
-    let registrationType ;
+    let registrationType;
 
     if (lowerDescription.includes("brand") ||
       lowerDescription.includes("staff") ||
@@ -144,28 +144,28 @@ const transformSocialMediaOrders = (orders) => {
       }
     }
 
-    if(registrationType){
-       return {
-      sendMail: 0,
-      ShowInCMSAttendeeList: 1,
-      FormType: "FREE",
-      RegistrationType: registrationType,
-      DynamicFields: filteredDynamicFields,
-      DefaultFields: [],
-      PreSignupFields: [],
-      FirstName: order.buyer_details?.first_name || "",
-      LastName: order.buyer_details?.last_name || "",
-      Email: order.buyer_details?.email || "",
-      PhoneCountryCode: order.buyer_details?.phone_country_code || "",
-      Phone: order.buyer_details?.phone || "",
-      Address: order.buyer_details?.address?.address_1 || "",
-      Zip: order.buyer_details?.address?.postal_code || "",
-      qr_code: order.issued_tickets?.[0]?.barcode || "",
-      qr: order.issued_tickets?.[0]?.qr_code_url || "",
-      Company: Company,
-      Designation: Designation,
-      isComplete: true
-    };
+    if (registrationType) {
+      return {
+        sendMail: 0,
+        ShowInCMSAttendeeList: 1,
+        FormType: "FREE",
+        RegistrationType: registrationType,
+        DynamicFields: filteredDynamicFields,
+        DefaultFields: [],
+        PreSignupFields: [],
+        FirstName: order.buyer_details?.first_name || "",
+        LastName: order.buyer_details?.last_name || "",
+        Email: order.buyer_details?.email || "",
+        PhoneCountryCode: order.buyer_details?.phone_country_code || "",
+        Phone: order.buyer_details?.phone || "",
+        Address: order.buyer_details?.address?.address_1 || "",
+        Zip: order.buyer_details?.address?.postal_code || "",
+        qr_code: order.issued_tickets?.[0]?.barcode || "",
+        qr: order.issued_tickets?.[0]?.qr_code_url || "",
+        Company: Company,
+        Designation: Designation,
+        isComplete: true
+      };
     }
   });
 };
@@ -207,7 +207,7 @@ export const fetchSocialMediaMastersOrders = async () => {
     const transformedOrders = transformSocialMediaOrders(subscriptionXOrders);
 
     const finalOrders = transformedOrders.map(order => {
-      if (order.RegistrationType?.RegistrationType === "Sponsor") {
+      if (order && order.RegistrationType && order.RegistrationType?.RegistrationType === "Sponsor") {
         const companyField = order.DynamicFields.find(
           field => field.Name === "Company/Organisation" ||
             field.Label === "Company/Organisation"
@@ -255,7 +255,7 @@ export const fetchSocialMediaMastersOrders = async () => {
     let failCount = 0;
 
     for (const order of finalOrders) {
-      if(order){
+      if (order) {
         console.log(`📦 Checking: ${order.FirstName} ${order.LastName} | ${order.Email} | QR: ${order.qr_code}`);
 
         const stored = await storeEmailInSupabase('social_media_masters', order.Email);

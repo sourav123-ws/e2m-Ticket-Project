@@ -4,77 +4,77 @@ import dotenv from "dotenv";
 import { storeEmailInSupabase } from "./supabase.js";
 dotenv.config();
 
-const API_URL = process.env.API_URL ;
+const API_URL = process.env.API_URL;
 const AUTH_TOKEN = process.env.AUTH_TOKEN;
 const RETAILX_EVENT_ID = "ev_4519856";
 const REGISTRATION_API_URL = "https://us-central1-e2monair.cloudfunctions.net/e2mreg-prd-register-attendee";
 
-const companyWithCode = [{key:'Criteo',value:'34050000'},
-  {key:'dunnhumby',value:'34051000'},
-  {key:'monday.com',value:'34052000'},
-  {key:'Stratacache',value:'34053000'},
-  {key:'Koddi',value:'34054000'},
-  {key:'Epsilon',value:'34055000'},
-  {key:'Mirakl',value:'34056000'},
-  {key:'StackAdapt',value:'34057000'},
-  {key:'myAthena',value:'34058000'},
-  {key:'Zeotap',value:'34059000'},
-  {key:'Kenshoo Skai',value:'34060000'},
-  {key:'Sovendus',value:'34061000'},
-  {key:'Dentsu',value:'34062000'},
-  {key:'Commerce Media Tech',value:'34063000'},
-  {key:'Zitcha',value:'34064000'},
-  {key:'SAVI',value:'34065000'},
-  {key:'Mediarithmics',value:'34066000'},
-  {key:'VTEX',value:'34067000'},
-  {key:'Imagino',value:'34068000'},
-  {key:'Tealium',value:'34069000'},
-  {key:'ADvendio',value:'34070000'},
-  {key:'Web Spiders Group',value:'34071000'},
-  {key:'Kevel',value:'34072000'},
-  {key:'Broadsign',value:'34073000'},
-  {key:'Matcha',value:'34074000'},
-  {key:'Flow Living',value:'34075000'},
-  {key:'Osmos',value:'34076000'},
-  {key:'SMG',value:'34077000'},
-  {key:'Webloyalty',value:'34078000'},
-  {key:'RetailX',value:'34079000'},
-  {key:'Women in Retail Media',value:'34080000'},
-  {key:'DPAA',value:'34081000'},
-  {key:'FMCG Guys',value:'34082000'},
-  {key:'IAB Europe',value:'34083000'}]
+const companyWithCode = [{ key: 'Criteo', value: '34050000' },
+{ key: 'dunnhumby', value: '34051000' },
+{ key: 'monday.com', value: '34052000' },
+{ key: 'Stratacache', value: '34053000' },
+{ key: 'Koddi', value: '34054000' },
+{ key: 'Epsilon', value: '34055000' },
+{ key: 'Mirakl', value: '34056000' },
+{ key: 'StackAdapt', value: '34057000' },
+{ key: 'myAthena', value: '34058000' },
+{ key: 'Zeotap', value: '34059000' },
+{ key: 'Kenshoo Skai', value: '34060000' },
+{ key: 'Sovendus', value: '34061000' },
+{ key: 'Dentsu', value: '34062000' },
+{ key: 'Commerce Media Tech', value: '34063000' },
+{ key: 'Zitcha', value: '34064000' },
+{ key: 'SAVI', value: '34065000' },
+{ key: 'Mediarithmics', value: '34066000' },
+{ key: 'VTEX', value: '34067000' },
+{ key: 'Imagino', value: '34068000' },
+{ key: 'Tealium', value: '34069000' },
+{ key: 'ADvendio', value: '34070000' },
+{ key: 'Web Spiders Group', value: '34071000' },
+{ key: 'Kevel', value: '34072000' },
+{ key: 'Broadsign', value: '34073000' },
+{ key: 'Matcha', value: '34074000' },
+{ key: 'Flow Living', value: '34075000' },
+{ key: 'Osmos', value: '34076000' },
+{ key: 'SMG', value: '34077000' },
+{ key: 'Webloyalty', value: '34078000' },
+{ key: 'RetailX', value: '34079000' },
+{ key: 'Women in Retail Media', value: '34080000' },
+{ key: 'DPAA', value: '34081000' },
+{ key: 'FMCG Guys', value: '34082000' },
+{ key: 'IAB Europe', value: '34083000' }]
 
-  const pushTransformedOrder = async (order, attempt = 1) => {
-    const payload = {
-      postToCRM: false,
-      key: {
-        instanceId: "OA_UAT",
-        clientId: "C1742212403583",
-        eventId: "E1742214690559",
-        bundleId: "u7KpSiKT0MtZ2z4JccWS",
-      },
-      data: [order],
-    };
-  
-  
-    try {
-      const response = await axios.post(REGISTRATION_API_URL, payload, {
-        headers: { "Content-Type": "application/json" },
-      });
-  
-      if (response.data?.success) {
-        console.log(`✅ [Try ${attempt}] Pushed: ${order.Email}`);
-        return true;
-      } else {
-        console.warn(`⚠️ [Try ${attempt}] API responded with failure:`, response.data);
-        return false;
-      }
-    } catch (error) {
-      console.error(`❌ [Try ${attempt}] Exception while pushing:`, error.response?.data || error.message);
+const pushTransformedOrder = async (order, attempt = 1) => {
+  const payload = {
+    postToCRM: false,
+    key: {
+      instanceId: "OA_UAT",
+      clientId: "C1742212403583",
+      eventId: "E1742214690559",
+      bundleId: "u7KpSiKT0MtZ2z4JccWS",
+    },
+    data: [order],
+  };
+
+
+  try {
+    const response = await axios.post(REGISTRATION_API_URL, payload, {
+      headers: { "Content-Type": "application/json" },
+    });
+
+    if (response.data?.success) {
+      console.log(`✅ [Try ${attempt}] Pushed: ${order.Email}`);
+      return true;
+    } else {
+      console.warn(`⚠️ [Try ${attempt}] API responded with failure:`, response.data);
       return false;
     }
-  };
-  
+  } catch (error) {
+    console.error(`❌ [Try ${attempt}] Exception while pushing:`, error.response?.data || error.message);
+    return false;
+  }
+};
+
 // const fetchSpringFestivalOrders = async () => {
 //   let allOrders = [];
 //   let nextCursor = null;
@@ -174,7 +174,7 @@ const companyWithCode = [{key:'Criteo',value:'34050000'},
 //       const validOrders = response.data.data.filter(order => {
 //         return order && order.status && order.status !== "cancelled";
 //       });
-      
+
 //       allOrders.push(...validOrders);
 
 //       nextCursor = response.data.data[response.data.data.length - 1].id;
@@ -190,14 +190,14 @@ const companyWithCode = [{key:'Criteo',value:'34050000'},
 //         const companyField = order.DynamicFields.find(
 //           field => field.Name === "Company/Organisation" || field.Label === "Company/Organisation"
 //         );
-        
+
 //         if (companyField) {
 //           const companyName = companyField.Value.toLowerCase();
 //           const companyMatch = companyWithCode.find(company => 
 //             companyName.includes(company.key.toLowerCase()) || 
 //             company.key.toLowerCase().includes(companyName)
 //           );
-          
+
 //           if (companyMatch) {
 //             return {
 //               ...order,
@@ -362,7 +362,7 @@ const transformRetailXOrders = (orders) => {
       Value: normalizeYesNo(question.answer || ""),
       Label: question.question,
       Type: Array.isArray(question.answer) ? "multiselect" : "text"
-    })).filter(field => 
+    })).filter(field =>
       field.Name !== "Typeoftickets" && field.Name !== "repeatemail"
     );
 
@@ -398,13 +398,13 @@ const transformRetailXOrders = (orders) => {
 
     const lowerDescription = description.toLowerCase();
 
-    let registrationType ;
+    let registrationType;
 
     if (lowerDescription.includes("brand") ||
-        lowerDescription.includes("staff") ||
-        lowerDescription.includes("retailer") ||
-        lowerDescription.includes("vendor") ||
-        lowerDescription.includes("agency")) {
+      lowerDescription.includes("staff") ||
+      lowerDescription.includes("retailer") ||
+      lowerDescription.includes("vendor") ||
+      lowerDescription.includes("agency")) {
       registrationType = {
         ColorCode: "#000",
         RegistrationType: "Attendee",
@@ -424,33 +424,32 @@ const transformRetailXOrders = (orders) => {
       };
     }
 
+    if (registrationType) {
+      return {
+        sendMail: 0,
+        ShowInCMSAttendeeList: 1,
+        FormType: "FREE",
+        RegistrationType: registrationType,
+        DynamicFields: filteredDynamicFields,
+        DefaultFields: [],
+        PreSignupFields: [],
+        FirstName: order.buyer_details?.first_name || "",
+        LastName: order.buyer_details?.last_name || "",
+        Email: order.buyer_details?.email || "",
+        PhoneCountryCode: order.buyer_details?.phone_country_code || "",
+        Phone: order.buyer_details?.phone || "",
+        Address: order.buyer_details?.address?.address_1 || "",
+        Zip: order.buyer_details?.address?.postal_code || "",
+        qr_code: order.issued_tickets[0].barcode,
+        qr: order.issued_tickets[0].qr_code_url,
+        Company: Company,
+        Designation: Designation,
+        isComplete: true
+      };
 
-    const transformedOrder = {
-      sendMail: 0,
-      ShowInCMSAttendeeList: 1,
-      FormType: "FREE",
-      RegistrationType: registrationType,
-      DynamicFields: filteredDynamicFields,
-      DefaultFields: [],
-      PreSignupFields: [],
-      FirstName: order.buyer_details?.first_name || "",
-      LastName: order.buyer_details?.last_name || "",
-      Email: order.buyer_details?.email || "",
-      PhoneCountryCode: order.buyer_details?.phone_country_code || "",
-      Phone: order.buyer_details?.phone || "",
-      Address: order.buyer_details?.address?.address_1 || "",
-      Zip: order.buyer_details?.address?.postal_code || "",
-      qr_code : order.issued_tickets[0].barcode,
-      qr : order.issued_tickets[0].qr_code_url,
-      Company: Company,
-      Designation: Designation,
-      isComplete: true
-    };
-
-    if(registrationType){
-      return transformedOrder;
     }
   });
+
 };
 
 
@@ -486,7 +485,10 @@ export const fetchRetailXOrders = async (req, res) => {
     const transformedOrders = transformRetailXOrders(allOrders);
 
     const finalOrders = transformedOrders.map(order => {
-      if (order.RegistrationType?.RegistrationType === "Sponsor") {
+      if (order && order.Email == "nichitalobo@gmail.com") {
+        console.log("order", order)
+      }
+      if (order && order.RegistrationType && order.RegistrationType?.RegistrationType === "Sponsor") {
         const companyField = order.DynamicFields.find(
           field => field.Name === "Company/Organisation" || field.Label === "Company/Organisation"
         );
@@ -513,9 +515,9 @@ export const fetchRetailXOrders = async (req, res) => {
     });
 
     //  const ordersWithoutQr = finalOrders.filter(order => !order.qr_code);
-        
+
     //     const emailsWithoutQr = ordersWithoutQr.map(order => order.Email);
-        
+
     //     if (emailsWithoutQr.length > 0) {
     //       fs.writeFileSync(
     //         "emails_without_qr.json",
@@ -533,20 +535,20 @@ export const fetchRetailXOrders = async (req, res) => {
     let successCount = 0;
 
     for (const order of finalOrders) {
-      if(order){
-          console.log(`📦 Checking: ${order.FirstName} ${order.LastName} | ${order.Email} | QR: ${order.qr_code}`);
-                      
-          const stored = await storeEmailInSupabase('retail_x', order.Email);
-                      
-          if (!stored) {
-            console.log(`⏩ Skipping push for duplicate email: ${order.Email}`);
-            continue; // don't push if duplicate
-          }
-                      
-          console.log(`📤 Pushing: ${order.FirstName} ${order.LastName} | ${order.Email}`);
-          await pushTransformedOrder(order, 1);
-                      
-          await new Promise(resolve => setTimeout(resolve, 300)); // rate limiting
+      if (order) {
+        console.log(`📦 Checking: ${order.FirstName} ${order.LastName} | ${order.Email} | QR: ${order.qr_code}`);
+
+        const stored = await storeEmailInSupabase('retail_x', order.Email);
+
+        if (!stored) {
+          console.log(`⏩ Skipping push for duplicate email: ${order.Email}`);
+          continue; // don't push if duplicate
+        }
+
+        console.log(`📤 Pushing: ${order.FirstName} ${order.LastName} | ${order.Email}`);
+        await pushTransformedOrder(order, 1);
+
+        await new Promise(resolve => setTimeout(resolve, 300)); // rate limiting
       }
     }
     // fs.writeFileSync(
@@ -557,14 +559,17 @@ export const fetchRetailXOrders = async (req, res) => {
     //       }, null, 2)
     //     );
 
-   console.log(`✅ Saved ${finalOrders.length} transformed Subscription orders`);
+    console.log(`✅ Saved ${finalOrders.length} transformed Subscription orders`);
     return finalOrders;
-    
+
   } catch (error) {
-    return res.status(500).json({
-      success: false,
-      message: "Error fetching RetailX orders",
-      error: error.message
-    });
+    console.error("❌ Error fetching RetailX orders:", error);
+    // return res.status(500).json({
+    //   success: false,
+    //   message: "Error fetching RetailX orders",
+    //   error: error.message
+    // });
   }
 };
+
+fetchRetailXOrders();
