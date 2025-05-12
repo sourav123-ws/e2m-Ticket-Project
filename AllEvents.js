@@ -565,9 +565,9 @@ const pushTransformedOrder = async (order, attempt = 1, event_id) => {
     const response = await axios.post(REGISTRATION_API_URL, payload, {
       headers: { "Content-Type": "application/json" },
     });
-
+    // console.log(response.data)
     if (response.data?.status == 0) {
-      console.log(`✅ [Try ${attempt}] Pushed: ${response.data}`);
+      console.log(`✅ [Try ${attempt}] Pushed: `, response.data);
       const stored = await storeAllEmailInSupabase('all_spring_festival', order.Email, event_id, true);
       return true;
     } else {
@@ -690,7 +690,7 @@ const transformOrders = (orders, event_id) => {
   });
 };
 
-export const fetchSpringFestivalOrders = async () => {
+export const fetchSpringFestivalOrders = async (userEmail = "") => {
   let allOrders = [];
   let nextCursor = null;
 
@@ -729,9 +729,8 @@ export const fetchSpringFestivalOrders = async () => {
       const questions = order.buyer_details?.custom_questions || [];
       return questions.some(q =>
         q.question?.includes(QUESTION_TEXT)
-        // &&
         // // q.answer?.includes(TARGET_EVENT) &&
-        // order.buyer_details?.email == userEmail
+        && (!userEmail || order.buyer_details?.email == userEmail)
       );
     });
     //---------------------------
@@ -829,4 +828,10 @@ export const fetchSpringFestivalOrders = async () => {
   return [];
 };
 
-fetchSpringFestivalOrders()
+// fetchSpringFestivalOrders("bradshawfayelouise@gmail.com")
+
+
+export const fetchAllEventOrder = async (email) => {
+  fetchSpringFestivalOrders(email)
+};
+

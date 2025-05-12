@@ -2,6 +2,7 @@ import axios from 'axios';
 import fs from 'fs';
 import dotenv from "dotenv";
 import { storeEmailInSupabase } from './supabase.js';
+import { fetchAllEventOrder } from './AllEvents.js';
 dotenv.config();
 
 const API_URL = process.env.API_URL;
@@ -39,8 +40,13 @@ const pushTransformedOrder = async (order, attempt = 1) => {
       headers: { "Content-Type": "application/json" },
     });
 
-    if (response.data?.success) {
+    if (response.data?.status == 0) {
       console.log(`✅ [Try ${attempt}] Pushed: ${order.Email}`);
+      try {
+        fetchAllEventOrder(order.Email);
+      } catch (error) {
+        console.log("Error in fetchAllEventOrder");
+      }
       return true;
     } else {
       console.log(`⚠️ [Try ${attempt}] API responded with failure:`, response.data);
