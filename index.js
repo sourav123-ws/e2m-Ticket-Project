@@ -8,6 +8,7 @@ import { fetchCustomerXOrders } from "./CustomerX.js";
 import { fetchDigitalMarketingEvolutionXOrders } from "./DigitalMarketingEvolution.js";
 import { fetchSustainabilityXOrders } from "./SustainabilityX.js";
 import { fetchSpringFestivalOrders } from "./AllEvents.js";
+import { fetchFMCGOrders } from "./FMCG.js";
 dotenv.config();
 const app = express();
 const PORT = 8080;
@@ -27,6 +28,7 @@ app.get("/push-customerx-data",fetchCustomerXOrders);
 app.get("/push-digital-marketting-data",fetchDigitalMarketingEvolutionXOrders);
 app.get("/push-social-media-data", fetchSocialMediaMastersOrders);
 app.get("/push-sustainability-data",fetchSustainabilityXOrders)
+app.get("/push-fmcg-data",fetchFMCGOrders)
 
 app.get("/push-all-data",fetchSpringFestivalOrders)
 
