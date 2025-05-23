@@ -480,7 +480,7 @@ export const fetchRetailXOrders = async (req, res) => {
       if (data.length < 100) break;
     }
 
-    console.log(`🧾 Total fetched valid orders: ${allOrders.length}`);
+    // console.log(`🧾 Total fetched valid orders: ${allOrders.length}`);
 
     const transformedOrders = transformRetailXOrders(allOrders);
 
@@ -571,5 +571,3 @@ export const fetchRetailXOrders = async (req, res) => {
     // });
   }
 };
-
-fetchRetailXOrders();

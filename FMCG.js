@@ -297,8 +297,6 @@ export const fetchFMCGOrders = async () => {
     console.log(`✅ Successfully pushed: ${successCount}`);
     console.log(`❌ Failed to push: ${failCount}`);
     console.log(`📊 Total attempted: ${successCount + failCount}`);
-
-    console.log(`✅ Processed ${finalOrders.length} transformed Subscription orders`);
     return finalOrders;
 
   } catch (error) {
@@ -310,5 +308,3 @@ export const fetchFMCGOrders = async () => {
     return [];
   }
 };
-
-// fetchFMCGOrders();
