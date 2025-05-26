@@ -12,7 +12,7 @@ const __dirname = path.dirname(__filename);
 
 const API_URL = process.env.API_URL;
 const AUTH_TOKEN = process.env.AUTH_TOKEN;
-const SPRING_FESTIVAL_EVENT_ID = 'ev_4745831';
+const FMCG_EVENT_ID = 'ev_4745831';
 const REGISTRATION_API_URL = "https://us-central1-e2monair.cloudfunctions.net/e2mreg-prd-register-attendee";
 
 const companyWithCode = [{ key: 'dunnhumby', value: '36186000' },
@@ -212,7 +212,7 @@ export const fetchFMCGOrders = async () => {
 
   try {
     while (true) {
-      let url = `${API_URL}?event_id=${SPRING_FESTIVAL_EVENT_ID}`;
+      let url = `${API_URL}?event_id=${FMCG_EVENT_ID}`;
       if (nextCursor) url += `&starting_after=${nextCursor}`;
 
       const response = await axios.get(url, {
