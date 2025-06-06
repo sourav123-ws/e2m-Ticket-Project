@@ -97,7 +97,8 @@ const transformFMCGOrders = (orders) => {
       lowerDescription.includes("agency") ||
       lowerDescription.includes("marketplace") ||
       lowerDescription.includes("mediaagency") ||
-      lowerDescription.includes("consultant")) {
+      lowerDescription.includes("consultant") || 
+      lowerDescription.includes("vip")) {
       registrationType = {
         "ColorCode": "#000",
         "RegistrationType": "Attendee",
