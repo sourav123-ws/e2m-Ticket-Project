@@ -23,8 +23,9 @@ const companyWithCode = [{ key: 'dunnhumby', value: '36186000' },
 { key: 'Commerce IQ', value: '36191000' },
 { key: 'Nectar 360', value: '36192000' },
 { key: 'RetailX', value: '36193000' },
-{ key: 'FMCG Guys', value: '36194000' }];
-
+{ key: 'FMCG Guys', value: '36194000' },
+{ key : "GS1 UK" , value : "36378000"}];
+ 
 const pushTransformedOrder = async (order, attempt = 1) => {
   const payload = {
     postToCRM: false,
