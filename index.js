@@ -9,6 +9,8 @@ import { fetchDigitalMarketingEvolutionXOrders } from "./DigitalMarketingEvoluti
 import { fetchSustainabilityXOrders } from "./SustainabilityX.js";
 import { fetchSpringFestivalOrders } from "./AllEvents.js";
 import { fetchFMCGOrders } from "./FMCG.js";
+import { fetchAutumnFestival } from "./autumnFestival.js";
+import { fetchAutumnFestivalForSponsors } from "./autumn-festival-sponsor.js";
 dotenv.config();
 const app = express();
 const PORT = 8080;
@@ -16,7 +18,7 @@ const PORT = 8080;
 app.use(express.json());
 
 app.get("/", (req, res) => {
-  res.json("Hello World");
+  res.json("Hello World 2");
 });
 
 
@@ -29,6 +31,8 @@ app.get("/push-digital-marketting-data",fetchDigitalMarketingEvolutionXOrders);
 app.get("/push-social-media-data", fetchSocialMediaMastersOrders);
 app.get("/push-sustainability-data",fetchSustainabilityXOrders)
 app.get("/push-fmcg-data",fetchFMCGOrders)
+app.get("/fetch-autumn-festival-attendee",fetchAutumnFestival);
+app.get("/fetch-autumn-festival-sponsor",fetchAutumnFestivalForSponsors);
 
 app.get("/push-all-data",fetchSpringFestivalOrders)
 
