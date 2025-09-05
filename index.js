@@ -11,6 +11,11 @@ import { fetchSpringFestivalOrders } from "./AllEvents.js";
 import { fetchFMCGOrders } from "./FMCG.js";
 import { fetchAutumnFestival } from "./autumnFestival.js";
 import { fetchAutumnFestivalForSponsors } from "./autumn-festival-sponsor.js";
+import { fetchMadWorldOrdersForEv_5929701 } from "./madWorld/ev_5929701.js";
+import { fetchMadWorldOrdersForEv_6098686 } from "./madWorld/ev_6098686.js";
+import { fetchMadWorldOrdersForEv_6098679 } from "./madWorld/ev_6098679.js";
+import { fetchMadWorldOrdersForEv_6430233 } from "./madWorld/ev_6430233.js";
+import { fetchMadWorldOrdersForEv_6098674 } from "./madWorld/ev_6098674.js";
 dotenv.config();
 const app = express();
 const PORT = 8080;
@@ -18,7 +23,7 @@ const PORT = 8080;
 app.use(express.json());
 
 app.get("/", (req, res) => {
-  res.json("Hello World 2");
+  res.json("Hello World 3");
 });
 
 
@@ -34,7 +39,13 @@ app.get("/push-fmcg-data",fetchFMCGOrders)
 app.get("/fetch-autumn-festival-attendee",fetchAutumnFestival);
 app.get("/fetch-autumn-festival-sponsor",fetchAutumnFestivalForSponsors);
 
-app.get("/push-all-data",fetchSpringFestivalOrders)
+app.get("/fetch-madworld/ev_5929701",fetchMadWorldOrdersForEv_5929701);
+app.get("/fetch-madworld/ev_6098686",fetchMadWorldOrdersForEv_6098686);
+app.get("/fetch-madworld/ev_6098679",fetchMadWorldOrdersForEv_6098679);
+app.get("/fetch-madworld/ev_6430233",fetchMadWorldOrdersForEv_6430233);
+app.get("/fetch-madworld/ev_6098674",fetchMadWorldOrdersForEv_6098674);
+
+app.get("/push-all-data",fetchSpringFestivalOrders) ;
 
 
 

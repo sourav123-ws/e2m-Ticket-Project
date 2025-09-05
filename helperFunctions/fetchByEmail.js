@@ -49,4 +49,4 @@ export const fetchFMCGOrdersByEmail = async (email) => {
   }
 };
 
-fetchFMCGOrdersByEmail('thibaut@numberly.com').then(orders => console.log(JSON.stringify(orders, null, 2)));
+fetchFMCGOrdersByEmail('Laura.payne1@nectar360.co.uk').then(orders => console.log(JSON.stringify(orders, null, 2)));
