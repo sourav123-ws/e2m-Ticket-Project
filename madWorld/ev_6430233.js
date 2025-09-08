@@ -84,9 +84,9 @@ const transformMadWorldOrders = (orders) => {
     const accessRetailX = normalizeYesNo(findAnswer("I would like access to the RetailX Intelligence data platform (free trial)"));
     const podcastGuest = normalizeYesNo(findAnswer("I would you like to be considered as a guest on the event podcast recorded live at the event"));
     const linkedinProfile = findAnswer("Linkedin Profile");
-    const countryRegion = findAnswer("Company Name");
+    const countryRegion = findAnswer("Country / Region");
     const dietaryRestrictions = findAnswer("Please confirm if you have any dietary restrictions? (write NA if nothing applies)") || "N/A";
-    const Company = findAnswer("Company/Organisation");
+    const Company = findAnswer("Company Name");
     const Designation = findAnswer("Job title");
     const connectProgram = findAnswer("I agree to participation in the introductory meeting programme \"Connect\" in a networking break");
     const channelXTrack = findAnswer("If attending ChannelX, which track are you most interested to attend?");
