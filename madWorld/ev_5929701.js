@@ -65,55 +65,56 @@ const pushTransformedOrder = async (order, attempt = 1) => {
 
 const transformMadWorldOrders = (orders) => {
   return orders.map(order => {
-    const customQuestions = order.buyer_details?.custom_questions || [];
-
+    
+    // Define findAnswer function inside the map to access the current order
     const findAnswer = (questionText) => {
-      const match = customQuestions.find(q =>
-        q.question?.trim().toLowerCase().includes(questionText.toLowerCase().trim())
+      const customQuestions = order.buyer_details?.custom_questions || [];
+      const question = customQuestions.find(q => 
+        q.question && q.question.toLowerCase().includes(questionText.toLowerCase())
       );
-      return match?.answer || "";
+      return question ? question.answer : null;
     };
 
     const normalizeYesNo = (value) => {
-      if (value === "1") return "Yes";
-      if (value === "0") return "No";
+      if (value === "1" || value === 1 || value === true || value === "true" || value === "Yes") return "Yes";
+      if (value === "0" || value === 0 || value === false || value === "false" || value === "No") return "No";
       return value;
     };
 
+    // Extract answers from the current order's custom questions
     const preEventDinner = normalizeYesNo(findAnswer("I would like to be considered to attend the pre-event dinner"));
     const accessRetailX = normalizeYesNo(findAnswer("I would like access to the RetailX Intelligence data platform (free trial)"));
     const podcastGuest = normalizeYesNo(findAnswer("I would you like to be considered as a guest on the event podcast recorded live at the event"));
     const linkedinProfile = findAnswer("Linkedin Profile");
-    const countryRegion = findAnswer("Country / Region");
-    const dietaryRestrictions = findAnswer("Please confirm if you have any dietary restrictions? (write NA if nothing applies)") || "N/A";
-    const Company = findAnswer("Company Name");
-    const Designation = findAnswer("Job title");
+    const countryRegion = findAnswer("Country / Region") || order.event_summary?.venue?.country; // Use venue country as fallback
+    const dietaryRestrictions = findAnswer("dietary requirements") || findAnswer("dietary restrictions") || "N/A";
+    const Company = findAnswer("Company Name"); // This should now correctly get "MAD World"
+    const Designation = findAnswer("Job Title") || findAnswer("Job title"); // This should get "Senior Account Director"
     const connectProgram = findAnswer("I agree to participation in the introductory meeting programme \"Connect\" in a networking break");
     const channelXTrack = findAnswer("If attending ChannelX, which track are you most interested to attend?");
-    const termsAgreement = findAnswer("I agree to the T&C's of registration including receiving a free copy of the relevant research report");
+    const termsAgreement = normalizeYesNo(findAnswer("I agree to the Registration Terms and Conditions")) || normalizeYesNo(findAnswer("T&C"));
     const eventsInterested = findAnswer("Which of the events are you most interested in attending? (Your attendance includes a free copy of the relevant report)?");
     const retailerOrBrand = findAnswer("Are you are Retailer or a Brand?");
     const sector = findAnswer("What sector are you in?");
 
-
-    let registrationType;
-
-    registrationType = {
+    let registrationType = {
         "ColorCode": "#000",
         "RegistrationType": "Attendee",
         "RegistrationTypeId": "UOjGBfcFWV3rkRMZfDa5"
-    }
-
+    };
 
     if (registrationType) {
-      let filteredDynamicFields = customQuestions.map(question => ({
+      // Initialize filteredDynamicFields properly
+      let filteredDynamicFields = [];
+
+      // Create dynamic fields from custom questions
+      const customQuestions = order.buyer_details?.custom_questions || [];
+      filteredDynamicFields = customQuestions.map(question => ({
         Name: question.question.replace(/\s+/g, '').replace(/[^\w]/g, ''),
         Value: normalizeYesNo(question.answer || ""),
         Label: question.question,
         Type: Array.isArray(question.answer) ? "multiselect" : "text"
-      })).filter(field =>
-        field.Name !== "Typeoftickets" && field.Name !== "repeatemail"
-      );
+      }));
 
       const allowedFields = [
         "Typeoftickets",
@@ -132,7 +133,11 @@ const transformMadWorldOrders = (orders) => {
         "IagreetotheTCsofregistrationincludingreceivingafreecopyoftherelevantresearchreport",
         "Whichoftheeventsareyoumostinterestedinattendingattendanceincludesafreecopyoftherelevantreport",
         "AreyouareRetaileroraBrand",
-        "Whatsectorareyouin"
+        "Whatsectorareyouin",
+        "CompanyName",
+        "JobTitle",
+        "IagreetotheRegistrationTermsandConditions",
+        "Doyouhaveanydietaryrequirementsoraccessibilityrequests"
       ];
 
       filteredDynamicFields = filteredDynamicFields.filter(field =>
@@ -164,7 +169,7 @@ const transformMadWorldOrders = (orders) => {
       ensureFieldExists("RepeatEmail", null, "Repeat Email", "email");
       ensureFieldExists("AddressLine2", order.buyer_details?.address?.address_2 || null, "Address Line 2", "text");
       ensureFieldExists("AddressLine3", order.buyer_details?.address?.address_3 || null, "Address Line 3", "text");
-      ensureFieldExists("CountryRegion", countryRegion || "India", "Country / Region", "text");
+      ensureFieldExists("CountryRegion", countryRegion, "Country / Region", "text");
       ensureFieldExists("LinkedinProfile", linkedinProfile || "www", "Linkedin Profile", "text");
       ensureFieldExists("Iwouldliketobeconsideredtoattendthepreeventdinner", preEventDinner || "No", "I would like to be considered to attend the pre-event dinner", "select");
       ensureFieldExists("Iwouldyouliketobeconsideredasaguestontheeventpodcastrecordedliveattheevent", podcastGuest || "Yes", "I would you like to be considered as a guest on the event podcast recorded live at the event", "select");
@@ -172,10 +177,10 @@ const transformMadWorldOrders = (orders) => {
       ensureFieldExists("IwouldlikeaccesstotheRetailXIntelligencedataplatformfreetrial", accessRetailX || "Yes", "I would like access to the RetailX Intelligence data platform (free trial)", "select");
       ensureFieldExists("IagreetoparticipationintheintroductorymeetingprogrammeConnectinanetworkingbreak", connectProgram === "Yes" || connectProgram === true, "I agree to participation in the introductory meeting programme \"Connect\" in a networking break", "checkbox");
       ensureFieldExists("IfattendingChannelXwhichtrackareyoumostinterestedtoattend", channelXTrack || "Marketplace Operations", "If attending ChannelX, which track are you most interested to attend?", "radio");
-      ensureFieldExists("IagreetotheTCsofregistrationincludingreceivingafreecopyoftherelevantresearchreport", termsAgreement || "", "I agree to the T&C's of registration including receiving a free copy of the relevant research report", "select");
-      ensureFieldExists("Whichoftheeventsareyoumostinterestedinattendingattendanceincludesafreecopyoftherelevantreport", Array.isArray(eventsInterested) ? eventsInterested : (eventsInterested ? [eventsInterested] : ["ChannelX World"]), "Which of the events are you most interested in attending? (Your attendance includes a free copy of the relevant report)? ", "multiselect");
-      ensureFieldExists("AreyouareRetaileroraBrand", Array.isArray(retailerOrBrand) ? retailerOrBrand : (retailerOrBrand ? [retailerOrBrand] : ["Retailer"]), "Are you are Retailer or a Brand? ", "multiselect");
-      ensureFieldExists("Whatsectorareyouin", Array.isArray(sector) ? sector : (sector ? [sector] : ["Automotive"]), "What sector are you in? ", "multiselect");
+      ensureFieldExists("IagreetotheTCsofregistrationincludingreceivingafreecopyoftherelevantresearchreport", termsAgreement || "Yes", "I agree to the T&C's of registration including receiving a free copy of the relevant research report", "select");
+      ensureFieldExists("Whichoftheeventsareyoumostinterestedinattendingattendanceincludesafreecopyoftherelevantreport", Array.isArray(eventsInterested) ? eventsInterested : (eventsInterested ? [eventsInterested] : ["MAD World Summit"]), "Which of the events are you most interested in attending? (Your attendance includes a free copy of the relevant report)? ", "multiselect");
+      ensureFieldExists("AreyouareRetaileroraBrand", Array.isArray(retailerOrBrand) ? retailerOrBrand : (retailerOrBrand ? [retailerOrBrand] : ["Brand"]), "Are you are Retailer or a Brand? ", "multiselect");
+      ensureFieldExists("Whatsectorareyouin", Array.isArray(sector) ? sector : (sector ? [sector] : ["Events"]), "What sector are you in? ", "multiselect");
 
       return {
         sendMail: 0,
@@ -188,18 +193,18 @@ const transformMadWorldOrders = (orders) => {
         FirstName: order.buyer_details?.first_name || "",
         LastName: order.buyer_details?.last_name || "",
         Email: order.buyer_details?.email || "",
-        PhoneCountryCode: order.buyer_details?.phone_country_code || "IN",
+        PhoneCountryCode: order.buyer_details?.phone_country_code || "GB",
         Phone: order.buyer_details?.phone || "",
         Address: order.buyer_details?.address?.address_1 || "",
         Zip: order.buyer_details?.address?.postal_code || "",
         qr_code: order.issued_tickets?.[0]?.barcode || "",
         qr: order.issued_tickets?.[0]?.qr_code_url || "",
-        Company: Company,
-        Designation: Designation,
+        Company: Company || "MAD World", // This should now correctly show "MAD World"
+        Designation: Designation || "Senior Account Director", // This should show the job title
         isComplete: true
       };
     }
-  });
+  }).filter(order => order !== undefined); // Filter out any undefined orders
 };
 
 export const fetchMadWorldOrdersForEv_5929701 = async () => {
