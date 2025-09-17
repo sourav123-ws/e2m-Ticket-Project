@@ -12,7 +12,7 @@ const __dirname = path.dirname(__filename);
 
 const API_URL = process.env.API_URL;
 const AUTH_TOKEN = process.env.AUTH_TOKEN;
-const AUTUMN_FESTIVAL_EVENT_ID = 'ev_6337457';
+const AUTUMN_FESTIVAL_EVENT_ID = 'ev_6803153';
 const REGISTRATION_API_URL = "https://us-central1-e2monair.cloudfunctions.net/e2mreg-prd-register-attendee";
 
 const companyWithCode = [{ key: 'Addingwell', value: '36481000' },
@@ -98,7 +98,7 @@ const transformAutumnFestivalAttendee = (orders) => {
     const agreeConnect = normalizeYesNo(findAnswer("I agree to participation in the introductory meeting programme \"Connect\" in a networking break"));
     const channelXTrack = findAnswer("If attending ChannelX, which track are you most interested to attend?");
     const tcAgree = findAnswer("I agree to the T&C's of registration including receiving a free copy of the relevant research report");
-    const interestedEvents = findAnswer("Which of the events are you most interested in attending? (Your attendance includes a free copy of the relevant report)?");
+    const interestedEvents = findAnswer("Please select the event(s) you are speaking at") || "";
     const retailerOrBrand = findAnswer("Are you are Retailer or a Brand?");
     const sector = findAnswer("What sector are you in?");
     const company = findAnswer("Company/Organisation");
@@ -109,13 +109,22 @@ const transformAutumnFestivalAttendee = (orders) => {
       order.line_items?.[0]?.description ||
       "";
     const lowerDescription = description.toLowerCase();
+    
 
     let registrationType;
 
+    const ticketTailerEventId = order?.event_summary?.id || "";
+    const ticketTailerEventName = order?.event_summary?.name || "";
+    const WhichEventAreYouInterestedIn = findAnswer("Please select the event(s) you are speaking at");
+    
+
     registrationType = {
       "ColorCode": "#000",
-      "RegistrationType": "Sponsor",
-      "RegistrationTypeId": "acSKVc0UTEshdsZRNPkM"
+      "RegistrationType": "Speaker",
+      "RegistrationTypeId": "JkhZd08bJLUkm2dk3hYK" ,
+      "TicketTailerEventId" : ticketTailerEventId ,
+      "TicketTailerEventName" : ticketTailerEventName ,
+      "WhichEventAreYouInterestedIn" : WhichEventAreYouInterestedIn
     };
 
     // if (lowerDescription.includes("brand") ||
@@ -206,7 +215,7 @@ const transformAutumnFestivalAttendee = (orders) => {
       ensureFieldExists("Iagreetoparticipationintheintroductorymeetingprogramme\"Connect\"inanetworkingbreak", agreeConnect, "I agree to participation in the introductory meeting programme \"Connect\" in a networking break", "checkbox");
       ensureFieldExists("IfattendingChannelX,whichtrackareyoumostinterestedtoattend?", channelXTrack, "If attending ChannelX, which track are you most interested to attend?", "radio");
       ensureFieldExists("IagreetotheT&C'sofregistrationincludingreceivingafreecopyoftherelevantresearchreport", tcAgree, "I agree to the T&C's of registration including receiving a free copy of the relevant research report", "select");
-      ensureFieldExists("Whichoftheeventsareyoumostinterestedinattending?(Yourattendanceincludesafreecopyoftherelevantreport)?", interestedEvents, "Which of the events are you most interested in attending? (Your attendance includes a free copy of the relevant report)?", "multiselect");
+      ensureFieldExists("Pleaseselecttheevent(s)youarespeakingat", interestedEvents, "Please select the event(s) you are speaking at", "multiselect");
       ensureFieldExists("AreyouareRetaileroraBrand?", retailerOrBrand, "Are you are Retailer or a Brand?", "multiselect");
       ensureFieldExists("Whatsectorareyouin?", sector, "What sector are you in?", "multiselect");
       ensureFieldExists("Company", company, "Company", "text");
@@ -237,7 +246,7 @@ const transformAutumnFestivalAttendee = (orders) => {
   });
 };
 
-export const fetchAutumnFestivalForSponsors = async () => {
+export const fetchAutumnFestivalForSpeakers = async () => {
   let allOrders = [];
   let nextCursor = null;
 
@@ -312,7 +321,7 @@ export const fetchAutumnFestivalForSponsors = async () => {
       if (order) {
         console.log(`📦 Checking: ${order.FirstName} ${order.LastName} | ${order.Email} | QR: ${order.qr_code}`);
 
-        const tableName = 'autumn_festival_sponsor'; // real table name
+        const tableName = 'autumn_festival_speaker'; // real table name
         console.log("order.email", order.Email);
         const stored = await storeEmailInSupabase(tableName, order.Email);
 
