@@ -15,32 +15,70 @@ const AUTH_TOKEN = process.env.AUTH_TOKEN;
 const AUTUMN_FESTIVAL_EVENT_ID = 'ev_4733324';
 const REGISTRATION_API_URL = "https://us-central1-e2monair.cloudfunctions.net/e2mreg-prd-register-attendee";
 
-const companyWithCode = [{ key: 'Addingwell', value: '36481000' },
-{ key: 'AppsFlyer', value: '36466000' },
-{ key: 'Canto', value: '36476000' },
+const companyWithCode = [{ key: 'Mirakl', value: '36458000' },
+{ key: 'WorldFirst', value: '36459000' },
+{ key: 'Virtual Stock', value: '36460000' },
 { key: 'Carbon6', value: '36461000' },
+{ key: 'Photoroom', value: '36462000' },
+{ key: 'Pattern', value: '36463000' },
+{ key: 'Salesforce', value: '36464000' },
+{ key: 'Linnworks', value: '36465000' },
+{ key: 'AppsFlyer', value: '36466000' },
+{ key: 'Koddi', value: '36467000' },
+{ key: 'Webloyalty', value: '36469000' },
 { key: 'ChannelEngine', value: '36470000' },
 { key: 'Commerce Media Tech', value: '36472000' },
-{ key: 'Imagino', value: '36486000' },
-{ key: 'Koddi', value: '36467000' },
-{ key: 'Kubb&co', value: '36479000' },
-{ key: 'Linnworks', value: '36465000' },
-{ key: 'LiverRamp 2', value: '36487000' },
-{ key: 'Miarkl', value: '36458000' },
-{ key: 'PXP', value: '36485000' },
-{ key: 'Pattern', value: '36463000' },
-{ key: 'Photoroom', value: '36462000' },
+{ key: 'Canto', value: '36476000' },
 { key: 'Proptexx', value: '36477000' },
-{ key: 'STRATACACHE', value: '36488000' },
-{ key: 'Salesforce', value: '36464000' },
-{ key: 'Simpler', value: '36511000' },
-{ key: 'So Squared', value: '36480000' },
 { key: 'Somerce', value: '36478000' },
-{ key: 'Virtual Stock', value: '36460000' },
-{ key: 'Webloyalty', value: '36469000' },
-{ key: 'WorldFirst', value: '36459000' },
-{ key: 'Aria', value: '36484000' }];
- 
+{ key: 'Kubbco', value: '36479000' },
+{ key: 'So Squared', value: '36480000' },
+{ key: 'Addingwell by Didomi', value: '36481000' },
+{ key: 'Aria', value: '36484000' },
+{ key: 'PXP', value: '36485000' },
+{ key: 'Imagino', value: '36486000' },
+{ key: 'LiveRamp', value: '36487000' },
+{ key: 'STRATACACHE', value: '36488000' },
+{ key: 'eDesk', value: '37953000' },
+{ key: 'Disrupt', value: '37954000' },
+{ key: 'Ignite AI Partners', value: '38007000' },
+{ key: 'Zitec', value: '38008000' },
+{ key: 'Simpler', value: '36511000' },
+{ key: 'Azoma', value: '38020000' },
+{ key: 'Sprii', value: '38371000' },
+{ key: 'Shopping IQ', value: '38374000' },
+{ key: 'WhatSales', value: '38377000' },
+{ key: 'The Despatch Company', value: '38379000' },
+{ key: 'Glopal', value: '38380000' },
+{ key: 'Mangopay', value: '38383000' },
+{ key: 'GS1 UK', value: '38385000' },
+{ key: 'ACI Worldwide', value: '38386000' },
+{ key: 'Listabl', value: '38388000' },
+{ key: 'The Agency', value: '38389000' },
+{ key: 'Quid', value: '38390000' },
+{ key: 'Savi', value: '38391000' },
+{ key: 'Passport', value: '38392000' },
+{ key: 'Seonali', value: '38393000' },
+{ key: 'Influencer Hero', value: '38395000' },
+{ key: 'Galvia', value: '38396000' },
+{ key: 'Merkle', value: '38397000' },
+{ key: 'PSE Agency', value: '38398000' },
+{ key: 'LiiveRamp', value: '38402000' },
+{ key: 'Dunnhumby', value: '38403000' },
+{ key: 'Epsilon', value: '38404000' },
+{ key: 'Mirakl Ads', value: '38405000' },
+{ key: 'Helm', value: '38478000' },
+{ key: 'Kevel', value: '38479000' },
+{ key: 'Listable', value: '38484000' },
+{ key: 'Brightpearl', value: '38485000' },
+{ key: 'Inventory Planner', value: '38486000' },
+{ key: 'Vimeo', value: '38515000' },
+{ key: 'Shopline', value: '38516000' },
+{ key: 'E Business Guru', value: '38517000' },
+{ key: 'Trojan Ecommerce', value: '38518000' },
+{ key: 'Mollie', value: '38519000' },
+{ key: 'BlaziAI', value: '38626000' }];
+
 const pushTransformedOrder = async (order, attempt = 1) => {
   const payload = {
     postToCRM: false,
@@ -114,7 +152,7 @@ const transformAutumnFestivalAttendee = (orders) => {
 
     registrationType = {
       "ColorCode": "#000",
-      "RegistrationType": "Sponsor",
+      "RegistrationType": "Attendee",
       "RegistrationTypeId": "acSKVc0UTEshdsZRNPkM"
     };
 
@@ -294,7 +332,6 @@ export const fetchAutumnFestivalForSponsorsV1 = async () => {
               ...order,
               RegistrationType: {
                 ...order.RegistrationType,
-                RegistrationTypeEntityId: companyMatch.value
               }
             };
           }
