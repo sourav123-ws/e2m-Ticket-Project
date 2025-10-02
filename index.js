@@ -20,6 +20,7 @@ import { fetchRetailXExecutiveOrdersForEv_6341249 } from "./retailxBriefExecutiv
 import { fetchRetailXExecutiveOrdersForEv_6320483 } from "./retailxBriefExecutive/ev_6320483.js";
 import { fetchAutumnFestivalForSpeakers } from "./autumn-festival-sepaker.js";
 import { fetchAutumnFestivalV2 } from "./autumnFestivalV2.js";
+import { fetchAutumnFestivalForSponsorsV1 } from "./autumn_festival_sponsor_v1.js";
 dotenv.config();
 const app = express();
 const PORT = 8080;
@@ -27,7 +28,7 @@ const PORT = 8080;
 app.use(express.json());
 
 app.get("/", (req, res) => {
-  res.json("Hello World 4");
+  res.json("Hello World 5");
 });
 
 
@@ -43,6 +44,7 @@ app.get("/push-fmcg-data",fetchFMCGOrders)
 app.get("/fetch-autumn-festival-attendee",fetchAutumnFestival);
 app.get("/fetch-autumn-festival-attendee_v2",fetchAutumnFestivalV2);
 app.get("/fetch-autumn-festival-sponsor",fetchAutumnFestivalForSponsors);
+app.get("/fetch-autumn-festival-sponsor-v1",fetchAutumnFestivalForSponsorsV1);
 app.get("/fetch-autumn-festival-speaker",fetchAutumnFestivalForSpeakers);
 
 app.get("/fetch-madworld/ev_5929701",fetchMadWorldOrdersForEv_5929701);
