@@ -21,6 +21,7 @@ import { fetchRetailXExecutiveOrdersForEv_6320483 } from "./retailxBriefExecutiv
 import { fetchAutumnFestivalForSpeakers } from "./autumn-festival-sepaker.js";
 import { fetchAutumnFestivalV2 } from "./autumnFestivalV2.js";
 import { fetchAutumnFestivalForSponsorsV1 } from "./autumn_festival_sponsor_v1.js";
+import { deleteSupabaseData } from "./helperFunctions/deleteSupabseData.js";
 dotenv.config();
 const app = express();
 const PORT = 8080;
@@ -28,7 +29,7 @@ const PORT = 8080;
 app.use(express.json());
 
 app.get("/", (req, res) => {
-  res.json("Hello World 6");
+  res.json("Hello World 7");
 });
 
 
@@ -56,6 +57,7 @@ app.get("/fetch-madworld/ev_6098674",fetchMadWorldOrdersForEv_6098674);
 app.get("/fetch-retailx-brief-executive/ev_6341249",fetchRetailXExecutiveOrdersForEv_6341249) ;
 app.get("/fetch-retailx-brief-executive/ev_6320483",fetchRetailXExecutiveOrdersForEv_6320483) ;
 
+app.post("/delete-supabase-data", deleteSupabaseData);
 
 app.get("/push-all-data",fetchSpringFestivalOrders) ;
 

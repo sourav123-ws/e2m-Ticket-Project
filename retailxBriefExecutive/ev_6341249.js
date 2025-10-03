@@ -210,7 +210,7 @@ export const fetchRetailXExecutiveOrdersForEv_6341249 = async (req, res) => {
       if (order) {
         console.log(`📦 Checking: ${order.FirstName} ${order.LastName} | ${order.Email} | QR: ${order.qr_code}`);
 
-        const stored = await storeEmailInSupabase('RETAILX_BRIEF_EXECUTIVE_SPONSOR', order.Email);
+        const stored = await storeEmailInSupabase('retail_x_brief_executive_sponsor', order.Email);
 
         if (!stored) {
           console.log(`⏩ Skipping push for duplicate email: ${order.Email}`);
