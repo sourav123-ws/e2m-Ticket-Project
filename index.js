@@ -29,7 +29,7 @@ const PORT = 8080;
 app.use(express.json());
 
 app.get("/", (req, res) => {
-  res.json("Hello World 7");
+  res.json("Hello World 8");
 });
 
 
@@ -57,7 +57,7 @@ app.get("/fetch-madworld/ev_6098674",fetchMadWorldOrdersForEv_6098674);
 app.get("/fetch-retailx-brief-executive/ev_6341249",fetchRetailXExecutiveOrdersForEv_6341249) ;
 app.get("/fetch-retailx-brief-executive/ev_6320483",fetchRetailXExecutiveOrdersForEv_6320483) ;
 
-app.post("/delete-supabase-data", deleteSupabaseData);
+app.get("/delete-supabase-data", deleteSupabaseData);
 
 app.get("/push-all-data",fetchSpringFestivalOrders) ;
 

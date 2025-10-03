@@ -23,35 +23,32 @@ const tableMap = {
 
 export const deleteSupabaseData = async (req, res) => {
   try {
-    // Extract ttEventIds and emails from req.body
-    const { ttEventIds, emails } = req.body;
+    // Extract single ttEventId and email from req.query params
+    const { ttEventId, email } = req.query;
 
-    if (!ttEventIds || !emails) {
-      return res.status(400).json({ error: 'Missing required fields in body: ttEventIds and emails' });
+    if (!ttEventId || !email) {
+      return res.status(400).json({ error: 'Missing required query params: ttEventId and email' });
     }
 
-    const eventIds = Array.isArray(ttEventIds) ? ttEventIds : [ttEventIds];
-    const emailList = Array.isArray(emails) ? emails : [emails];
+    const eventId = ttEventId; // Single value
+    const emailValue = email; // Single value
 
     const results = {
       success: [],
       errors: []
     };
 
-    for (const eventId of eventIds) {
-      const tableName = tableMap[eventId];
-      if (!tableName) {
-        results.errors.push(`No table mapped for tt_event_id: ${eventId}`);
-        results.success.push(false);
-        continue;
-      }
-
+    const tableName = tableMap[eventId];
+    if (!tableName) {
+      results.errors.push(`No table mapped for tt_event_id: ${eventId}`);
+      results.success.push(false);
+    } else {
       try {
-        // Delete records where email is in the list (table is event-specific, so no tt_event_id filter needed)
+        // Delete record where email matches (table is event-specific, so no tt_event_id filter needed)
         const { error } = await supabase
           .from(tableName)
           .delete()
-          .in('email', emailList);  // Assumes 'email' column exists
+          .eq('email', emailValue);  // Single email match; assumes 'email' column exists
 
         if (error) {
           throw error;
@@ -64,7 +61,7 @@ export const deleteSupabaseData = async (req, res) => {
       }
     }
 
-    // Determine overall status
+    // Determine overall status (single operation)
     const totalOperations = results.success.length;
     const successfulOps = results.success.filter(Boolean).length;
 
@@ -72,10 +69,7 @@ export const deleteSupabaseData = async (req, res) => {
     let message = 'Deletion completed';
     if (successfulOps === 0) {
       statusCode = 500;
-      message = 'All deletions failed';
-    } else if (successfulOps < totalOperations) {
-      statusCode = 207;
-      message = 'Partial deletion success';
+      message = 'Deletion failed';
     }
 
     return res.status(statusCode).json({
