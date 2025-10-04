@@ -3,7 +3,7 @@ import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import dotenv from "dotenv";
-import { storeEmailInSupabase } from './supabase.js';
+import { logE2MError , storeEmailInSupabase } from './supabase.js';
 dotenv.config();
 
 // Define __dirname for ESM
