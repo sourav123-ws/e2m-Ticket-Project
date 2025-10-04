@@ -3,7 +3,7 @@ import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import dotenv from "dotenv";
-import { logE2MError, storeEmailInSupabase } from './supabase.js';
+import { checkEmailExists, storeEmailInSupabase } from './supabase.js';
 dotenv.config();
 
 // Define __dirname for ESM
@@ -75,6 +75,7 @@ const pushTransformedOrder = async (order, attempt = 1) => {
       });
 
       console.error(`⚠️ API push failed for: ${order.Email}, skipping Supabase storage`);
+      failCount++;
     }
   } catch (error) {
     console.log(`❌ [Try ${attempt}] Error pushing transformed order:`, error.response?.data || error.message);
@@ -322,6 +323,15 @@ export const fetchAutumnFestival = async () => {
     for (const order of finalOrders) {
       if (order) {
         console.log(`📦 Checking: ${order.FirstName} ${order.LastName} | ${order.Email} | QR: ${order.qr_code}`);
+        //checking function here
+        // if found no action taken
+
+        const emailExist = await checkEmailExists("autumn_festival_attendee",order.Email)
+        
+        if(emailExist){
+          console.log("Email already exists in Supabase, skipping:", order.Email);
+          continue ;
+        }
 
         console.log(`📤 Pushing to API: ${order.FirstName} ${order.LastName} | ${order.Email}`);
         const pushSuccess = await pushTransformedOrder(order, 1);

@@ -131,3 +131,23 @@ export const logE2MError = async (logData) => {
     return false;
   }
 };
+
+export const checkEmailExists = async (tableName,email) =>{
+   try {
+      const { data: existing, error: fetchError } = await supabase
+        .from(tableName)
+        .select('email')
+        .eq('email', email)
+        .maybeSingle();
+
+      if (fetchError) {
+        console.error(`❌ Error checking existing email in ${tableName}:`, fetchError.message);
+        return false;
+      }
+
+      return !!existing;
+    } catch (error) {
+      console.error(`❌ Exception checking email in ${tableName}:`, error.message);
+      return false;
+    }
+}
