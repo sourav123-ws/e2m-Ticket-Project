@@ -3,7 +3,7 @@ import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import dotenv from "dotenv";
-import { storeEmailInSupabase } from './supabase.js';
+import { logE2MError, storeEmailInSupabase } from './supabase.js';
 dotenv.config();
 
 // Define __dirname for ESM
@@ -13,6 +13,7 @@ const __dirname = path.dirname(__filename);
 const API_URL = process.env.API_URL;
 const AUTH_TOKEN = process.env.AUTH_TOKEN;
 const AUTUMN_FESTIVAL_EVENT_ID = 'ev_6286249'; // for attendee registrations
+const E2M_EVENT_ID = 'E1753774079219';
 const REGISTRATION_API_URL = "https://us-central1-e2monair.cloudfunctions.net/e2mreg-prd-register-attendee";
 
 const companyWithCode = [{ key: 'Addingwell', value: '36481000' },
@@ -58,12 +59,23 @@ const pushTransformedOrder = async (order, attempt = 1) => {
       headers: { "Content-Type": "application/json" },
     });
 
-    if (response.data?.status == 0) {
+    if (response.data?.status == 0 || response.data?.status == -99) {
       console.log(`✅ [Try ${attempt}] Pushed: ${order.Email}`);
       return true;
-    } else {
-      console.log(`⚠️ [Try ${attempt}] API responded with failure:`, response.data);
-      return false;
+    }
+    else {
+      //supabase error log logic
+      await logE2MError({
+        tt_event_id: AUTUMN_FESTIVAL_EVENT_ID || null,
+        e2m_event_id: E2M_EVENT_ID || null,
+        email: order.Email,
+        error: response?.data || {},
+        status: 0,
+        e2m_payload: payload
+      });
+
+      console.error(`⚠️ API push failed for: ${order.Email}, skipping Supabase storage`);
+      failCount++;
     }
   } catch (error) {
     console.log(`❌ [Try ${attempt}] Error pushing transformed order:`, error.response?.data || error.message);
@@ -312,18 +324,23 @@ export const fetchAutumnFestival = async () => {
       if (order) {
         console.log(`📦 Checking: ${order.FirstName} ${order.LastName} | ${order.Email} | QR: ${order.qr_code}`);
 
-        const tableName = 'autumn_festival_attendee'; // real table name
-        console.log("order.email", order.Email);
-        const stored = await storeEmailInSupabase(tableName, order.Email);
+        console.log(`📤 Pushing to API: ${order.FirstName} ${order.LastName} | ${order.Email}`);
+        const pushSuccess = await pushTransformedOrder(order, 1);
+        console.log("Push success:", pushSuccess);
+        if (pushSuccess) {
+          // Only store in Supabase if API push was successful
+          const tableName = 'autumn_festival_attendee'; // real table name
+          console.log(`✅ API push successful, storing in Supabase: ${order.Email}`);
+          const stored = await storeEmailInSupabase(tableName, order.Email);
 
-        if (!stored) {
-          console.log(`⏩ Skipping push for duplicate email: ${order.Email}`);
-          continue; // don't push if duplicate
+          if (stored) {
+            console.log(`✅ Successfully stored in Supabase: ${order.Email}`);
+            successCount++;
+          } else {
+            console.log(`⚠️ API succeeded but Supabase storage failed (duplicate): ${order.Email}`);
+            successCount++; // Still count as success since API push worked
+          }
         }
-
-        console.log(`📤 Pushing: ${order.FirstName} ${order.LastName} | ${order.Email}`);
-        await pushTransformedOrder(order, 1);
-
         await new Promise(resolve => setTimeout(resolve, 300)); // rate limiting
       }
     }
