@@ -107,10 +107,8 @@ const pushTransformedOrder = async (order, attempt = 1) => {
         tt_event_id: AUTUMN_FESTIVAL_EVENT_ID || null,
         e2m_event_id: E2M_EVENT_ID || null,
         email: order.Email,
-        error: {
-          response: response?.data || null
-        },
-        status: '0',
+        error: response?.data || {},
+        status: 0,
         e2m_payload: payload
       });
 
