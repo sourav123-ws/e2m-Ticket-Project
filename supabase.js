@@ -83,3 +83,66 @@ export const storeEmailInSupabase = async (eventTable, email) => {
       return false;
     }
   };
+
+  export const logE2MError = async (logData) => {
+  try {
+    const { tt_event_id, e2m_event_id, email, error, status, e2m_payload } = logData;
+
+    // Check if email already exists in error log
+    const { data: existing, error: fetchError } = await supabase
+      .from('e2m_error_log')
+      .select('email')
+      .eq('email', email)
+      .maybeSingle();
+
+    if (fetchError) {
+      console.error(`❌ Error checking existing email in e2m_error_log:`, fetchError.message);
+      return false;
+    }
+
+    if (existing) {
+      const { error: updateError } = await supabase
+        .from('e2m_error_log')
+        .update({
+          tt_event_id,
+          e2m_event_id,
+          error,
+          status,
+          e2m_payload,
+          created_at: new Date().toISOString() // Update timestamp
+        })
+        .eq('email', email);
+
+      if (updateError) {
+        console.error(`❌ Error updating e2m_error_log:`, updateError.message);
+        return false;
+      }
+
+      console.log(`✅ Updated error log for: ${email}`);
+      return true;
+    }
+
+    // Insert new record if not found
+    const { error: insertError } = await supabase
+      .from('e2m_error_log')
+      .insert([{
+        tt_event_id,
+        e2m_event_id,
+        email,
+        error,
+        status,
+        e2m_payload
+      }]);
+
+    if (insertError) {
+      console.error(`❌ Error inserting into e2m_error_log:`, insertError.message);
+      return false;
+    }
+
+    console.log(`✅ Logged error for: ${email}`);
+    return true;
+  } catch (err) {
+    console.error(`❌ Exception logging error to e2m_error_log:`, err.message);
+    return false;
+  }
+};
