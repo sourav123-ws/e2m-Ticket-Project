@@ -113,7 +113,6 @@ const pushTransformedOrder = async (order, attempt = 1) => {
       });
 
       console.error(`⚠️ API push failed for: ${order.Email}, skipping Supabase storage`);
-      failCount++;
     }
   } catch (error) {
     console.log(`❌ [Try ${attempt}] Error pushing transformed order:`, error.response?.data || error.message);
