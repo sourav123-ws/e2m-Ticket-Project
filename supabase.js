@@ -91,7 +91,7 @@ export const logE2MError = async (logData) => {
     // Check if the combination of email, e2m_event_id, and tt_event_id already exists
     const { data: existing, error: fetchError } = await supabase
       .from('e2m_error_log')
-      .select('email')
+      .select('*')
       .eq('email', email)
       .eq('e2m_event_id', e2m_event_id)
       .eq('tt_event_id', tt_event_id)
