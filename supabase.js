@@ -84,15 +84,17 @@ export const storeEmailInSupabase = async (eventTable, email) => {
     }
   };
 
-  export const logE2MError = async (logData) => {
+export const logE2MError = async (logData) => {
   try {
     const { tt_event_id, e2m_event_id, email, error, status, e2m_payload } = logData;
 
-    // Check if email already exists in error log
+    // Check if the combination of email, e2m_event_id, and tt_event_id already exists
     const { data: existing, error: fetchError } = await supabase
       .from('e2m_error_log')
       .select('email')
       .eq('email', email)
+      .eq('e2m_event_id', e2m_event_id)
+      .eq('tt_event_id', tt_event_id)
       .maybeSingle();
 
     if (fetchError) {
@@ -100,29 +102,12 @@ export const storeEmailInSupabase = async (eventTable, email) => {
       return false;
     }
 
-    if (existing) {
-      const { error: updateError } = await supabase
-        .from('e2m_error_log')
-        .update({
-          tt_event_id,
-          e2m_event_id,
-          error,
-          status,
-          e2m_payload,
-          created_at: new Date().toISOString() // Update timestamp
-        })
-        .eq('email', email);
-
-      if (updateError) {
-        console.error(`❌ Error updating e2m_error_log:`, updateError.message);
-        return false;
-      }
-
-      console.log(`✅ Updated error log for: ${email}`);
-      return true;
+    if (existing && existing.status < 1 ) {
+      console.log(`⚠️ Record already exists in error log for email: ${email}, tt_event: ${tt_event_id}, e2m_event: ${e2m_event_id}`);
+      return true; // Return true since it's already logged
     }
 
-    // Insert new record if not found
+    // Insert new record
     const { error: insertError } = await supabase
       .from('e2m_error_log')
       .insert([{
@@ -139,7 +124,7 @@ export const storeEmailInSupabase = async (eventTable, email) => {
       return false;
     }
 
-    console.log(`✅ Logged error for: ${email}`);
+    console.log(`✅ Logged error for: ${email} (tt_event: ${tt_event_id}, e2m_event: ${e2m_event_id})`);
     return true;
   } catch (err) {
     console.error(`❌ Exception logging error to e2m_error_log:`, err.message);
