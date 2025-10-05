@@ -59,7 +59,7 @@ const pushTransformedOrder = async (order, attempt = 1) => {
       headers: { "Content-Type": "application/json" },
     });
 
-    if (response.data?.status == 0 || response.data?.status == -99) {
+    if (response.data?.status == 0 || response.data?.status == -1.5) {
       console.log(`✅ [Try ${attempt}] Pushed: ${order.Email}`);
       return true;
     }
