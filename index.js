@@ -9,7 +9,7 @@ import { fetchDigitalMarketingEvolutionXOrders } from "./DigitalMarketingEvoluti
 import { fetchSustainabilityXOrders } from "./SustainabilityX.js";
 import { fetchSpringFestivalOrders } from "./AllEvents.js";
 import { fetchFMCGOrders } from "./FMCG.js";
-import { fetchAutumnFestival } from "./autumnFestival.js";
+import { fetchAutumnFestivalAttendee } from "./autumn_festival_attendee.js";
 import { fetchAutumnFestivalForSponsors } from "./autumn-festival-sponsor.js";
 import { fetchMadWorldOrdersForEv_5929701 } from "./madWorld/ev_5929701.js";
 import { fetchMadWorldOrdersForEv_6098686 } from "./madWorld/ev_6098686.js";
@@ -20,7 +20,7 @@ import { fetchRetailXExecutiveOrdersForEv_6341249 } from "./retailxBriefExecutiv
 import { fetchRetailXExecutiveOrdersForEv_6320483 } from "./retailxBriefExecutive/ev_6320483.js";
 import { fetchAutumnFestivalForSpeakers } from "./autumn-festival-sepaker.js";
 import { fetchAutumnFestivalV2 } from "./autumnFestivalV2.js";
-import { fetchAutumnFestivalForSponsorsV1 } from "./autumn_festival_sponsor_v1.js";
+import { fetchAutumnFestivalForAttendeeV1 } from "./autumn_festival_attendee_v1.js";
 import { deleteSupabaseData } from "./helperFunctions/deleteSupabseData.js";
 dotenv.config();
 const app = express();
@@ -42,10 +42,12 @@ app.get("/push-digital-marketting-data",fetchDigitalMarketingEvolutionXOrders);
 app.get("/push-social-media-data", fetchSocialMediaMastersOrders);
 app.get("/push-sustainability-data",fetchSustainabilityXOrders)
 app.get("/push-fmcg-data",fetchFMCGOrders)
-app.get("/fetch-autumn-festival-attendee",fetchAutumnFestival);
+
+app.get("/fetch-autumn-festival-attendee",fetchAutumnFestivalAttendee);
+app.get("/fetch-autumn-festival-attendee-v1",fetchAutumnFestivalForAttendeeV1);
 app.get("/fetch-autumn-festival-attendee_v2",fetchAutumnFestivalV2);
+
 app.get("/fetch-autumn-festival-sponsor",fetchAutumnFestivalForSponsors);
-app.get("/fetch-autumn-festival-sponsor-v1",fetchAutumnFestivalForSponsorsV1);
 app.get("/fetch-autumn-festival-speaker",fetchAutumnFestivalForSpeakers);
 
 app.get("/fetch-madworld/ev_5929701",fetchMadWorldOrdersForEv_5929701);
