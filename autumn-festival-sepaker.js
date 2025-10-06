@@ -1,9 +1,13 @@
-import axios from 'axios';
-import fs from 'fs';
-import path from 'path';
-import { fileURLToPath } from 'url';
+import axios from "axios";
+import fs from "fs";
+import path from "path";
+import { fileURLToPath } from "url";
 import dotenv from "dotenv";
-import { storeEmailInSupabase } from './supabase.js';
+import {
+  checkEmailExists,
+  logE2MError,
+  storeEmailInSupabase,
+} from "./supabase.js";
 dotenv.config();
 
 // Define __dirname for ESM
@@ -12,35 +16,39 @@ const __dirname = path.dirname(__filename);
 
 const API_URL = process.env.API_URL;
 const AUTH_TOKEN = process.env.AUTH_TOKEN;
-const AUTUMN_FESTIVAL_EVENT_ID = 'ev_6803153';
-const REGISTRATION_API_URL = "https://us-central1-e2monair.cloudfunctions.net/e2mreg-prd-register-attendee";
+const AUTUMN_FESTIVAL_EVENT_ID = "ev_6803153";
+const E2M_EVENT_ID = "E1753774079219";
+const REGISTRATION_API_URL =
+  "https://us-central1-e2monair.cloudfunctions.net/e2mreg-prd-register-attendee";
 
-const companyWithCode = [{ key: 'Addingwell', value: '36481000' },
-{ key: 'AppsFlyer', value: '36466000' },
-{ key: 'Canto', value: '36476000' },
-{ key: 'Carbon6', value: '36461000' },
-{ key: 'ChannelEngine', value: '36470000' },
-{ key: 'Commerce Media Tech', value: '36472000' },
-{ key: 'Imagino', value: '36486000' },
-{ key: 'Koddi', value: '36467000' },
-{ key: 'Kubb&co', value: '36479000' },
-{ key: 'Linnworks', value: '36465000' },
-{ key: 'LiverRamp 2', value: '36487000' },
-{ key: 'Miarkl', value: '36458000' },
-{ key: 'PXP', value: '36485000' },
-{ key: 'Pattern', value: '36463000' },
-{ key: 'Photoroom', value: '36462000' },
-{ key: 'Proptexx', value: '36477000' },
-{ key: 'STRATACACHE', value: '36488000' },
-{ key: 'Salesforce', value: '36464000' },
-{ key: 'Simpler', value: '36511000' },
-{ key: 'So Squared', value: '36480000' },
-{ key: 'Somerce', value: '36478000' },
-{ key: 'Virtual Stock', value: '36460000' },
-{ key: 'Webloyalty', value: '36469000' },
-{ key: 'WorldFirst', value: '36459000' },
-{ key: 'Aria', value: '36484000' }];
- 
+const companyWithCode = [
+  { key: "Addingwell", value: "36481000" },
+  { key: "AppsFlyer", value: "36466000" },
+  { key: "Canto", value: "36476000" },
+  { key: "Carbon6", value: "36461000" },
+  { key: "ChannelEngine", value: "36470000" },
+  { key: "Commerce Media Tech", value: "36472000" },
+  { key: "Imagino", value: "36486000" },
+  { key: "Koddi", value: "36467000" },
+  { key: "Kubb&co", value: "36479000" },
+  { key: "Linnworks", value: "36465000" },
+  { key: "LiverRamp 2", value: "36487000" },
+  { key: "Miarkl", value: "36458000" },
+  { key: "PXP", value: "36485000" },
+  { key: "Pattern", value: "36463000" },
+  { key: "Photoroom", value: "36462000" },
+  { key: "Proptexx", value: "36477000" },
+  { key: "STRATACACHE", value: "36488000" },
+  { key: "Salesforce", value: "36464000" },
+  { key: "Simpler", value: "36511000" },
+  { key: "So Squared", value: "36480000" },
+  { key: "Somerce", value: "36478000" },
+  { key: "Virtual Stock", value: "36460000" },
+  { key: "Webloyalty", value: "36469000" },
+  { key: "WorldFirst", value: "36459000" },
+  { key: "Aria", value: "36484000" },
+];
+
 const pushTransformedOrder = async (order, attempt = 1) => {
   const payload = {
     postToCRM: false,
@@ -58,27 +66,44 @@ const pushTransformedOrder = async (order, attempt = 1) => {
       headers: { "Content-Type": "application/json" },
     });
 
-    if (response.data?.status == 0) {
+    if (response.data?.status == 0 || response.data?.status == -1.5) {
       console.log(`✅ [Try ${attempt}] Pushed: ${order.Email}`);
       return true;
     } else {
-      console.log(`⚠️ [Try ${attempt}] API responded with failure:`, response.data);
+      //supabase error log logic
+      await logE2MError({
+        tt_event_id: AUTUMN_FESTIVAL_EVENT_ID || null,
+        e2m_event_id: E2M_EVENT_ID || null,
+        email: order.Email,
+        error: response?.data || {},
+        status: 0,
+        e2m_payload: payload,
+      });
+
+      console.error(
+        `⚠️ API push failed for: ${order.Email}, skipping Supabase storage`
+      );
       return false;
     }
   } catch (error) {
-    console.log(`❌ [Try ${attempt}] Error pushing transformed order:`, error.response?.data || error.message);
+    console.log(
+      `❌ [Try ${attempt}] Error pushing transformed order:`,
+      error.response?.data || error.message
+    );
     return false;
   }
 };
 
 const transformAutumnFestivalAttendee = (orders) => {
-  return orders.map(order => {
+  return orders.map((order) => {
     const customQuestions = order.buyer_details?.custom_questions || [];
 
-
     const findAnswer = (questionText) => {
-      const match = customQuestions.find(q =>
-        q.question?.trim().toLowerCase().includes(questionText.toLowerCase().trim())
+      const match = customQuestions.find((q) =>
+        q.question
+          ?.trim()
+          .toLowerCase()
+          .includes(questionText.toLowerCase().trim())
       );
       return match?.answer || "";
     };
@@ -91,14 +116,36 @@ const transformAutumnFestivalAttendee = (orders) => {
 
     const countryRegion = findAnswer("Country / Region");
     const linkedinProfile = findAnswer("Linkedin Profile");
-    const preEventDinner = normalizeYesNo(findAnswer("I would like to be considered to attend the pre-event dinner"));
-    const eventPodcast = normalizeYesNo(findAnswer("I would you like to be considered as a guest on the event podcast recorded live at the event"));
-    const dietaryRestrictions = findAnswer("Please confirm if you have any dietary restrictions? (write NA if nothing applies)") || "N/A";
-    const accessRetailX = normalizeYesNo(findAnswer("I would like access to the RetailX Intelligence data platform (free trial)"));
-    const agreeConnect = normalizeYesNo(findAnswer("I agree to participation in the introductory meeting programme \"Connect\" in a networking break"));
-    const channelXTrack = findAnswer("If attending ChannelX, which track are you most interested to attend?");
-    const tcAgree = findAnswer("I agree to the T&C's of registration including receiving a free copy of the relevant research report");
-    const interestedEvents = findAnswer("Please select the event(s) you are speaking at") || "";
+    const preEventDinner = normalizeYesNo(
+      findAnswer("I would like to be considered to attend the pre-event dinner")
+    );
+    const eventPodcast = normalizeYesNo(
+      findAnswer(
+        "I would you like to be considered as a guest on the event podcast recorded live at the event"
+      )
+    );
+    const dietaryRestrictions =
+      findAnswer(
+        "Please confirm if you have any dietary restrictions? (write NA if nothing applies)"
+      ) || "N/A";
+    const accessRetailX = normalizeYesNo(
+      findAnswer(
+        "I would like access to the RetailX Intelligence data platform (free trial)"
+      )
+    );
+    const agreeConnect = normalizeYesNo(
+      findAnswer(
+        'I agree to participation in the introductory meeting programme "Connect" in a networking break'
+      )
+    );
+    const channelXTrack = findAnswer(
+      "If attending ChannelX, which track are you most interested to attend?"
+    );
+    const tcAgree = findAnswer(
+      "I agree to the T&C's of registration including receiving a free copy of the relevant research report"
+    );
+    const interestedEvents =
+      findAnswer("Please select the event(s) you are speaking at") || "";
     const retailerOrBrand = findAnswer("Are you are Retailer or a Brand?");
     const sector = findAnswer("What sector are you in?");
     const company = findAnswer("Company/Organisation");
@@ -109,22 +156,22 @@ const transformAutumnFestivalAttendee = (orders) => {
       order.line_items?.[0]?.description ||
       "";
     const lowerDescription = description.toLowerCase();
-    
 
     let registrationType;
 
     const ticketTailerEventId = order?.event_summary?.id || "";
     const ticketTailerEventName = order?.event_summary?.name || "";
-    const WhichEventAreYouInterestedIn = findAnswer("Please select the event(s) you are speaking at");
-    
+    const WhichEventAreYouInterestedIn = findAnswer(
+      "Please select the event(s) you are speaking at"
+    );
 
     registrationType = {
-      "ColorCode": "#000",
-      "RegistrationType": "Speaker",
-      "RegistrationTypeId": "JkhZd08bJLUkm2dk3hYK" ,
-      "TicketTailerEventId" : ticketTailerEventId ,
-      "TicketTailerEventName" : ticketTailerEventName ,
-      "WhichEventAreYouInterestedIn" : WhichEventAreYouInterestedIn
+      ColorCode: "#000",
+      RegistrationType: "Speaker",
+      RegistrationTypeId: "JkhZd08bJLUkm2dk3hYK",
+      TicketTailerEventId: ticketTailerEventId,
+      TicketTailerEventName: ticketTailerEventName,
+      WhichEventAreYouInterestedIn: WhichEventAreYouInterestedIn,
     };
 
     // if (lowerDescription.includes("brand") ||
@@ -134,7 +181,7 @@ const transformAutumnFestivalAttendee = (orders) => {
     //   lowerDescription.includes("agency") ||
     //   lowerDescription.includes("marketplace") ||
     //   lowerDescription.includes("mediaagency") ||
-    //   lowerDescription.includes("consultant") || 
+    //   lowerDescription.includes("consultant") ||
     //   lowerDescription.includes("vip")) {
     //   registrationType = {
     //     "ColorCode": "#000",
@@ -156,14 +203,17 @@ const transformAutumnFestivalAttendee = (orders) => {
     // }
 
     if (registrationType) {
-      let filteredDynamicFields = customQuestions.map(question => ({
-        Name: question.question.replace(/\s+/g, ''),
-        Value: normalizeYesNo(question.answer || ""),
-        Label: question.question,
-        Type: Array.isArray(question.answer) ? "multiselect" : "text"
-      })).filter(field =>
-        field.Name !== "Typeoftickets" && field.Name !== "repeatemail"
-      );
+      let filteredDynamicFields = customQuestions
+        .map((question) => ({
+          Name: question.question.replace(/\s+/g, ""),
+          Value: normalizeYesNo(question.answer || ""),
+          Label: question.question,
+          Type: Array.isArray(question.answer) ? "multiselect" : "text",
+        }))
+        .filter(
+          (field) =>
+            field.Name !== "Typeoftickets" && field.Name !== "repeatemail"
+        );
 
       const allowedFields = [
         "Country/Region",
@@ -172,26 +222,26 @@ const transformAutumnFestivalAttendee = (orders) => {
         "Iwouldyouliketobeconsideredasaguestontheeventpodcastrecordedliveattheevent",
         "Pleaseconfirmifyouhaveanydietaryrestrictions?(writeNAifnothingapplies)",
         "IwouldlikeaccesstotheRetailXIntelligencedataplatform(freetrial)",
-        "Iagreetoparticipationintheintroductorymeetingprogramme\"Connect\"inanetworkingbreak",
+        'Iagreetoparticipationintheintroductorymeetingprogramme"Connect"inanetworkingbreak',
         "IfattendingChannelX,whichtrackareyoumostinterestedtoattend?",
         "IagreetotheT&C'sofregistrationincludingreceivingafreecopyoftherelevantresearchreport",
         "Whichoftheeventsareyoumostinterestedinattending?(Yourattendanceincludesafreecopyoftherelevantreport)?",
         "AreyouareRetaileroraBrand?",
-        "Whatsectorareyouin?"
+        "Whatsectorareyouin?",
       ];
 
-      filteredDynamicFields = filteredDynamicFields.filter(field =>
+      filteredDynamicFields = filteredDynamicFields.filter((field) =>
         allowedFields.includes(field.Name)
       );
 
-      const existingFieldNames = filteredDynamicFields.map(f => f.Name);
+      const existingFieldNames = filteredDynamicFields.map((f) => f.Name);
 
       if (!existingFieldNames.includes("Typeoftickets")) {
         filteredDynamicFields.unshift({
           Name: "Typeoftickets",
           Value: registrationType.RegistrationType,
           Label: "Type of tickets",
-          Type: "select"
+          Type: "select",
         });
       }
 
@@ -201,23 +251,83 @@ const transformAutumnFestivalAttendee = (orders) => {
             Name: name,
             Value: value,
             Label: label,
-            Type: type
+            Type: type,
           });
         }
       };
 
-      ensureFieldExists("Country/Region", countryRegion, "Country / Region", "text");
-      ensureFieldExists("LinkedinProfile", linkedinProfile, "Linkedin Profile", "text");
-      ensureFieldExists("Iwouldliketobeconsideredtoattendthepre-eventdinner", preEventDinner, "I would like to be considered to attend the pre-event dinner", "select");
-      ensureFieldExists("Iwouldyouliketobeconsideredasaguestontheeventpodcastrecordedliveattheevent", eventPodcast, "I would you like to be considered as a guest on the event podcast recorded live at the event", "select");
-      ensureFieldExists("Pleaseconfirmifyouhaveanydietaryrestrictions?(writeNAifnothingapplies)", dietaryRestrictions, "Please confirm if you have any dietary restrictions? (write NA if nothing applies)", "text");
-      ensureFieldExists("IwouldlikeaccesstotheRetailXIntelligencedataplatform(freetrial)", accessRetailX, "I would like access to the RetailX Intelligence data platform (free trial)", "select");
-      ensureFieldExists("Iagreetoparticipationintheintroductorymeetingprogramme\"Connect\"inanetworkingbreak", agreeConnect, "I agree to participation in the introductory meeting programme \"Connect\" in a networking break", "checkbox");
-      ensureFieldExists("IfattendingChannelX,whichtrackareyoumostinterestedtoattend?", channelXTrack, "If attending ChannelX, which track are you most interested to attend?", "radio");
-      ensureFieldExists("IagreetotheT&C'sofregistrationincludingreceivingafreecopyoftherelevantresearchreport", tcAgree, "I agree to the T&C's of registration including receiving a free copy of the relevant research report", "select");
-      ensureFieldExists("Pleaseselecttheevent(s)youarespeakingat", interestedEvents, "Please select the event(s) you are speaking at", "multiselect");
-      ensureFieldExists("AreyouareRetaileroraBrand?", retailerOrBrand, "Are you are Retailer or a Brand?", "multiselect");
-      ensureFieldExists("Whatsectorareyouin?", sector, "What sector are you in?", "multiselect");
+      ensureFieldExists(
+        "Country/Region",
+        countryRegion,
+        "Country / Region",
+        "text"
+      );
+      ensureFieldExists(
+        "LinkedinProfile",
+        linkedinProfile,
+        "Linkedin Profile",
+        "text"
+      );
+      ensureFieldExists(
+        "Iwouldliketobeconsideredtoattendthepre-eventdinner",
+        preEventDinner,
+        "I would like to be considered to attend the pre-event dinner",
+        "select"
+      );
+      ensureFieldExists(
+        "Iwouldyouliketobeconsideredasaguestontheeventpodcastrecordedliveattheevent",
+        eventPodcast,
+        "I would you like to be considered as a guest on the event podcast recorded live at the event",
+        "select"
+      );
+      ensureFieldExists(
+        "Pleaseconfirmifyouhaveanydietaryrestrictions?(writeNAifnothingapplies)",
+        dietaryRestrictions,
+        "Please confirm if you have any dietary restrictions? (write NA if nothing applies)",
+        "text"
+      );
+      ensureFieldExists(
+        "IwouldlikeaccesstotheRetailXIntelligencedataplatform(freetrial)",
+        accessRetailX,
+        "I would like access to the RetailX Intelligence data platform (free trial)",
+        "select"
+      );
+      ensureFieldExists(
+        'Iagreetoparticipationintheintroductorymeetingprogramme"Connect"inanetworkingbreak',
+        agreeConnect,
+        'I agree to participation in the introductory meeting programme "Connect" in a networking break',
+        "checkbox"
+      );
+      ensureFieldExists(
+        "IfattendingChannelX,whichtrackareyoumostinterestedtoattend?",
+        channelXTrack,
+        "If attending ChannelX, which track are you most interested to attend?",
+        "radio"
+      );
+      ensureFieldExists(
+        "IagreetotheT&C'sofregistrationincludingreceivingafreecopyoftherelevantresearchreport",
+        tcAgree,
+        "I agree to the T&C's of registration including receiving a free copy of the relevant research report",
+        "select"
+      );
+      ensureFieldExists(
+        "Pleaseselecttheevent(s)youarespeakingat",
+        interestedEvents,
+        "Please select the event(s) you are speaking at",
+        "multiselect"
+      );
+      ensureFieldExists(
+        "AreyouareRetaileroraBrand?",
+        retailerOrBrand,
+        "Are you are Retailer or a Brand?",
+        "multiselect"
+      );
+      ensureFieldExists(
+        "Whatsectorareyouin?",
+        sector,
+        "What sector are you in?",
+        "multiselect"
+      );
       ensureFieldExists("Company", company, "Company", "text");
       ensureFieldExists("Designation", designation, "Designation", "text");
 
@@ -240,7 +350,7 @@ const transformAutumnFestivalAttendee = (orders) => {
         qr: order.issued_tickets?.[0]?.qr_code_url || "",
         Company: company || "",
         Designation: designation || "",
-        isComplete: true
+        isComplete: true,
       };
     }
   });
@@ -269,45 +379,50 @@ export const fetchAutumnFestivalForSpeakers = async () => {
       if (!response.data.data || response.data.data.length === 0) break;
 
       const orders = response.data.data;
-      const validOrders = orders.filter(order => order && order.status !== "cancelled");
+      const validOrders = orders.filter(
+        (order) => order && order.status !== "cancelled"
+      );
 
       allOrders.push(...validOrders);
       if (orders.length < 100) break;
       nextCursor = orders[orders.length - 1].id;
     }
-    console.log(allOrders)
+    console.log(allOrders);
     console.log(`✅ Fetched and saved ${allOrders.length} total orders`);
 
     const transformedOrders = transformAutumnFestivalAttendee(allOrders);
 
+    const finalOrders = transformedOrders.map((order) => {
+      const companyField = order.DynamicFields.find(
+        (field) => field.Name === "Company" || field.Label === "Company"
+      );
+      if (companyField?.Value) {
+        const normalize = (str) =>
+          str
+            ?.toLowerCase()
+            .replace(/\s+/g, "")
+            .replace(/[^a-z0-9]/gi, "") || "";
 
-    const finalOrders = transformedOrders.map(order => {
-        const companyField = order.DynamicFields.find(
-          field => field.Name === "Company" ||
-            field.Label === "Company"
-        );
-        if (companyField?.Value) {
+        const companyName = normalize(companyField.Value);
 
-          const normalize = str =>
-            str?.toLowerCase().replace(/\s+/g, '').replace(/[^a-z0-9]/gi, '') || '';
+        const companyMatch = companyWithCode.find((company) => {
+          const normalizedKey = normalize(company.key);
+          return (
+            companyName.includes(normalizedKey) ||
+            normalizedKey.includes(companyName)
+          );
+        });
 
-          const companyName = normalize(companyField.Value);
-
-          const companyMatch = companyWithCode.find(company => {
-            const normalizedKey = normalize(company.key);
-            return companyName.includes(normalizedKey) || normalizedKey.includes(companyName);
-          });
-
-          if (companyMatch) {
-            return {
-              ...order,
-              RegistrationType: {
-                ...order.RegistrationType,
-                RegistrationTypeEntityId: companyMatch.value
-              }
-            };
-          }
+        if (companyMatch) {
+          return {
+            ...order,
+            RegistrationType: {
+              ...order.RegistrationType,
+              RegistrationTypeEntityId: companyMatch.value,
+            },
+          };
         }
+      }
       return order;
     });
 
@@ -319,34 +434,63 @@ export const fetchAutumnFestivalForSpeakers = async () => {
 
     for (const order of finalOrders) {
       if (order) {
-        console.log(`📦 Checking: ${order.FirstName} ${order.LastName} | ${order.Email} | QR: ${order.qr_code}`);
+        console.log(
+          `📦 Checking: ${order.FirstName} ${order.LastName} | ${order.Email} | QR: ${order.qr_code}`
+        );
+        //checking function here
+        // if found no action taken
 
-        const tableName = 'autumn_festival_speaker'; // real table name
-        console.log("order.email", order.Email);
-        const stored = await storeEmailInSupabase(tableName, order.Email);
+        const emailExist = await checkEmailExists(
+          "autumn_festival_speaker",
+          order.Email
+        );
 
-        if (!stored) {
-          console.log(`⏩ Skipping push for duplicate email: ${order.Email}`);
-          continue; // don't push if duplicate
+        if (emailExist) {
+          console.log(
+            "Email already exists in Supabase, skipping:",
+            order.Email
+          );
+          continue;
         }
 
-        console.log(`📤 Pushing: ${order.FirstName} ${order.LastName} | ${order.Email}`);
-        await pushTransformedOrder(order, 1);
+        console.log(
+          `📤 Pushing to API: ${order.FirstName} ${order.LastName} | ${order.Email}`
+        );
+        const pushSuccess = await pushTransformedOrder(order, 1);
+        console.log("Push success:", pushSuccess);
+        if (pushSuccess) {
+          // Only store in Supabase if API push was successful
+          const tableName = "autumn_festival_speaker"; // real table name
+          console.log(
+            `✅ API push successful, storing in Supabase: ${order.Email}`
+          );
+          const stored = await storeEmailInSupabase(tableName, order.Email);
 
-        await new Promise(resolve => setTimeout(resolve, 300)); // rate limiting
+          if (stored) {
+            console.log(`✅ Successfully stored in Supabase: ${order.Email}`);
+            successCount++;
+          } else {
+            console.log(
+              `⚠️ API succeeded but Supabase storage failed (duplicate): ${order.Email}`
+            );
+            successCount++; // Still count as success since API push worked
+          }
+        }
+        await new Promise((resolve) => setTimeout(resolve, 300)); // rate limiting
       }
     }
 
     // Write all orders to a JSON file after the loop
     // fs.writeFileSync('orders.json', JSON.stringify(Orders, null, 2));
 
-    console.log(`✅ Successfully processed ${successCount} orders, failed ${failCount} orders.`);
+    console.log(
+      `✅ Successfully processed ${successCount} orders, failed ${failCount} orders.`
+    );
 
     console.log(`✅ Successfully pushed: ${successCount}`);
     console.log(`❌ Failed to push: ${failCount}`);
     console.log(`📊 Total attempted: ${successCount + failCount}`);
     return finalOrders;
-
   } catch (error) {
     console.error("❌ Error:", error.message);
     // fs.writeFileSync(

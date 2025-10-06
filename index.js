@@ -19,7 +19,6 @@ import { fetchMadWorldOrdersForEv_6098674 } from "./madWorld/ev_6098674.js";
 import { fetchRetailXExecutiveOrdersForEv_6341249 } from "./retailxBriefExecutive/ev_6341249.js";
 import { fetchRetailXExecutiveOrdersForEv_6320483 } from "./retailxBriefExecutive/ev_6320483.js";
 import { fetchAutumnFestivalForSpeakers } from "./autumn-festival-sepaker.js";
-import { fetchAutumnFestivalV2 } from "./autumnFestivalV2.js";
 import { fetchAutumnFestivalForAttendeeV1 } from "./autumn_festival_attendee_v1.js";
 import { deleteSupabaseData } from "./helperFunctions/deleteSupabseData.js";
 dotenv.config();
@@ -45,7 +44,6 @@ app.get("/push-fmcg-data",fetchFMCGOrders)
 
 app.get("/fetch-autumn-festival-attendee",fetchAutumnFestivalAttendee);
 app.get("/fetch-autumn-festival-attendee-v1",fetchAutumnFestivalForAttendeeV1);
-app.get("/fetch-autumn-festival-attendee_v2",fetchAutumnFestivalV2);
 
 app.get("/fetch-autumn-festival-sponsor",fetchAutumnFestivalForSponsors);
 app.get("/fetch-autumn-festival-speaker",fetchAutumnFestivalForSpeakers);

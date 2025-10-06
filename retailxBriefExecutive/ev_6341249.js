@@ -1,24 +1,28 @@
 import axios from "axios";
 import fs from "fs";
 import dotenv from "dotenv";
-import { storeEmailInSupabase } from "../supabase.js";
+import { checkEmailExists, logE2MError, storeEmailInSupabase } from "../supabase.js";
 dotenv.config();
 
 const API_URL = process.env.API_URL;
 const AUTH_TOKEN = process.env.AUTH_TOKEN;
 const RETAILX_BRIEF_EXECUTIVE_SPONSOR = "ev_6341249";
-const REGISTRATION_API_URL = "https://us-central1-e2monair.cloudfunctions.net/e2mreg-prd-register-attendee";
+const E2M_EVENT_ID = "E1753774391797";
+const REGISTRATION_API_URL =
+  "https://us-central1-e2monair.cloudfunctions.net/e2mreg-prd-register-attendee";
 
-const companyWithCode = [{ key: 'AppsFlyer', value: '36455000' },
-{ key: 'DPAA', value: '36456000' },
-{ key: 'Epsilon', value: '36451000' },
-{ key: 'FMCG Guys', value: '36457000' },
-{ key: 'IAB Europe', value: '36474000' },
-{ key: 'Koddi', value: '36452000' },
-{ key: 'LiverRamp', value: '36448000' },
-{ key: 'Mirakl', value: '36453000' },
-{ key: 'STRATACACHE', value: '36449000' },
-{ key: 'dunnhumby', value: '36450000' }];
+const companyWithCode = [
+  { key: "AppsFlyer", value: "36455000" },
+  { key: "DPAA", value: "36456000" },
+  { key: "Epsilon", value: "36451000" },
+  { key: "FMCG Guys", value: "36457000" },
+  { key: "IAB Europe", value: "36474000" },
+  { key: "Koddi", value: "36452000" },
+  { key: "LiverRamp", value: "36448000" },
+  { key: "Mirakl", value: "36453000" },
+  { key: "STRATACACHE", value: "36449000" },
+  { key: "dunnhumby", value: "36450000" },
+];
 
 const pushTransformedOrder = async (order, attempt = 1) => {
   const payload = {
@@ -32,102 +36,125 @@ const pushTransformedOrder = async (order, attempt = 1) => {
     data: [order],
   };
 
-
   try {
     const response = await axios.post(REGISTRATION_API_URL, payload, {
       headers: { "Content-Type": "application/json" },
     });
 
-    if (response.data?.success) {
+    if (response.data?.status == 0 || response.data?.status == -1.5) {
       console.log(`✅ [Try ${attempt}] Pushed: ${order.Email}`);
       return true;
     } else {
-      console.warn(`⚠️ [Try ${attempt}] API responded with failure:`, response.data);
+      //supabase error log logic
+      await logE2MError({
+        tt_event_id: RETAILX_BRIEF_EXECUTIVE_SPONSOR || null,
+        e2m_event_id: E2M_EVENT_ID || null,
+        email: order.Email,
+        error: response?.data || {},
+        status: 0,
+        e2m_payload: payload,
+      });
+
+      console.error(
+        `⚠️ API push failed for: ${order.Email}, skipping Supabase storage`
+      );
       return false;
     }
   } catch (error) {
-    console.error(`❌ [Try ${attempt}] Exception while pushing:`, error.response?.data || error.message);
+    console.error(
+      `❌ [Try ${attempt}] Exception while pushing:`,
+      error.response?.data || error.message
+    );
     return false;
   }
 };
 
-
 const transformRetailXOrders = (orders) => {
-  return orders.map(order => {
-    const customQuestions = order.buyer_details?.custom_questions || [];
+  return orders
+    .map((order) => {
+      const customQuestions = order.buyer_details?.custom_questions || [];
 
-    const findAnswer = (questionText) => {
-      const match = customQuestions.find(q =>
-        q.question.trim().toLowerCase() === questionText.toLowerCase().trim()
-      );
-      return match?.answer || "";
-    };
+      const findAnswer = (questionText) => {
+        const match = customQuestions.find(
+          (q) =>
+            q.question.trim().toLowerCase() ===
+            questionText.toLowerCase().trim()
+        );
+        return match?.answer || "";
+      };
 
-    // Company and Designation mapping
-    const Company = findAnswer("Company/Organisation") || findAnswer("Company") || "";
-    const Designation = findAnswer("Job Title") || findAnswer("Designation") || "";
+      // Company and Designation mapping
+      const Company =
+        findAnswer("Company/Organisation") || findAnswer("Company") || "";
+      const Designation =
+        findAnswer("Job Title") || findAnswer("Designation") || "";
 
-    // Country/Region
-    const countryRegion = findAnswer("Country / Region") || findAnswer("Country/Region") || "";
+      // Country/Region
+      const countryRegion =
+        findAnswer("Country / Region") || findAnswer("Country/Region") || "";
 
-    // Phone
-    const phone = order.buyer_details?.phone || findAnswer("Mobile Phone Number") || "";
+      // Phone
+      const phone =
+        order.buyer_details?.phone || findAnswer("Mobile Phone Number") || "";
 
-    // DynamicFields
-    let filteredDynamicFields = customQuestions.map(question => ({
-      Name: question.question.replace(/\s+/g, '').replace(/[^\w]/g, ''),
-      Value: question.answer || "",
-      Label: question.question,
-      Type: Array.isArray(question.answer) ? "multiselect" : "text"
-    }));
+      // DynamicFields
+      let filteredDynamicFields = customQuestions.map((question) => ({
+        Name: question.question.replace(/\s+/g, "").replace(/[^\w]/g, ""),
+        Value: question.answer || "",
+        Label: question.question,
+        Type: Array.isArray(question.answer) ? "multiselect" : "text",
+      }));
 
-    // Add essential fields if missing
-    const addField = (name, value, label, type) => {
-      if (!filteredDynamicFields.some(f => f.Name === name)) {
-        filteredDynamicFields.push({ Name: name, Value: value, Label: label, Type: type });
-      }
-    };
+      // Add essential fields if missing
+      const addField = (name, value, label, type) => {
+        if (!filteredDynamicFields.some((f) => f.Name === name)) {
+          filteredDynamicFields.push({
+            Name: name,
+            Value: value,
+            Label: label,
+            Type: type,
+          });
+        }
+      };
 
-    addField("CountryRegion", countryRegion, "Country / Region", "text");
-    addField("Company", Company, "Company/Organisation", "text");
-    addField("Designation", Designation, "Job Title", "text");
+      addField("CountryRegion", countryRegion, "Country / Region", "text");
+      addField("Company", Company, "Company/Organisation", "text");
+      addField("Designation", Designation, "Job Title", "text");
 
+      let registrationType;
 
-    let registrationType;
-    
-    registrationType = {
+      registrationType = {
         ColorCode: "#000",
         RegistrationType: "Sponsor",
-        RegistrationTypeId: "1pjW9NZ0LMZZ8pkJltf8"
-    };
-
-    if (registrationType) {
-      return {
-        sendMail: 0,
-        ShowInCMSAttendeeList: 1,
-        FormType: "FREE",
-        RegistrationType: registrationType,
-        DynamicFields: filteredDynamicFields,
-        DefaultFields: [],
-        PreSignupFields: [],
-        FirstName: order.buyer_details?.first_name || "",
-        LastName: order.buyer_details?.last_name || "",
-        Email: order.buyer_details?.email || "",
-        Address: order.buyer_details?.address?.address_1 || "",
-        Zip: order.buyer_details?.address?.postal_code || "",
-        Designation: Designation,
-        Company: Company,
-        PhoneCountryCode: order.buyer_details?.phone_country_code || "",
-        Phone: phone,
-        qr_code: order.issued_tickets[0].barcode,
-        qr: order.issued_tickets[0].qr_code_url,
-        isComplete: true
+        RegistrationTypeId: "1pjW9NZ0LMZZ8pkJltf8",
       };
-    }
-  }).filter(Boolean);
+
+      if (registrationType) {
+        return {
+          sendMail: 0,
+          ShowInCMSAttendeeList: 1,
+          FormType: "FREE",
+          RegistrationType: registrationType,
+          DynamicFields: filteredDynamicFields,
+          DefaultFields: [],
+          PreSignupFields: [],
+          FirstName: order.buyer_details?.first_name || "",
+          LastName: order.buyer_details?.last_name || "",
+          Email: order.buyer_details?.email || "",
+          Address: order.buyer_details?.address?.address_1 || "",
+          Zip: order.buyer_details?.address?.postal_code || "",
+          Designation: Designation,
+          Company: Company,
+          PhoneCountryCode: order.buyer_details?.phone_country_code || "",
+          Phone: phone,
+          qr_code: order.issued_tickets[0].barcode,
+          qr: order.issued_tickets[0].qr_code_url,
+          isComplete: true,
+        };
+      }
+    })
+    .filter(Boolean);
 };
-
-
 
 export const fetchRetailXExecutiveOrdersForEv_6341249 = async (req, res) => {
   let allOrders = [];
@@ -149,7 +176,9 @@ export const fetchRetailXExecutiveOrdersForEv_6341249 = async (req, res) => {
         break;
       }
 
-      const validOrders = data.filter(order => order && order.status !== "cancelled");
+      const validOrders = data.filter(
+        (order) => order && order.status !== "cancelled"
+      );
       allOrders.push(...validOrders);
       nextCursor = data[data.length - 1].id;
       if (data.length < 100) break;
@@ -159,17 +188,24 @@ export const fetchRetailXExecutiveOrdersForEv_6341249 = async (req, res) => {
 
     const transformedOrders = transformRetailXOrders(allOrders);
 
-    const finalOrders = transformedOrders.map(order => {
-      if (order && order.RegistrationType && order.RegistrationType?.RegistrationType === "Sponsor") {
+    const finalOrders = transformedOrders.map((order) => {
+      if (
+        order &&
+        order.RegistrationType &&
+        order.RegistrationType?.RegistrationType === "Sponsor"
+      ) {
         const companyField = order.DynamicFields.find(
-          field => field.Name === "Company/Organisation" || field.Label === "Company/Organisation"
+          (field) =>
+            field.Name === "Company/Organisation" ||
+            field.Label === "Company/Organisation"
         );
 
         if (companyField) {
           const companyName = companyField.Value?.toLowerCase();
-          const companyMatch = companyWithCode.find(company =>
-            companyName?.includes(company.key.toLowerCase()) ||
-            company.key.toLowerCase().includes(companyName)
+          const companyMatch = companyWithCode.find(
+            (company) =>
+              companyName?.includes(company.key.toLowerCase()) ||
+              company.key.toLowerCase().includes(companyName)
           );
 
           if (companyMatch) {
@@ -177,8 +213,8 @@ export const fetchRetailXExecutiveOrdersForEv_6341249 = async (req, res) => {
               ...order,
               RegistrationType: {
                 ...order.RegistrationType,
-                RegistrationTypeEntityId: companyMatch.value
-              }
+                RegistrationTypeEntityId: companyMatch.value,
+              },
             };
           }
         }
@@ -203,26 +239,55 @@ export const fetchRetailXExecutiveOrdersForEv_6341249 = async (req, res) => {
     //       console.log(`✅ All orders have QR codes`);
     //     }
 
-
     let successCount = 0;
 
     for (const order of finalOrders) {
-      if (order) {
-        console.log(`📦 Checking: ${order.FirstName} ${order.LastName} | ${order.Email} | QR: ${order.qr_code}`);
-
-        const stored = await storeEmailInSupabase('retail_x_brief_executive_sponsor', order.Email);
-
-        if (!stored) {
-          console.log(`⏩ Skipping push for duplicate email: ${order.Email}`);
-          continue; // don't push if duplicate
+          if (order) {
+            console.log(
+              `📦 Checking: ${order.FirstName} ${order.LastName} | ${order.Email} | QR: ${order.qr_code}`
+            );
+            //checking function here
+            // if found no action taken
+    
+            const emailExist = await checkEmailExists(
+              "retailx_brief_executive",
+              order.Email
+            );
+    
+            if (emailExist) {
+              console.log(
+                "Email already exists in Supabase, skipping:",
+                order.Email
+              );
+              continue;
+            }
+    
+            console.log(
+              `📤 Pushing to API: ${order.FirstName} ${order.LastName} | ${order.Email}`
+            );
+            const pushSuccess = await pushTransformedOrder(order, 1);
+            console.log("Push success:", pushSuccess);
+            if (pushSuccess) {
+              // Only store in Supabase if API push was successful
+              const tableName = "retailx_brief_executive"; // real table name
+              console.log(
+                `✅ API push successful, storing in Supabase: ${order.Email}`
+              );
+              const stored = await storeEmailInSupabase(tableName, order.Email);
+    
+              if (stored) {
+                console.log(`✅ Successfully stored in Supabase: ${order.Email}`);
+                successCount++;
+              } else {
+                console.log(
+                  `⚠️ API succeeded but Supabase storage failed (duplicate): ${order.Email}`
+                );
+                successCount++; // Still count as success since API push worked
+              }
+            }
+            await new Promise((resolve) => setTimeout(resolve, 300)); // rate limiting
+          }
         }
-
-        console.log(`📤 Pushing: ${order.FirstName} ${order.LastName} | ${order.Email}`);
-        await pushTransformedOrder(order, 1);
-
-        await new Promise(resolve => setTimeout(resolve, 300)); // rate limiting
-      }
-    }
     // fs.writeFileSync(
     //       "RETAIL_X.json",
     //       JSON.stringify({
@@ -231,9 +296,10 @@ export const fetchRetailXExecutiveOrdersForEv_6341249 = async (req, res) => {
     //       }, null, 2)
     //     );
 
-    console.log(`✅ Saved ${finalOrders.length} transformed Subscription orders`);
+    console.log(
+      `✅ Saved ${finalOrders.length} transformed Subscription orders`
+    );
     return finalOrders;
-
   } catch (error) {
     console.error("❌ Error fetching RetailX orders:", error);
     // return res.status(500).json({
