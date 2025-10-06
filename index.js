@@ -64,9 +64,9 @@ app.get("/push-all-data",fetchSpringFestivalOrders) ;
 
 // Webhook
 
-app.get("/create-orders", createOrders);
+app.post("/create-orders", createOrders);
 
-app.get("/create-order",createOrder)
+app.post("/create-order",createOrder)
 
 
 app.listen(PORT, () => {

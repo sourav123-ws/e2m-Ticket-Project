@@ -159,14 +159,14 @@ export const insertPayloadData = async (tableName, payload) => {
       .insert({ payload: payload });
 
     if (error) {
-      console.error('Supabase insert error:', error);
+      console.error('Supabase insert error:', JSON.stringify(error, null, 2));
       throw error;
     }
 
     return { success: true, data };
   } catch (error) {
-    console.error('Error inserting payload:', error);
-    return { success: false, error: error.message };
+    console.error('Error inserting payload:', JSON.stringify(error, null, 2));
+    return { success: false, error: error.message || JSON.stringify(error) };
   }
 };
 

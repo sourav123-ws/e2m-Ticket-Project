@@ -5,10 +5,11 @@ export const createOrders = async (req, res) => {
     console.log("Webhook received:", req.body);
     const payload = req.body;
 
-    const response = await insertPayloadData("ticket_tailer_order", payload);
+    const response = await insertPayloadData("ticket_tailor_order", payload); // Corrected table name
     console.log("Insert response:", response);
+
     if (!response.success) {
-      console.error("Failed to insert payload:", response.error);
+      console.error("Failed to insert payload:", JSON.stringify(response.error, null, 2));
       return res.status(500).json({
         success: false,
         error: "Failed to save webhook data",
@@ -21,7 +22,7 @@ export const createOrders = async (req, res) => {
       message: "Webhook received and saved",
     });
   } catch (error) {
-    console.error("Error processing webhook:", error);
+    console.error("Error processing webhook:", JSON.stringify(error, null, 2));
     return res.status(500).json({
       success: false,
       error: "Internal Server Error",
