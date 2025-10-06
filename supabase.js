@@ -151,3 +151,46 @@ export const checkEmailExists = async (tableName,email) =>{
       return false;
     }
 }
+
+export const insertPayloadData = async (tableName, payload) => {
+  try {
+    const { data, error } = await supabase
+      .from(tableName)
+      .insert({ payload: payload });
+
+    if (error) {
+      console.error('Supabase insert error:', error);
+      throw error;
+    }
+
+    return { success: true, data };
+  } catch (error) {
+    console.error('Error inserting payload:', error);
+    return { success: false, error: error.message };
+  }
+};
+
+export const insertTicketOrder = async (email, e2mEventId, ttEventId, status , payload , errorMsg) => {
+  try {
+    const { data, error } = await supabase
+      .from('ticket_tailer_orders')
+      .insert({ 
+        email: email,
+        e2m_event_id: e2mEventId,
+        tt_event_id: ttEventId,
+        status: status ,
+        payload : payload ,
+        error : errorMsg
+      });
+
+    if (error) {
+      console.error('Supabase insert error:', error);
+      throw error;
+    }
+
+    return { success: true, data };
+  } catch (error) {
+    console.error('Error inserting ticket order:', error);
+    return { success: false, error: error.message };
+  }
+};
