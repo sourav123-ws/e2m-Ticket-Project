@@ -1,21 +1,5 @@
-import axios from "axios";
-import path from "path";
-import { fileURLToPath } from "url";
 import dotenv from "dotenv";
-import { checkEmailExists, logE2MError, storeEmailInSupabase } from "./supabase.js";
 dotenv.config();
-
-// Define __dirname for ESM
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
-const API_URL = process.env.API_URL;
-const AUTH_TOKEN =
-  "Basic c2tfOTEzN18yNDE0NzdfZjUwYmJiNGYwZDI2MGFhMjQ3YWZjZGJhZDQ3MWE2N2M=";
-const MAD_WORLD_EVENT_ID = "ev_6430233";
-const E2M_EVENT_ID = "E1753776477925";
-const REGISTRATION_API_URL =
-  "https://us-central1-e2monair.cloudfunctions.net/e2mreg-prd-register-attendee";
 
 const companyWithCode = [
   { key: "Benifex", value: "36490000" },
@@ -50,37 +34,7 @@ const pushTransformedOrder = async (order, attempt = 1) => {
     data: [order],
   };
 
-  try {
-    const response = await axios.post(REGISTRATION_API_URL, payload, {
-      headers: { "Content-Type": "application/json" },
-    });
-
-    if (response.data?.status == 0 || response.data?.status == -1.5) {
-      console.log(`✅ [Try ${attempt}] Pushed: ${order.Email}`);
-      return true;
-    } else {
-      //supabase error log logic
-      await logE2MError({
-        tt_event_id: MAD_WORLD_EVENT_ID || null,
-        e2m_event_id: E2M_EVENT_ID || null,
-        email: order.Email,
-        error: response?.data || {},
-        status: 0,
-        e2m_payload: payload,
-      });
-
-      console.error(
-        `⚠️ API push failed for: ${order.Email}, skipping Supabase storage`
-      );
-      return false;
-    }
-  } catch (error) {
-    console.log(
-      `❌ [Try ${attempt}] Error pushing transformed order:`,
-      error.response?.data || error.message
-    );
-    return false;
-  }
+  return payload ;
 };
 
 const transformMadWorldOrders = (orders) => {
@@ -325,39 +279,27 @@ const transformMadWorldOrders = (orders) => {
   });
 };
 
-export const fetchMadWorldOrdersForEv_6430233Webhook = async (req, res) => {
+export const fetchMadWorldOrdersForEv_6430233Webhook = async (order) => {
   try {
-    const order = req.body; // The payload is the single order
     console.log(`📦 Processing order for: ${order.buyer_details?.email}`);
 
     // Validate required fields
     const email = order.buyer_details?.email;
     const ttEventId = order.event_summary?.id;
     if (!email || !ttEventId) {
-      return res.status(400).json({
+      return {
         success: false,
         error: "Missing required fields (email or event_summary.id)",
-      });
-    }
-
-    // Check if email already exists in Supabase
-    const tableName = "mad_world"; // Table name for this webhook
-    const emailExists = await checkEmailExists(tableName, email);
-    if (emailExists) {
-      console.log(`⚠️ Email already exists in Supabase, skipping: ${email}`);
-      return res.status(200).json({
-        success: true,
-        message: `Order already processed for ${email}`,
-      });
+      };
     }
 
     // Transform the order
-    const transformedOrder = transformMadWorldOrders([order], ttEventId)[0];
+    const transformedOrder = transformMadWorldOrders([order])[0];
     if (!transformedOrder) {
-      return res.status(400).json({
+      return {
         success: false,
         error: "Failed to transform order",
-      });
+      };
     }
 
     // Apply company code logic for sponsors
@@ -393,28 +335,22 @@ export const fetchMadWorldOrdersForEv_6430233Webhook = async (req, res) => {
     console.log(`📤 Pushing to API: ${finalOrder.FirstName} ${finalOrder.LastName} | ${finalOrder.Email}`);
     const pushSuccess = await pushTransformedOrder(finalOrder, 1);
     if (!pushSuccess) {
-      return res.status(500).json({
+      return {
         success: false,
         error: `Failed to push order for ${finalOrder.Email} to registration API`,
-      });
+      };
     }
 
-    // Store in Supabase if API push was successful
-    console.log(`✅ API push successful, storing in Supabase: ${finalOrder.Email}`);
-    const stored = await storeEmailInSupabase(tableName, finalOrder.Email);
-    if (!stored) {
-      console.log(`⚠️ API succeeded but Supabase storage failed (duplicate): ${finalOrder.Email}`);
-    }
-
-    return res.status(200).json({
+    return {
       success: true,
       message: `Order processed successfully for ${finalOrder.Email}`,
-    });
+      payload: pushSuccess,
+    };
   } catch (error) {
     console.error(`❌ Error processing order:`, error.message);
-    return res.status(500).json({
+    return {
       success: false,
       error: "Internal Server Error",
-    });
+    };
   }
 };

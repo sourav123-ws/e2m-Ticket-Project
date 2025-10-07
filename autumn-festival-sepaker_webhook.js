@@ -1,25 +1,6 @@
-import axios from "axios";
-import fs from "fs";
-import path from "path";
-import { fileURLToPath } from "url";
 import dotenv from "dotenv";
-import {
-  checkEmailExists,
-  logE2MError,
-  storeEmailInSupabase,
-} from "./supabase.js";
 dotenv.config();
 
-// Define __dirname for ESM
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
-const API_URL = process.env.API_URL;
-const AUTH_TOKEN = process.env.AUTH_TOKEN;
-const AUTUMN_FESTIVAL_EVENT_ID = "ev_6803153";
-const E2M_EVENT_ID = "E1753774079219";
-const REGISTRATION_API_URL =
-  "https://us-central1-e2monair.cloudfunctions.net/e2mreg-prd-register-attendee";
 
 const companyWithCode = [
   { key: "Addingwell", value: "36481000" },
@@ -61,37 +42,7 @@ const pushTransformedOrder = async (order, attempt = 1) => {
     data: [order],
   };
 
-  try {
-    const response = await axios.post(REGISTRATION_API_URL, payload, {
-      headers: { "Content-Type": "application/json" },
-    });
-
-    if (response.data?.status == 0 || response.data?.status == -1.5) {
-      console.log(`✅ [Try ${attempt}] Pushed: ${order.Email}`);
-      return true;
-    } else {
-      //supabase error log logic
-      await logE2MError({
-        tt_event_id: AUTUMN_FESTIVAL_EVENT_ID || null,
-        e2m_event_id: E2M_EVENT_ID || null,
-        email: order.Email,
-        error: response?.data || {},
-        status: 0,
-        e2m_payload: payload,
-      });
-
-      console.error(
-        `⚠️ API push failed for: ${order.Email}, skipping Supabase storage`
-      );
-      return false;
-    }
-  } catch (error) {
-    console.log(
-      `❌ [Try ${attempt}] Error pushing transformed order:`,
-      error.response?.data || error.message
-    );
-    return false;
-  }
+  return payload ;
 };
 
 const transformAutumnFestivalAttendee = (orders) => {
@@ -174,33 +125,6 @@ const transformAutumnFestivalAttendee = (orders) => {
       WhichEventAreYouInterestedIn: WhichEventAreYouInterestedIn,
     };
 
-    // if (lowerDescription.includes("brand") ||
-    //   lowerDescription.includes("staff") ||
-    //   lowerDescription.includes("retailer") ||
-    //   lowerDescription.includes("vendor") ||
-    //   lowerDescription.includes("agency") ||
-    //   lowerDescription.includes("marketplace") ||
-    //   lowerDescription.includes("mediaagency") ||
-    //   lowerDescription.includes("consultant") ||
-    //   lowerDescription.includes("vip")) {
-    //   registrationType = {
-    //     "ColorCode": "#000",
-    //     "RegistrationType": "Attendee",
-    //     "RegistrationTypeId": "cNQfGmutcDAC5hzStnqZ"
-    //   }
-    // } else if (lowerDescription.includes("sponsor")) {
-    //   registrationType = {
-    //     "ColorCode": "#000",
-    //     "RegistrationType": "Sponsor",
-    //     "RegistrationTypeId": "DgG5hTkMrGQBfmNNsViv"
-    //   }
-    // } else if (lowerDescription.includes("speaker")) {
-    //   registrationType = {
-    //     "ColorCode": "#000",
-    //     "RegistrationType": "Speaker",
-    //     "RegistrationTypeId": "kyamSq1PIgUr49NdKL3F"
-    //   }
-    // }
 
     if (registrationType) {
       let filteredDynamicFields = customQuestions
@@ -356,39 +280,27 @@ const transformAutumnFestivalAttendee = (orders) => {
   });
 };
 
-export const fetchAutumnFestivalForSpeakersWebhook = async (req, res) => {
+export const fetchAutumnFestivalForSpeakersWebhook = async (order) => {
   try {
-    const order = req.body; // The payload is the single order
     console.log(`📦 Processing order for: ${order.buyer_details?.email}`);
 
     // Validate required fields
     const email = order.buyer_details?.email;
     const ttEventId = order.event_summary?.id;
     if (!email || !ttEventId) {
-      return res.status(400).json({
+      return {
         success: false,
         error: "Missing required fields (email or event_summary.id)",
-      });
-    }
-
-    // Check if email already exists in Supabase
-    const tableName = "autumn_festival_speaker"; // Table name for this webhook
-    const emailExists = await checkEmailExists(tableName, email);
-    if (emailExists) {
-      console.log(`⚠️ Email already exists in Supabase, skipping: ${email}`);
-      return res.status(200).json({
-        success: true,
-        message: `Order already processed for ${email}`,
-      });
+      };
     }
 
     // Transform the order
     const transformedOrder = transformAutumnFestivalAttendee([order])[0]; // Transform single order
     if (!transformedOrder) {
-      return res.status(400).json({
+      return {
         success: false,
         error: "Failed to transform order",
-      });
+      };
     }
 
     // Apply company code logic
@@ -421,28 +333,22 @@ export const fetchAutumnFestivalForSpeakersWebhook = async (req, res) => {
     console.log(`📤 Pushing to API: ${finalOrder.FirstName} ${finalOrder.LastName} | ${finalOrder.Email}`);
     const pushSuccess = await pushTransformedOrder(finalOrder, 1);
     if (!pushSuccess) {
-      return res.status(500).json({
+      return {
         success: false,
         error: `Failed to push order for ${finalOrder.Email} to registration API`,
-      });
+      };
     }
 
-    // Store in Supabase if API push was successful
-    console.log(`✅ API push successful, storing in Supabase: ${finalOrder.Email}`);
-    const stored = await storeEmailInSupabase(tableName, finalOrder.Email);
-    if (!stored) {
-      console.log(`⚠️ API succeeded but Supabase storage failed (duplicate): ${finalOrder.Email}`);
-    }
-
-    return res.status(200).json({
+    return {
       success: true,
       message: `Order processed successfully for ${finalOrder.Email}`,
-    });
+      payload: pushSuccess,
+    };
   } catch (error) {
     console.error(`❌ Error processing order:`, error.message);
-    return res.status(500).json({
+    return {
       success: false,
       error: "Internal Server Error",
-    });
+    };
   }
 };
