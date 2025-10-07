@@ -220,29 +220,31 @@ export const insertTicketOrder = async (
   try {
     // Check if a record exists with the given key and status = '0'
     const { data: existingData, error: selectError } = await supabase
-      .from('ticket_tailer_orders')
-      .select('*')
-      .eq('email', email)
-      .eq('e2m_event_id', e2mEventId)
-      .eq('tt_event_id', ttEventId)
-      .eq('status', '0')
+      .from("ticket_tailer_orders")
+      .select("*")
+      .eq("email", email)
+      .eq("e2m_event_id", e2mEventId)
+      .eq("tt_event_id", ttEventId)
+      .eq("status", "0")
       .single();
 
-    if (selectError && selectError.code !== 'PGRST116') {
+    if (selectError && selectError.code !== "PGRST116") {
       // PGRST116 means "no rows found", which is not an error for us
-      console.error('❌ Error checking existing record:', selectError.message);
+      console.error("❌ Error checking existing record:", selectError.message);
       return { success: false, error: selectError.message };
     }
 
     if (existingData) {
       // Record exists with status = '0', stop execution and return success
-      console.log(`✅ Skipping insert: Record already exists with status '0' for email: ${email}, tt_event_id: ${ttEventId}, e2m_event_id: ${e2mEventId}`);
+      console.log(
+        `✅ Skipping insert: Record already exists with status '0' for email: ${email}, tt_event_id: ${ttEventId}, e2m_event_id: ${e2mEventId}`
+      );
       return { success: false, data: existingData };
     }
 
     // If no record with status = '0', attempt to insert
     const { data, error } = await supabase
-      .from('ticket_tailer_orders')
+      .from("ticket_tailer_orders")
       .insert({
         email: email,
         e2m_event_id: e2mEventId,
@@ -255,120 +257,164 @@ export const insertTicketOrder = async (
       .select();
 
     if (error) {
-      console.error('❌ Supabase insert error:', error.message);
+      console.error("❌ Supabase insert error:", error.message);
       return { success: false, error: error.message };
     }
 
-    console.log(`✅ Inserted ticket order for email: ${email}, tt_event_id: ${ttEventId}, e2m_event_id: ${e2mEventId}`);
+    console.log(
+      `✅ Inserted ticket order for email: ${email}, tt_event_id: ${ttEventId}, e2m_event_id: ${e2mEventId}`
+    );
     return { success: true, data };
   } catch (error) {
-    console.error('❌ Error inserting ticket order:', error.message);
+    console.error("❌ Error inserting ticket order:", error.message);
     return { success: false, error: error.message };
   }
 };
 
-export const updateTicketOrderStatus = async (email, e2mEventId, ttEventId, status, errorMsg = null) => {
+export const updateTicketOrderStatus = async (
+  email,
+  e2mEventId,
+  ttEventId,
+  status,
+  errorMsg = null
+) => {
   try {
     // If an external error message is provided (e.g., from registration API), treat it as an error case
     if (errorMsg) {
       const { data, error: updateError } = await supabase
-        .from('ticket_tailer_orders')
+        .from("ticket_tailer_orders")
         .update({
           status: status,
           error_flag: true,
-          error_msg: { error: errorMsg }
+          error_msg: { error: errorMsg },
         })
-        .eq('email', email)
-        .eq('e2m_event_id', e2mEventId)
-        .eq('tt_event_id', ttEventId)
+        .eq("email", email)
+        .eq("e2m_event_id", e2mEventId)
+        .eq("tt_event_id", ttEventId)
         .select();
 
       if (updateError) {
-        console.error('❌ Error updating ticket_tailer_orders with error details:', updateError.message);
+        console.error(
+          "❌ Error updating ticket_tailer_orders with error details:",
+          updateError.message
+        );
         return { success: false, error: updateError.message };
       }
 
       if (!data || data.length === 0) {
-        console.error('❌ No record found for email:', email, 'tt_event_id:', ttEventId, 'e2m_event_id:', e2mEventId);
-        return { success: false, error: 'No matching record found' };
+        console.error(
+          "❌ No record found for email:",
+          email,
+          "tt_event_id:",
+          ttEventId,
+          "e2m_event_id:",
+          e2mEventId
+        );
+        return { success: false, error: "No matching record found" };
       }
 
-      console.log(`✅ Updated status to ${status} with error for email: ${email}, tt_event_id: ${ttEventId}, e2m_event_id: ${e2mEventId}`);
+      console.log(
+        `✅ Updated status to ${status} with error for email: ${email}, tt_event_id: ${ttEventId}, e2m_event_id: ${e2mEventId}`
+      );
       return { success: true, data };
     }
 
     // Normal case: attempt to update status
     const { data, error } = await supabase
-      .from('ticket_tailer_orders')
+      .from("ticket_tailer_orders")
       .update({ status: status })
-      .eq('email', email)
-      .eq('e2m_event_id', e2mEventId)
-      .eq('tt_event_id', ttEventId)
+      .eq("email", email)
+      .eq("e2m_event_id", e2mEventId)
+      .eq("tt_event_id", ttEventId)
       .select();
 
     if (error) {
-      console.error('❌ Error updating status in ticket_tailer_orders:', error.message);
+      console.error(
+        "❌ Error updating status in ticket_tailer_orders:",
+        error.message
+      );
       // Update status, error_flag, and error_msg on error
       const errorUpdate = await supabase
-        .from('ticket_tailer_orders')
+        .from("ticket_tailer_orders")
         .update({
           status: status,
           error_flag: true,
-          error_msg: { error: error.message }
+          error_msg: { error: error.message },
         })
-        .eq('email', email)
-        .eq('e2m_event_id', e2mEventId)
-        .eq('tt_event_id', ttEventId)
+        .eq("email", email)
+        .eq("e2m_event_id", e2mEventId)
+        .eq("tt_event_id", ttEventId)
         .select();
 
       if (errorUpdate.error) {
-        console.error('❌ Failed to update error_flag and error_msg:', errorUpdate.error.message);
+        console.error(
+          "❌ Failed to update error_flag and error_msg:",
+          errorUpdate.error.message
+        );
       }
 
       return { success: false, error: error.message };
     }
 
     if (!data || data.length === 0) {
-      console.error('❌ No record found for email:', email, 'tt_event_id:', ttEventId, 'e2m_event_id:', e2mEventId);
+      console.error(
+        "❌ No record found for email:",
+        email,
+        "tt_event_id:",
+        ttEventId,
+        "e2m_event_id:",
+        e2mEventId
+      );
       // Update error_flag and error_msg for no record found
       const errorUpdate = await supabase
-        .from('ticket_tailer_orders')
+        .from("ticket_tailer_orders")
         .update({
           status: status,
           error_flag: true,
-          error_msg: { error: 'No matching record found' }
+          error_msg: { error: "No matching record found" },
         })
-        .eq('email', email)
-        .eq('e2m_event_id', e2mEventId)
-        .eq('tt_event_id', ttEventId)
+        .eq("email", email)
+        .eq("e2m_event_id", e2mEventId)
+        .eq("tt_event_id", ttEventId)
         .select();
 
       if (errorUpdate.error) {
-        console.error('❌ Failed to update error_flag and error_msg:', errorUpdate.error.message);
+        console.error(
+          "❌ Failed to update error_flag and error_msg:",
+          errorUpdate.error.message
+        );
       }
 
-      return { success: false, error: 'No matching record found' };
+      return { success: false, error: "No matching record found" };
     }
 
-    console.log(`✅ Updated status to ${status} for email: ${email}, tt_event_id: ${ttEventId}, e2m_event_id: ${e2mEventId}`);
+    console.log(
+      `✅ Updated status to ${status} for email: ${email}, tt_event_id: ${ttEventId}, e2m_event_id: ${e2mEventId}`
+    );
     return { success: true, data };
   } catch (error) {
-    console.error('❌ Exception updating status in ticket_tailer_orders:', error.message);
+    console.error(
+      "❌ Exception updating status in ticket_tailer_orders:",
+      error.message
+    );
     // Update status, error_flag, and error_msg on exception
     const errorUpdate = await supabase
-      .from('ticket_tailer_orders')
+      .from("ticket_tailer_orders")
       .update({
         status: status,
         error_flag: true,
-        error_msg: { error: error.message }
+        error_msg: { error: error.message },
       })
-      .eq('email', email)
-      .eq('e2m_event_id', e2mEventId)
-      .eq('tt_event_id', ttEventId)
+      .eq("email", email)
+      .eq("e2m_event_id", e2mEventId)
+      .eq("tt_event_id", ttEventId)
       .select();
 
     if (errorUpdate.error) {
-      console.error('❌ Failed to update error_flag and error_msg:', errorUpdate.error.message);
+      console.error(
+        "❌ Failed to update error_flag and error_msg:",
+        errorUpdate.error.message
+      );
     }
 
     return { success: false, error: error.message };
