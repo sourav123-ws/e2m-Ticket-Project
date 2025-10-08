@@ -1,4 +1,4 @@
-import {  insertTicketOrder, updateTicketOrderStatus } from "../supabase.js";
+import { insertTicketOrder, updateTicketOrderStatus } from "../supabase.js";
 import { fetchAutumnFestivalAttendeeWebhook } from "../autumn_festival_attendee_webhook.js";
 import { fetchAutumnFestivalForAttendeeV1Webhook } from "../autumn_festival_attendee_v1_webhook.js";
 import { fetchAutumnFestivalForSponsorsWebhook } from "../autumn-festival-sponsor_webhook.js";
@@ -11,11 +11,15 @@ import { fetchMadWorldOrdersForEv_6430233Webhook } from "../mad_world_ev_6430233
 import { fetchMadWorldOrdersForEv_6098674Webhook } from "../mad_world_ev_6098674.js";
 
 import { fetchRetailXExecutiveOrdersForEv_6320483 } from "../brief_x_executive_ev_6320483.js";
-import { fetchRetailXExecutiveOrdersForEv_6341249 } from "../brief_x_executive_ev_6341249.js"
+import { fetchRetailXExecutiveOrdersForEv_6341249 } from "../brief_x_executive_ev_6341249.js";
+
+import { fetchTestEventWebhook } from "../test_event_webhook.js";
 
 import axios from "axios";
+import { sendMail } from "../utils/sendMail.js";
 
-const REGISTRATION_API_URL = "https://us-central1-e2monair.cloudfunctions.net/e2mreg-prd-register-attendee";
+const REGISTRATION_API_URL =
+  "https://us-central1-e2monair.cloudfunctions.net/e2mreg-prd-register-attendee";
 
 const EVENT_ID_MAPPING = {
   ev_6337457: "E1753774079219",
@@ -29,6 +33,7 @@ const EVENT_ID_MAPPING = {
   ev_6098679: "E1753776477925",
   ev_6098686: "E1753776477925",
   ev_6430233: "E1753776477925",
+  ev_6430999: "E1757055673945"
 };
 
 const FILE_MAPPING = {
@@ -42,7 +47,8 @@ const FILE_MAPPING = {
   ev_6430233: "mad_world_ev_6430233",
   ev_6098674: "mad_world_ev_6098674",
   ev_6320483: "retailx_brief_executive_ev_6320483",
-  ev_6341249: "retailx_brief_executive_ev_6341249"
+  ev_6341249: "retailx_brief_executive_ev_6341249",
+  ev_6430999: "test_event_webhook"
 };
 
 export const createOrder = async (req, res) => {
@@ -89,10 +95,14 @@ export const createOrder = async (req, res) => {
     // Route to the appropriate handler
     // For this example, we'll assume createOrder handles all mapped files
     // You can extend this to call different functions or endpoints based on targetFile
-   
-    const handlerData = await routeToHandler(targetFile, req, e2mEventId,ttEventId);
-    return res.status(handlerData.status || 500).json(handlerData);
 
+    const handlerData = await routeToHandler(
+      targetFile,
+      req,
+      e2mEventId,
+      ttEventId
+    );
+    return res.status(handlerData.status || 500).json(handlerData);
   } catch (error) {
     console.error("Error processing webhook:", error);
     res.status(500).json({
@@ -160,7 +170,7 @@ export const createOrder = async (req, res) => {
 //         return await fetchMadWorldOrdersForEv_6098674Webhook(req.body.payload, res);
 //       case "retailx_brief_executive_ev_6320483":
 //         return await fetchRetailXExecutiveOrdersForEv_6320483(req.body.payload, res);
-//       case "retailx_brief_executive_ev_6341249": 
+//       case "retailx_brief_executive_ev_6341249":
 //         return await fetchRetailXExecutiveOrdersForEv_6341249(req.body.payload, res);
 //       case "test_event_webhook":
 //          return await fetchTestEventWebhook(req.body.payload, res);
@@ -182,8 +192,7 @@ export const createOrder = async (req, res) => {
 //   }
 // };
 
-
-const routeToHandler = async (targetFile, req, e2mEventId,ttEventId) => {
+const routeToHandler = async (targetFile, req, e2mEventId, ttEventId) => {
   console.log("Routing to handler for file:", targetFile);
   console.log("Request body:", JSON.stringify(req.body, null, 2));
 
@@ -191,37 +200,64 @@ const routeToHandler = async (targetFile, req, e2mEventId,ttEventId) => {
     let handlerResponse;
     switch (targetFile) {
       case "autumn_festival_attendee_v1_webhook":
-        handlerResponse = await fetchAutumnFestivalForAttendeeV1Webhook(req.body.payload);
+        handlerResponse = await fetchAutumnFestivalForAttendeeV1Webhook(
+          req.body.payload
+        );
         break;
       case "autumn_festival_attendee_webhook":
-        handlerResponse = await fetchAutumnFestivalAttendeeWebhook(req.body.payload);
+        handlerResponse = await fetchAutumnFestivalAttendeeWebhook(
+          req.body.payload
+        );
         break;
       case "autumn_festival_speaker_webhook":
-        handlerResponse = await fetchAutumnFestivalForSpeakersWebhook(req.body.payload);
+        handlerResponse = await fetchAutumnFestivalForSpeakersWebhook(
+          req.body.payload
+        );
         break;
       case "autumn_festival_sponsor_webhook":
-        handlerResponse = await fetchAutumnFestivalForSponsorsWebhook(req.body.payload);
+        handlerResponse = await fetchAutumnFestivalForSponsorsWebhook(
+          req.body.payload
+        );
         break;
       case "mad_world_ev_5929701":
-        handlerResponse = await fetchMadWorldOrdersForEv_5929701Webhook(req.body.payload);
+        handlerResponse = await fetchMadWorldOrdersForEv_5929701Webhook(
+          req.body.payload
+        );
         break;
       case "mad_world_ev_6098686":
-        handlerResponse = await fetchMadWorldOrdersForEv_6098686Webhook(req.body.payload);
+        handlerResponse = await fetchMadWorldOrdersForEv_6098686Webhook(
+          req.body.payload
+        );
         break;
       case "mad_world_ev_6098679":
-        handlerResponse = await fetchMadWorldOrdersForEv_6098679Webhook(req.body.payload);
+        handlerResponse = await fetchMadWorldOrdersForEv_6098679Webhook(
+          req.body.payload
+        );
         break;
       case "mad_world_ev_6430233":
-        handlerResponse = await fetchMadWorldOrdersForEv_6430233Webhook(req.body.payload);
+        handlerResponse = await fetchMadWorldOrdersForEv_6430233Webhook(
+          req.body.payload
+        );
         break;
       case "mad_world_ev_6098674":
-        handlerResponse = await fetchMadWorldOrdersForEv_6098674Webhook(req.body.payload);
+        handlerResponse = await fetchMadWorldOrdersForEv_6098674Webhook(
+          req.body.payload
+        );
         break;
       case "retailx_brief_executive_ev_6320483":
-        handlerResponse = await fetchRetailXExecutiveOrdersForEv_6320483(req.body.payload);
+        handlerResponse = await fetchRetailXExecutiveOrdersForEv_6320483(
+          req.body.payload
+        );
         break;
       case "retailx_brief_executive_ev_6341249":
-        handlerResponse = await fetchRetailXExecutiveOrdersForEv_6341249(req.body.payload);
+        handlerResponse = await fetchRetailXExecutiveOrdersForEv_6341249(
+          req.body.payload
+        );
+        break;
+      case "test_event_webhook":
+        handlerResponse = await fetchTestEventWebhook(
+          req.body.payload
+        );
         break;
       default:
         return {
@@ -231,11 +267,16 @@ const routeToHandler = async (targetFile, req, e2mEventId,ttEventId) => {
         };
     }
 
-    if (!handlerResponse || !handlerResponse.success || !handlerResponse.payload) {
+    if (
+      !handlerResponse ||
+      !handlerResponse.success ||
+      !handlerResponse.payload
+    ) {
       return {
         success: false,
         status: 500,
-        error: handlerResponse?.error || "Handler did not return a valid payload",
+        error:
+          handlerResponse?.error || "Handler did not return a valid payload",
       };
     }
 
@@ -250,7 +291,9 @@ const routeToHandler = async (targetFile, req, e2mEventId,ttEventId) => {
       };
     }
 
-    console.log(`📤 Pushing to API: ${payload.data[0].FirstName} ${payload.data[0].LastName} | ${email}`);
+    console.log(
+      `📤 Pushing to API: ${payload.data[0].FirstName} ${payload.data[0].LastName} | ${email}`
+    );
     try {
       const response = await axios.post(REGISTRATION_API_URL, payload, {
         headers: { "Content-Type": "application/json" },
@@ -260,48 +303,97 @@ const routeToHandler = async (targetFile, req, e2mEventId,ttEventId) => {
       if (response.data?.status == 0 || response.data?.status == -1.5) {
         console.log(`✅ API push successful for: ${email}`);
         // await updateTicketOrderStatus(email, e2mEventId, ttEventId , 3, errorMsg);
-        const updateResult = await updateTicketOrderStatus(email, e2mEventId, ttEventId , 1);
-        if(!updateResult.success) {
-          console.error("❌ Failed to update order status:", updateResult.error);
+        const updateResult = await updateTicketOrderStatus(
+          email,
+          e2mEventId,
+          ttEventId,
+          1
+        );
+        if (!updateResult.success) {
+          console.error(
+            "❌ Failed to update order status:",
+            updateResult.error
+          );
           return {
             success: false,
             status: 500,
+          };
+        }
+
+        if (ttEventId === "ev_6098674") {
+          const sponsorName = `${payload.data[0].FirstName || ""} ${
+            payload.data[0].LastName || ""
+          }`.trim();
+          const sponsorEmail = payload.data[0].Email;
+
+          const subject = `MadWorld 2025 - New Sponsor Registration Received`;
+          const html = `
+            <h2>New Sponsor Registration Notification</h2>
+            <p><b>Event ID:</b> ${ttEventId}</p>
+            <hr/>
+            <p><b>Representative Name:</b> ${sponsorName}</p>
+            <p><b>Representative Email:</b> ${sponsorEmail}</p>
+            <hr/>
+          `;
+
+          // send to internal owner
+          const internalEmail = "debashis.giri@webspiders.com";
+          const mailResult = await sendMail(internalEmail, subject, html);
+          if (mailResult.success) {
+            console.log(`📧 Internal notification sent to ${internalEmail}`);
+          } else {
+            console.error(
+              `⚠️ Failed to send internal notification:`,
+              mailResult.error
+            );
           }
         }
         return {
           success: true,
           status: 200,
           message: `Order processed successfully for ${email}`,
-          payload: payload
+          payload: payload,
         };
       } else {
-        const errorMsg = response.data?.message || "Unknown error from registration API";
-        await updateTicketOrderStatus(email, e2mEventId, ttEventId , 1 , errorMsg);
+        const errorMsg =
+          response.data?.message || "Unknown error from registration API";
+        await updateTicketOrderStatus(
+          email,
+          e2mEventId,
+          ttEventId,
+          1,
+          errorMsg
+        );
         return {
           success: false,
           status: 500,
           error: `Failed to push order for ${email} to registration API`,
-          apiError: response.data
+          apiError: response.data,
         };
       }
     } catch (error) {
-      console.error(`❌ Error pushing to API:`, error.response?.data || error.message);
+      console.error(
+        `❌ Error pushing to API:`,
+        error.response?.data || error.message
+      );
       return {
         success: false,
         status: 500,
         error: `Failed to push order for ${email} to registration API`,
-        apiError: error.response?.data || error.message
+        apiError: error.response?.data || error.message,
       };
     }
   } catch (error) {
     console.error(`Error in handler for ${targetFile}:`, {
       message: error.message,
-      stack: error.stack
+      stack: error.stack,
     });
     return {
       success: false,
       status: 500,
-      error: `Failed to process handler for ${targetFile}: ${error.message || 'Unknown error'}`,
+      error: `Failed to process handler for ${targetFile}: ${
+        error.message || "Unknown error"
+      }`,
     };
   }
 };
