@@ -1,4 +1,4 @@
-import { insertTicketOrder, updateTicketOrderStatus } from "../supabase.js";
+import { insertOrderPayload, insertTicketOrder, updateTicketOrderStatus } from "../supabase.js";
 import { fetchAutumnFestivalAttendeeWebhook } from "../autumn_festival_attendee_webhook.js";
 import { fetchAutumnFestivalForAttendeeV1Webhook } from "../autumn_festival_attendee_v1_webhook.js";
 import { fetchAutumnFestivalForSponsorsWebhook } from "../autumn-festival-sponsor_webhook.js";
@@ -18,7 +18,7 @@ import { fetchTestEventWebhook } from "../test_event_webhook.js";
 import axios from "axios";
 import { sendMail } from "../utils/sendMail.js";
 
-const REGISTRATION_API_URL =
+export const REGISTRATION_API_URL =
   "https://us-central1-e2monair.cloudfunctions.net/e2mreg-prd-register-attendee";
 
 const EVENT_ID_MAPPING = {
@@ -307,7 +307,7 @@ const routeToHandler = async (targetFile, req, e2mEventId, ttEventId) => {
           email,
           e2mEventId,
           ttEventId,
-          1
+          '1'
         );
         if (!updateResult.success) {
           console.error(
@@ -318,6 +318,17 @@ const routeToHandler = async (targetFile, req, e2mEventId, ttEventId) => {
             success: false,
             status: 500,
           };
+        }
+
+        const insertPayload = await insertOrderPayload(email, e2mEventId, ttEventId, payload);
+
+        if(!insertPayload.success){
+          console.error(
+            "❌ Failed to insert order payload:",
+            insertPayload.error
+          );
+        } else {
+          console.log("✅ Order payload inserted successfully");
         }
 
         if (ttEventId === "ev_6098674") {
@@ -361,7 +372,7 @@ const routeToHandler = async (targetFile, req, e2mEventId, ttEventId) => {
           email,
           e2mEventId,
           ttEventId,
-          1,
+          '0',
           errorMsg
         );
         return {

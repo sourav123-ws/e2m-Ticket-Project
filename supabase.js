@@ -214,7 +214,7 @@ export const insertTicketOrder = async (
   e2mEventId,
   ttEventId,
   status,
-  payload,
+  order,
   errorMsg
 ) => {
   try {
@@ -250,7 +250,7 @@ export const insertTicketOrder = async (
         e2m_event_id: e2mEventId,
         tt_event_id: ttEventId,
         status: status,
-        payload: payload,
+        order: order,
         error_msg: errorMsg || null,
         error_flag: errorMsg ? true : false,
       })
@@ -417,6 +417,131 @@ export const updateTicketOrderStatus = async (
       );
     }
 
+    return { success: false, error: error.message };
+  }
+};
+
+export const getOrdersWithPendingStatus = async () => {
+  try {
+    const { data, error } = await supabase
+      .from("ticket_tailer_orders")
+      .select("*")
+      .eq("status", "0");
+
+    if (error) {
+      console.error("❌ Error fetching orders with status '0':", error.message);
+      return { success: false, error: error.message, data: null };
+    }
+
+    if (!data || data.length === 0) {
+      console.log("ℹ️ No orders found with status '0'");
+      return { success: true, data: [], count: 0 };
+    }
+
+    console.log(`✅ Found ${data.length} order(s) with status '0'`);
+    return { success: true, data, count: data.length };
+  } catch (error) {
+    console.error(
+      "❌ Exception fetching orders with status '0':",
+      error.message
+    );
+    return { success: false, error: error.message, data: null };
+  }
+};
+
+export const updateOrderErrorStatus = async (
+  email,
+  e2mEventId,
+  ttEventId,
+  status,
+  errorMsg,
+  error_flag 
+) => {
+  try {
+    const { data, error } = await supabase
+      .from("ticket_tailer_orders")
+      .update({
+        status: status,
+        error_flag: error_flag,
+        error_msg: errorMsg ? { error: errorMsg } : null,
+      })
+      .eq("email", email)
+      .eq("e2m_event_id", e2mEventId)
+      .eq("tt_event_id", ttEventId)
+      .select();
+
+    if (error) {
+      console.error("❌ Error updating ticket order status:", error.message);
+      return { success: false, error: error.message };
+    }
+
+    if (!data || data.length === 0) {
+      console.error(
+        "❌ No matching record found for email:",
+        email,
+        "e2m_event_id:",
+        e2mEventId,
+        "tt_event_id:",
+        ttEventId
+      );
+      return { success: false, error: "No matching record found" };
+    }
+
+    console.log(
+      `✅ Updated status=${status}, error_flag=${!!errorMsg} for email: ${email}`
+    );
+    return { success: true, data };
+  } catch (err) {
+    console.error("❌ Exception updating ticket order status:", err.message);
+    return { success: false, error: err.message };
+  }
+};
+
+export const insertOrderPayload = async (
+  email,
+  e2mEventId,
+  ttEventId,
+  newPayload
+) => {
+  try {
+    // Update the payload for the matching record
+    const { data, error } = await supabase
+      .from("ticket_tailer_orders")
+      .update({ payload: newPayload })
+      .eq("email", email)
+      .eq("e2m_event_id", e2mEventId)
+      .eq("tt_event_id", ttEventId)
+      .select();
+
+    if (error) {
+      console.error(
+        "❌ Error inserting payload in ticket_tailer_orders:",
+        error.message
+      );
+      return { success: false, error: error.message };
+    }
+
+    if (!data || data.length === 0) {
+      console.error(
+        "❌ No record found for email:",
+        email,
+        "tt_event_id:",
+        ttEventId,
+        "e2m_event_id:",
+        e2mEventId
+      );
+      return { success: false, error: "No matching record found" };
+    }
+
+    console.log(
+      `✅ Inserted payload for email: ${email}, tt_event_id: ${ttEventId}, e2m_event_id: ${e2mEventId}`
+    );
+    return { success: true, data };
+  } catch (error) {
+    console.error(
+      "❌ Exception inserting payload in ticket_tailer_orders:",
+      error.message
+    );
     return { success: false, error: error.message };
   }
 };
