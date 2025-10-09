@@ -78,13 +78,20 @@ const pushTransformedOrder = async (order, attempt = 1) => {
 
       // send to internal owner
       const internalEmail = "debashis.giri@webspiders.com";
-      const mailResult = await sendMail(internalEmail, subject, html);
-      if (mailResult.success) {
-        console.log(`📧 Internal notification sent to ${internalEmail}`);
-      } else {
+      try {
+        const mailResult = await sendMail(internalEmail, subject, html);
+        if (mailResult.success) {
+          console.log(`📧 Internal notification sent to ${internalEmail}`);
+        } else {
+          console.error(
+            `⚠️ Failed to send internal notification:`,
+            mailResult.error
+          );
+        }
+      } catch (emailError) {
         console.error(
-          `⚠️ Failed to send internal notification:`,
-          mailResult.error
+          `⚠️ Exception occurred while sending email:`,
+          emailError.message || emailError
         );
       }
     }
