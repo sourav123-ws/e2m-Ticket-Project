@@ -2,7 +2,12 @@ import axios from "axios";
 import path from "path";
 import { fileURLToPath } from "url";
 import dotenv from "dotenv";
-import { checkEmailExists, logE2MError, storeEmailInSupabase } from "../supabase.js";
+import {
+  checkEmailExists,
+  logE2MError,
+  storeEmailInSupabase,
+} from "../supabase.js";
+import { sendMail } from "../utils/sendMail.js";
 dotenv.config();
 
 // Define __dirname for ESM
@@ -54,6 +59,35 @@ const pushTransformedOrder = async (order, attempt = 1) => {
     const response = await axios.post(REGISTRATION_API_URL, payload, {
       headers: { "Content-Type": "application/json" },
     });
+
+    if (response?.data?.status == 0) {
+      const sponsorName = `${payload.data[0].FirstName || ""} ${
+        payload.data[0].LastName || ""
+      }`.trim();
+      const sponsorEmail = payload.data[0].Email;
+
+      const subject = `MadWorld 2025 - New Sponsor Registration Received`;
+      const html = `
+            <h2>New Sponsor Registration Notification</h2>
+            <p><b>Event ID:</b> ${ttEventId}</p>
+            <hr/>
+            <p><b>Representative Name:</b> ${sponsorName}</p>
+            <p><b>Representative Email:</b> ${sponsorEmail}</p>
+            <hr/>
+          `;
+
+      // send to internal owner
+      const internalEmail = "debashis.giri@webspiders.com";
+      const mailResult = await sendMail(internalEmail, subject, html);
+      if (mailResult.success) {
+        console.log(`📧 Internal notification sent to ${internalEmail}`);
+      } else {
+        console.error(
+          `⚠️ Failed to send internal notification:`,
+          mailResult.error
+        );
+      }
+    }
 
     if (response.data?.status == 0 || response.data?.status == -1.5) {
       console.log(`✅ [Try ${attempt}] Pushed: ${order.Email}`);
