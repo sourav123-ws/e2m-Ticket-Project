@@ -21,7 +21,7 @@ import { fetchRetailXExecutiveOrdersForEv_6320483 } from "./retailxBriefExecutiv
 import { fetchAutumnFestivalForSpeakers } from "./autumn-festival-sepaker.js";
 import { fetchAutumnFestivalForAttendeeV1 } from "./autumn_festival_attendee_v1.js";
 import { deleteSupabaseData } from "./helperFunctions/deleteSupabseData.js";
-import { createOrder, createOrders } from "./controllers/ticketTailerOrders.js";
+import { createOrder } from "./controllers/ticketTailerOrders.js";
 dotenv.config();
 const app = express();
 const PORT = 8080;
@@ -64,7 +64,6 @@ app.get("/push-all-data",fetchSpringFestivalOrders) ;
 
 // Webhook
 
-app.post("/create-orders", createOrders);
 
 app.post("/create-order",createOrder)
 
